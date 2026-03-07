@@ -126,7 +126,7 @@ def call_groq(system_prompt, user_prompt, max_tokens=2048):
             {'role': 'user', 'content': user_prompt},
         ],
     }
-    resp = http_requests.post(GROQ_API_URL, headers=headers, json=payload, timeout=60)
+    resp = http_requests.post(GROQ_API_URL, headers=headers, json=payload, timeout=25)
     resp.raise_for_status()
     return resp.json()['choices'][0]['message']['content'].strip()
 
@@ -439,7 +439,7 @@ def delete_question(qid):
 def ai_generate_questions():
     data = request.get_json(silent=True) or {}
     topic = data.get('topic', '').strip()
-    num_questions = min(int(data.get('num_questions', 5)), 20)
+    num_questions = min(int(data.get('num_questions', 5)), 10)
     subject_id = data.get('subject_id')
     save_to_db = bool(data.get('save', False))
     if not topic:
@@ -452,7 +452,7 @@ def ai_generate_questions():
         "Ensure questions are factually correct, distinct, and exam-appropriate."
     )
     try:
-        raw = call_groq(system_prompt, user_prompt, max_tokens=3000)
+        raw = call_groq(system_prompt, user_prompt, max_tokens=1500)
         questions = parse_json_from_ai(raw)
     except ValueError as e:
         return jsonify({'error': str(e)}), 503
