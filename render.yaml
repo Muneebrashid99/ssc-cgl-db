@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: ssc-cgl
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT --workers 1 --timeout 120
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+
+databases:
+  - name: ssc-cgl-db
+    databaseName: ssc_cgl
+    user: ssc_cgl_user
