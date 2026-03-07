@@ -1,0 +1,2302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSC CGL 2026 — Master Prep Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   EXACT MATCH TO YOUR EXISTING UI
+   Light theme, same sidebar, same card styles
+═══════════════════════════════════════════════ */
+:root {
+  --bg: #f5f5f0;
+  --sidebar-bg: #1a1a2e;
+  --sidebar-text: #a0a8c0;
+  --sidebar-active: #ffffff;
+  --sidebar-active-bg: rgba(255,255,255,0.1);
+  --card-bg: #ffffff;
+  --card-border: #e8e8e2;
+  --text-primary: #1a1a2e;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --accent-orange: #f97316;
+  --accent-gold: #f59e0b;
+  --accent-green: #10b981;
+  --accent-blue: #3b82f6;
+  --accent-purple: #8b5cf6;
+  --accent-red: #ef4444;
+  --accent-teal: #14b8a6;
+  --border-light: #f0f0ea;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.10);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 14px;
+}
+
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+
+/* ── LAYOUT ── */
+.app-layout { display: flex; min-height: 100vh; }
+
+/* ══════════════════════════════════════════════
+   SIDEBAR — exact match to your screenshot
+══════════════════════════════════════════════ */
+.sidebar {
+  width: 230px;
+  min-width: 230px;
+  background: var(--sidebar-bg);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.sidebar-brand {
+  padding: 20px 18px 16px;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.brand-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(249,115,22,0.2);
+  border: 1px solid rgba(249,115,22,0.3);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 11px; font-weight: 700;
+  color: #fb923c;
+  margin-bottom: 8px;
+}
+.brand-name {
+  font-size: 18px; font-weight: 800; color: #ffffff;
+  line-height: 1.2;
+}
+.brand-name span { color: var(--accent-orange); }
+.brand-sub { font-size: 11px; color: var(--sidebar-text); margin-top: 2px; }
+
+/* Countdown box in sidebar */
+.sidebar-countdown {
+  margin: 12px 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+.countdown-label { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sidebar-text); margin-bottom: 4px; }
+.countdown-number { font-size: 36px; font-weight: 800; color: #f97316; line-height: 1; }
+.countdown-sub { font-size: 10px; color: var(--sidebar-text); margin-top: 2px; }
+
+/* Nav sections */
+.nav-section-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: rgba(255,255,255,0.3);
+  padding: 14px 18px 6px;
+}
+
+.nav-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 18px;
+  color: var(--sidebar-text);
+  cursor: pointer; transition: all 0.18s;
+  font-size: 13.5px; font-weight: 500;
+  border-left: 2px solid transparent;
+  user-select: none;
+  text-decoration: none;
+}
+.nav-item:hover { color: #ffffff; background: rgba(255,255,255,0.05); }
+.nav-item.active {
+  color: #ffffff;
+  background: rgba(255,255,255,0.08);
+  border-left-color: var(--accent-orange);
+  font-weight: 600;
+}
+.nav-icon { font-size: 16px; width: 22px; text-align: center; opacity: 0.9; }
+.nav-badge {
+  margin-left: auto;
+  font-size: 9px; font-weight: 800;
+  padding: 2px 7px; border-radius: 10px;
+  letter-spacing: 0.5px;
+}
+.nav-badge.new { background: #f97316; color: #fff; }
+.nav-badge.db  { background: #3b82f6; color: #fff; }
+.nav-badge.ai  { background: #8b5cf6; color: #fff; }
+
+/* Progress in sidebar */
+.sidebar-progress {
+  margin: 8px 14px 0;
+  padding: 10px 14px;
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius-sm);
+}
+.progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.progress-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.35); }
+.progress-pct { font-size: 11px; font-weight: 700; color: var(--accent-orange); }
+.progress-bar-bg { height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: var(--accent-orange); border-radius: 2px; transition: width 0.5s ease; }
+.progress-note { font-size: 10px; color: rgba(255,255,255,0.25); margin-top: 6px; }
+
+.sidebar-bottom {
+  margin-top: auto;
+  padding: 14px 18px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  display: flex; align-items: center; gap: 10px;
+}
+.user-dot {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, #f97316, #f59e0b);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; color: #fff;
+}
+.user-info .uname { font-size: 12px; font-weight: 700; color: #fff; }
+.user-info .urole { font-size: 10px; color: var(--sidebar-text); }
+.logout-link {
+  margin-left: auto; color: rgba(255,255,255,0.3); font-size: 16px;
+  cursor: pointer; background: none; border: none; transition: color 0.2s;
+}
+.logout-link:hover { color: #ef4444; }
+
+/* ══════════════════════════════════════════════
+   MAIN CONTENT
+══════════════════════════════════════════════ */
+.main-content {
+  margin-left: 230px;
+  flex: 1;
+  min-height: 100vh;
+}
+
+/* ── PAGE HEADER (the big hero area) ── */
+.page-header {
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--card-border);
+  padding: 28px 32px 24px;
+}
+.header-eyebrow {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.header-title {
+  font-size: 30px; font-weight: 800; color: var(--text-primary);
+  line-height: 1.2; margin-bottom: 8px;
+}
+.header-title .highlight { color: var(--accent-orange); }
+.header-desc { font-size: 13px; color: var(--text-secondary); max-width: 580px; line-height: 1.6; }
+
+/* ── ALERT BANNER ── */
+.alert-banner {
+  display: flex; align-items: flex-start; gap: 12px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  margin: 0 32px;
+  font-size: 12.5px; color: #92400e;
+}
+.alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.alert-banner a { color: var(--accent-orange); font-weight: 600; }
+
+/* ── MAIN PADDING AREA ── */
+.main-body { padding: 24px 32px; }
+
+/* ══════════════════════════════════════════════
+   STAT CARDS — exact match to your 4-card row
+══════════════════════════════════════════════ */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+.stat-card.orange::after { background: var(--accent-orange); }
+.stat-card.teal::after   { background: var(--accent-teal); }
+.stat-card.blue::after   { background: var(--accent-blue); }
+.stat-card.red::after    { background: var(--accent-red); }
+
+.stat-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.stat-value {
+  font-size: 30px; font-weight: 800;
+  color: var(--text-primary); line-height: 1;
+}
+.stat-value.orange { color: var(--accent-orange); }
+.stat-sub {
+  font-size: 11px; color: var(--text-muted); margin-top: 5px;
+}
+.stat-icon {
+  position: absolute; right: 16px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px; opacity: 0.12;
+}
+
+/* ══════════════════════════════════════════════
+   SECTION HEADING
+══════════════════════════════════════════════ */
+.section-heading {
+  font-size: 10px; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+/* ══════════════════════════════════════════════
+   SUBJECT CARDS — click to start quiz
+══════════════════════════════════════════════ */
+.subjects-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 28px;
+}
+.subject-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.subject-card:hover {
+  border-color: var(--accent-orange);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+.subject-card::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+.subject-card.green::before   { background: var(--accent-green); }
+.subject-card.orange::before  { background: var(--accent-orange); }
+.subject-card.purple::before  { background: var(--accent-purple); }
+.subject-card.blue::before    { background: var(--accent-blue); }
+
+.subject-icon-wrap {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; margin-bottom: 12px;
+}
+.subject-icon-wrap.green  { background: #d1fae5; }
+.subject-icon-wrap.orange { background: #fed7aa; }
+.subject-icon-wrap.purple { background: #ede9fe; }
+.subject-icon-wrap.blue   { background: #dbeafe; }
+
+.subject-name { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; line-height: 1.3; }
+.subject-meta { font-size: 11px; color: var(--text-muted); }
+
+/* ══════════════════════════════════════════════
+   PHASE BATTLE PLAN / ROADMAP
+══════════════════════════════════════════════ */
+.phase-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 24px; }
+.phase-card {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius); padding: 18px;
+}
+.phase-num {
+  font-size: 9px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+  padding: 3px 10px; border-radius: 20px;
+  margin-bottom: 10px; display: inline-block;
+}
+.phase-1 { background: #fef3c7; color: #92400e; }
+.phase-2 { background: #dbeafe; color: #1e40af; }
+.phase-3 { background: #d1fae5; color: #065f46; }
+.phase-title { font-size: 14px; font-weight: 700; color: var(--text-primary); margin-bottom: 4px; }
+.phase-desc { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+
+/* ══════════════════════════════════════════════
+   GENERIC CARD
+══════════════════════════════════════════════ */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.card-title {
+  font-size: 14px; font-weight: 700; color: var(--text-primary);
+  margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+
+/* ══════════════════════════════════════════════
+   PAGES
+══════════════════════════════════════════════ */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ══════════════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius-sm);
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+  cursor: pointer; border: none; transition: all 0.18s;
+}
+.btn-primary { background: var(--accent-orange); color: #fff; }
+.btn-primary:hover { background: #ea6d00; }
+.btn-secondary { background: var(--bg); border: 1px solid var(--card-border); color: var(--text-primary); }
+.btn-secondary:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
+.btn-sm { padding: 6px 14px; font-size: 12px; }
+.btn-danger { background: #fee2e2; color: var(--accent-red); }
+.btn-danger:hover { background: #fecaca; }
+
+/* ══════════════════════════════════════════════
+   QUIZ
+══════════════════════════════════════════════ */
+.quiz-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 18px;
+}
+.quiz-progress-track {
+  height: 5px; background: var(--bg); border-radius: 3px;
+  overflow: hidden; margin-bottom: 20px;
+  border: 1px solid var(--card-border);
+}
+.quiz-progress-fill {
+  height: 100%; background: var(--accent-orange);
+  border-radius: 3px; transition: width 0.3s ease;
+}
+.question-card {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius); padding: 24px; margin-bottom: 14px;
+}
+.q-number {
+  font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--accent-orange); margin-bottom: 10px;
+}
+.q-text { font-size: 15px; font-weight: 600; color: var(--text-primary); line-height: 1.6; margin-bottom: 20px; }
+.options-list { display: flex; flex-direction: column; gap: 8px; }
+.option-btn {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: var(--radius-sm);
+  background: var(--bg); border: 1.5px solid var(--card-border);
+  cursor: pointer; transition: all 0.18s; text-align: left;
+  font-family: 'Inter', sans-serif; font-size: 13.5px;
+  color: var(--text-primary); font-weight: 400;
+}
+.option-btn:hover { border-color: var(--accent-orange); background: #fff7ed; }
+.option-btn.selected { border-color: var(--accent-orange); background: #fff7ed; }
+.option-btn.correct  { border-color: var(--accent-green); background: #ecfdf5; color: #065f46; }
+.option-btn.wrong    { border-color: var(--accent-red); background: #fef2f2; color: #7f1d1d; }
+
+.option-key {
+  width: 26px; height: 26px; min-width: 26px;
+  border-radius: 6px; background: var(--card-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 800; color: var(--text-muted);
+  transition: all 0.18s;
+}
+.option-btn.selected .option-key { background: var(--accent-orange); color: #fff; }
+.option-btn.correct  .option-key { background: var(--accent-green); color: #fff; }
+.option-btn.wrong    .option-key { background: var(--accent-red); color: #fff; }
+
+/* Timer pill */
+.timer-pill {
+  background: #fff7ed; border: 1px solid #fed7aa;
+  border-radius: 20px; padding: 5px 14px;
+  font-size: 13px; font-weight: 700; color: var(--accent-orange);
+  font-family: 'Inter', monospace;
+}
+.timer-pill.warning { background: #fef2f2; border-color: #fca5a5; color: var(--accent-red); }
+
+/* Result */
+.result-hero {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius); padding: 32px; text-align: center; margin-bottom: 16px;
+}
+.result-pct {
+  font-size: 56px; font-weight: 800; line-height: 1;
+  margin-bottom: 6px;
+}
+.result-grade { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+.result-msg { font-size: 13px; color: var(--text-secondary); margin-bottom: 24px; }
+.result-stats { display: flex; justify-content: center; gap: 32px; }
+.result-stat .val { font-size: 22px; font-weight: 800; }
+.result-stat .lab { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-top: 2px; }
+
+/* ══════════════════════════════════════════════
+   FLASHCARDS
+══════════════════════════════════════════════ */
+.fc-scene {
+  perspective: 1200px; cursor: pointer;
+  max-width: 680px; height: 300px; margin: 0 auto 20px;
+}
+.fc-card {
+  width: 100%; height: 100%;
+  position: relative; transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4,0,0.2,1);
+}
+.fc-card.flipped { transform: rotateY(180deg); }
+.fc-face {
+  position: absolute; width: 100%; height: 100%;
+  backface-visibility: hidden;
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; padding: 28px;
+  text-align: center;
+}
+.fc-face.back { transform: rotateY(180deg); }
+.fc-tag {
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  background: #f5f5f0; border: 1px solid var(--card-border);
+  border-radius: 20px; padding: 4px 12px; color: var(--text-muted); margin-bottom: 14px;
+}
+.fc-year {
+  position: absolute; top: 14px; right: 14px;
+  font-size: 10px; font-weight: 700;
+  background: #fff7ed; color: var(--accent-orange);
+  border: 1px solid #fed7aa; border-radius: 20px; padding: 3px 10px;
+}
+.fc-question { font-size: 17px; font-weight: 600; color: var(--text-primary); line-height: 1.5; }
+.fc-answer { font-size: 16px; font-weight: 700; color: var(--accent-green); line-height: 1.5; }
+.fc-explanation { font-size: 12px; color: var(--text-muted); margin-top: 10px; font-style: italic; }
+.fc-hint { font-size: 12px; color: var(--text-muted); margin-top: 12px; }
+
+.fc-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-bottom: 14px; }
+.fc-nav-btn {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  cursor: pointer; font-size: 16px; color: var(--text-secondary);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.18s;
+}
+.fc-nav-btn:hover { border-color: var(--accent-orange); color: var(--accent-orange); }
+.fc-counter { font-size: 14px; font-weight: 700; color: var(--text-primary); min-width: 80px; text-align: center; }
+
+.fc-actions { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+.btn-know  { background: #ecfdf5; border: 1px solid #a7f3d0; color: var(--accent-green); }
+.btn-know:hover { background: #d1fae5; }
+.btn-dunno { background: #fef2f2; border: 1px solid #fca5a5; color: var(--accent-red); }
+.btn-dunno:hover { background: #fee2e2; }
+
+.filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.filter-chip {
+  padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  color: var(--text-secondary); cursor: pointer; transition: all 0.18s;
+}
+.filter-chip:hover, .filter-chip.active {
+  background: #fff7ed; border-color: #fed7aa; color: var(--accent-orange);
+}
+.fc-stats-row {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px;
+}
+.fc-stat-box {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm); padding: 12px; text-align: center;
+}
+.fc-stat-val { font-size: 24px; font-weight: 800; }
+.fc-stat-lab { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-top: 2px; }
+
+/* ══════════════════════════════════════════════
+   SYLLABUS
+══════════════════════════════════════════════ */
+.subject-tabs {
+  display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px;
+}
+.sub-tab {
+  padding: 7px 16px; border-radius: var(--radius-sm); font-size: 13px; font-weight: 600;
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  color: var(--text-secondary); cursor: pointer; transition: all 0.18s;
+}
+.sub-tab:hover, .sub-tab.active {
+  background: #fff7ed; border-color: #fed7aa; color: var(--accent-orange);
+}
+.topic-row {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm); margin-bottom: 8px; overflow: hidden;
+}
+.topic-header {
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 16px; cursor: pointer; transition: background 0.15s;
+}
+.topic-header:hover { background: var(--bg); }
+.topic-arrow { font-size: 11px; color: var(--text-muted); transition: transform 0.25s; }
+.topic-row.open .topic-arrow { transform: rotate(90deg); }
+.topic-name { flex: 1; font-size: 13.5px; font-weight: 600; color: var(--text-primary); }
+.topic-body { display: none; padding: 0 16px 14px; }
+.topic-row.open .topic-body { display: block; }
+
+.video-link {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 7px;
+  text-decoration: none; color: inherit; transition: all 0.18s;
+}
+.video-link:hover { border-color: #ef4444; background: #fff5f5; }
+.yt-icon {
+  width: 36px; height: 36px; border-radius: 8px;
+  background: #ef4444; display: flex; align-items: center;
+  justify-content: center; font-size: 14px; flex-shrink: 0;
+}
+.video-title { font-size: 12.5px; font-weight: 600; color: var(--text-primary); }
+.video-channel { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
+.video-dur { margin-left: auto; font-size: 11px; font-weight: 600; color: var(--text-muted); }
+
+.subtopic-list { list-style: none; }
+.subtopic-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 0; border-bottom: 1px solid var(--border-light);
+  font-size: 13px; color: var(--text-secondary);
+}
+.subtopic-item:last-child { border-bottom: none; }
+.check-box {
+  width: 16px; height: 16px; border-radius: 4px;
+  border: 1.5px solid #d1d5db; cursor: pointer;
+  transition: all 0.18s; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px;
+}
+.check-box.done { background: var(--accent-green); border-color: var(--accent-green); color: #fff; }
+
+/* ══════════════════════════════════════════════
+   NOTES
+══════════════════════════════════════════════ */
+.notes-layout { display: grid; grid-template-columns: 260px 1fr; gap: 16px; height: calc(100vh - 200px); min-height: 500px; }
+.notes-sidebar {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
+}
+.notes-sidebar-header {
+  padding: 14px 16px; border-bottom: 1px solid var(--card-border);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.notes-sidebar-title { font-size: 13px; font-weight: 700; color: var(--text-primary); }
+.notes-list { flex: 1; overflow-y: auto; }
+.note-item {
+  padding: 12px 14px; border-bottom: 1px solid var(--border-light);
+  cursor: pointer; transition: background 0.15s;
+}
+.note-item:hover { background: var(--bg); }
+.note-item.active { background: #fff7ed; border-left: 2px solid var(--accent-orange); }
+.note-item-title { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.note-tag {
+  display: inline-block; font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.5px;
+  padding: 2px 7px; border-radius: 10px; margin-top: 3px;
+}
+.note-item-date { font-size: 10px; color: var(--text-muted); margin-top: 2px; }
+
+.notes-editor {
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius); display: flex; flex-direction: column; overflow: hidden;
+}
+.notes-toolbar {
+  padding: 10px 14px; border-bottom: 1px solid var(--card-border);
+  display: flex; align-items: center; gap: 5px; flex-wrap: wrap;
+}
+.tool-btn {
+  padding: 4px 10px; border-radius: 5px; background: var(--bg);
+  border: 1px solid var(--card-border); color: var(--text-secondary);
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  transition: all 0.15s; font-family: 'Inter', sans-serif;
+}
+.tool-btn:hover { background: #fff7ed; border-color: #fed7aa; color: var(--accent-orange); }
+.note-title-in {
+  background: none; border: none; outline: none;
+  font-family: 'Inter', sans-serif; font-size: 20px; font-weight: 800;
+  color: var(--text-primary); padding: 18px 20px 8px; width: 100%;
+}
+.note-title-in::placeholder { color: var(--text-muted); }
+.note-body-in {
+  flex: 1; background: none; border: none; outline: none; resize: none;
+  font-family: 'Inter', sans-serif; font-size: 13.5px; line-height: 1.8;
+  color: var(--text-secondary); padding: 8px 20px 20px;
+}
+.note-body-in::placeholder { color: var(--text-muted); }
+
+/* ══════════════════════════════════════════════
+   AI TUTOR
+══════════════════════════════════════════════ */
+.ai-layout {
+  display: flex; flex-direction: column;
+  height: calc(100vh - 200px); min-height: 500px;
+  max-width: 820px;
+}
+.ai-messages { flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 14px; padding: 4px 2px; }
+.msg {
+  max-width: 78%; padding: 13px 16px;
+  border-radius: 12px; font-size: 13.5px; line-height: 1.6;
+}
+.msg-user {
+  align-self: flex-end;
+  background: var(--accent-orange); color: #fff;
+  border-radius: 12px 12px 2px 12px;
+}
+.msg-ai {
+  align-self: flex-start;
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  color: var(--text-primary); border-radius: 12px 12px 12px 2px;
+}
+.ai-bar {
+  margin-top: 12px; display: flex; gap: 8px;
+  background: var(--card-bg); border: 1.5px solid var(--card-border);
+  border-radius: 12px; padding: 8px 10px;
+  box-shadow: var(--shadow-sm);
+}
+.ai-input {
+  flex: 1; background: none; border: none; outline: none;
+  font-family: 'Inter', sans-serif; font-size: 13.5px;
+  color: var(--text-primary);
+}
+.ai-input::placeholder { color: var(--text-muted); }
+.ai-send {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: var(--accent-orange); border: none; cursor: pointer;
+  color: #fff; font-size: 15px; display: flex; align-items: center; justify-content: center;
+  transition: background 0.18s;
+}
+.ai-send:hover { background: #ea6d00; }
+
+/* ══════════════════════════════════════════════
+   FORMS
+══════════════════════════════════════════════ */
+.form-group { margin-bottom: 14px; }
+.form-label { display: block; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 6px; }
+.form-input, .form-select, .form-textarea {
+  width: 100%; background: var(--bg); border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm); color: var(--text-primary);
+  font-family: 'Inter', sans-serif; font-size: 13.5px;
+  padding: 9px 12px; outline: none; transition: border-color 0.18s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color: var(--accent-orange); background: #fff; }
+.form-textarea { min-height: 80px; resize: vertical; }
+
+/* ══════════════════════════════════════════════
+   HISTORY TABLE
+══════════════════════════════════════════════ */
+.data-table { width: 100%; border-collapse: collapse; }
+.data-table th {
+  text-align: left; padding: 9px 14px;
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-muted); border-bottom: 1px solid var(--card-border);
+  background: var(--bg);
+}
+.data-table td { padding: 11px 14px; border-bottom: 1px solid var(--border-light); font-size: 13px; color: var(--text-secondary); }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--bg); }
+.score-badge { display: inline-flex; font-size: 12px; font-weight: 700; padding: 2px 10px; border-radius: 20px; }
+.score-high { background: #d1fae5; color: #065f46; }
+.score-mid  { background: #fef3c7; color: #92400e; }
+.score-low  { background: #fee2e2; color: #7f1d1d; }
+
+/* ══════════════════════════════════════════════
+   STUDY PLANNER
+══════════════════════════════════════════════ */
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; }
+.cal-cell {
+  aspect-ratio: 1; border-radius: 7px;
+  background: var(--bg); border: 1px solid var(--card-border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  transition: all 0.18s; color: var(--text-secondary);
+}
+.cal-cell:hover { border-color: var(--accent-orange); }
+.cal-cell.studied { background: #d1fae5; border-color: #a7f3d0; color: var(--accent-green); }
+.cal-cell.today { background: #fff7ed; border-color: #fed7aa; color: var(--accent-orange); font-weight: 800; }
+.cal-cell.hdr { background: none; border: none; font-size: 10px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; color: var(--text-muted); cursor: default; }
+
+/* ══════════════════════════════════════════════
+   TOAST
+══════════════════════════════════════════════ */
+.toast-box { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 7px; }
+.toast {
+  background: #1a1a2e; color: #fff;
+  border-radius: var(--radius-sm); padding: 11px 16px;
+  font-size: 13px; font-weight: 600;
+  animation: toastSlide 0.25s ease;
+  box-shadow: var(--shadow-md);
+}
+.toast.ok   { border-left: 3px solid var(--accent-green); }
+.toast.err  { border-left: 3px solid var(--accent-red); }
+.toast.info { border-left: 3px solid var(--accent-orange); }
+@keyframes toastSlide { from { opacity:0; transform:translateX(16px); } to { opacity:1; transform:translateX(0); } }
+
+/* ══════════════════════════════════════════════
+   LOADING / EMPTY
+══════════════════════════════════════════════ */
+.spinner-wrap { display: flex; align-items: center; gap: 8px; padding: 28px; color: var(--text-muted); font-size: 13px; }
+.spin { width: 16px; height: 16px; border: 2px solid var(--card-border); border-top-color: var(--accent-orange); border-radius: 50%; animation: spin 0.7s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.empty-box { text-align: center; padding: 48px 20px; }
+.empty-box .ei { font-size: 40px; margin-bottom: 12px; }
+.empty-box h3 { font-size: 16px; font-weight: 700; color: var(--text-secondary); margin-bottom: 6px; }
+.empty-box p { font-size: 13px; color: var(--text-muted); }
+
+/* Exam pattern table */
+.ep-table { width: 100%; border-collapse: collapse; }
+.ep-table th, .ep-table td { padding: 11px 16px; border-bottom: 1px solid var(--card-border); font-size: 13px; text-align: left; }
+.ep-table th { font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text-muted); background: var(--bg); }
+.ep-table tr:hover td { background: var(--bg); }
+
+/* Tag colors */
+.tag-math     { background: #dbeafe; color: #1e40af; }
+.tag-reasoning{ background: #ede9fe; color: #5b21b6; }
+.tag-english  { background: #d1fae5; color: #065f46; }
+.tag-gk       { background: #fef3c7; color: #92400e; }
+.tag-formula  { background: #cffafe; color: #164e63; }
+.tag-trick    { background: #fee2e2; color: #7f1d1d; }
+.tag-general  { background: #f3f4f6; color: #374151; }
+
+/* Diff badges */
+.diff-easy   { background: #d1fae5; color: #065f46; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.diff-medium { background: #fef3c7; color: #92400e; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+.diff-hard   { background: #fee2e2; color: #7f1d1d; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+@media (max-width: 900px) {
+  .sidebar { transform: translateX(-100%); transition: transform 0.3s ease; }
+  .sidebar.open { transform: translateX(0); }
+  .main-content { margin-left: 0; }
+  .stats-row { grid-template-columns: 1fr 1fr; }
+  .subjects-grid { grid-template-columns: 1fr 1fr; }
+  .phase-grid { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+  .notes-layout { grid-template-columns: 1fr; }
+  .mobile-menu-btn { display: flex !important; }
+}
+
+.mobile-menu-btn {
+  display: none;
+  position: fixed; top: 14px; left: 14px; z-index: 200;
+  width: 38px; height: 38px; border-radius: 9px;
+  background: var(--card-bg); border: 1px solid var(--card-border);
+  align-items: center; justify-content: center;
+  font-size: 16px; cursor: pointer; color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+</style>
+</head>
+<body>
+
+<button class="mobile-menu-btn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+
+<div class="app-layout">
+
+<!-- ══════════════════════════════════════════
+     SIDEBAR
+══════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="sidebar-brand">
+    <div class="brand-tag">📌 SSC CGL 2026</div>
+    <div class="brand-name">Master <span>Prep Hub</span></div>
+    <div class="brand-sub">AI-powered command centre</div>
+  </div>
+
+  <div class="sidebar-countdown">
+    <div class="countdown-label">Days to Tier 1</div>
+    <div class="countdown-number" id="daysLeft">—</div>
+    <div class="countdown-sub">Target: May–June 2026</div>
+  </div>
+
+  <div class="nav-section-label">Navigation</div>
+
+  <div class="nav-item active" onclick="nav('dashboard')">
+    <span class="nav-icon">📊</span> Dashboard
+  </div>
+  <div class="nav-item" onclick="nav('roadmap')">
+    <span class="nav-icon">🗺️</span> Roadmap
+  </div>
+  <div class="nav-item" onclick="nav('syllabus')">
+    <span class="nav-icon">📚</span> Syllabus + Videos
+  </div>
+  <div class="nav-item" onclick="nav('pyq')">
+    <span class="nav-icon">🗂️</span> PYQ Bank
+    <span class="nav-badge new">NEW</span>
+  </div>
+  <div class="nav-item" onclick="nav('quiz')">
+    <span class="nav-icon">⚡</span> Live Mock Tests
+    <span class="nav-badge db">DB</span>
+  </div>
+  <div class="nav-item" onclick="nav('planner')">
+    <span class="nav-icon">📅</span> Weekly Planner
+  </div>
+  <div class="nav-item" onclick="nav('history')">
+    <span class="nav-icon">📈</span> Mock Tracker
+  </div>
+  <div class="nav-item" onclick="nav('notes')">
+    <span class="nav-icon">📝</span> My Notes
+  </div>
+  <div class="nav-item" onclick="nav('ai')">
+    <span class="nav-icon">🤖</span> AI Tutor
+    <span class="nav-badge ai">AI</span>
+  </div>
+  <div class="nav-item" onclick="nav('add')">
+    <span class="nav-icon">➕</span> Add Question
+  </div>
+  <div class="nav-item" onclick="nav('pattern')">
+    <span class="nav-icon">📋</span> Exam Pattern
+  </div>
+
+  <div class="sidebar-progress">
+    <div class="progress-row">
+      <span class="progress-label">Syllabus Progress</span>
+      <span class="progress-pct" id="syllabusProgressPct">0%</span>
+    </div>
+    <div class="progress-bar-bg"><div class="progress-bar-fill" id="syllabusProgressBar" style="width:0%"></div></div>
+    <div class="progress-note">• Auto-saves across sessions</div>
+  </div>
+
+  <div class="sidebar-bottom">
+    <div class="user-dot" id="userDot">S</div>
+    <div class="user-info">
+      <div class="uname">Samin</div>
+      <div class="urole">CGL 2026 Aspirant</div>
+    </div>
+    <button class="logout-link" onclick="location.href='/logout'" title="Logout">⏏</button>
+  </div>
+
+</aside>
+
+<!-- ══════════════════════════════════════════
+     MAIN
+══════════════════════════════════════════ -->
+<div class="main-content">
+
+<!-- ══ DASHBOARD ══ -->
+<div class="page active" id="page-dashboard">
+  <div class="page-header">
+    <div class="header-eyebrow">MARCH 2026 — <span id="daysLeftHeader">~90</span> DAYS LEFT</div>
+    <div class="header-title">Your Path to <span class="highlight">SSC CGL</span><br>Top Rank</div>
+    <div class="header-desc">A complete AI-powered preparation system. Tier 1 expected May–June 2026. Every hour counts — make them count.</div>
+  </div>
+
+  <div style="padding: 14px 32px 0;">
+    <div class="alert-banner">
+      <span class="alert-icon">📌</span>
+      <span>
+        <strong>Exam Update:</strong> SSC Calendar 2025–26 places notification in March 2026.
+        <a href="https://ssc.gov.in" target="_blank">Apply at ssc.gov.in</a> immediately.
+        Tier 1: May–June 2026 · Tier 2: Aug–Sep 2026.
+      </span>
+    </div>
+  </div>
+
+  <div class="main-body">
+    <div class="stats-row">
+      <div class="stat-card orange">
+        <div class="stat-label">Days to Tier 1</div>
+        <div class="stat-value orange" id="statDays">~70</div>
+        <div class="stat-sub">May 2026 target</div>
+        <div class="stat-icon">📅</div>
+      </div>
+      <div class="stat-card teal">
+        <div class="stat-label">Tier 1 Structure</div>
+        <div class="stat-value">200</div>
+        <div class="stat-sub">100 Qs · 60 min · −0.5</div>
+        <div class="stat-icon">📋</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">Quiz Attempts</div>
+        <div class="stat-value" id="statAttempts">—</div>
+        <div class="stat-sub" id="statAttemptsSub">from database</div>
+        <div class="stat-icon">🎯</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-label">Best Score</div>
+        <div class="stat-value" id="statBest">—</div>
+        <div class="stat-sub">your highest %</div>
+        <div class="stat-icon">⭐</div>
+      </div>
+    </div>
+
+    <div class="section-heading">
+      CHOOSE A SUBJECT — START QUIZ
+    </div>
+    <div class="subjects-grid" id="subjectsGrid">
+      <div class="spinner-wrap"><div class="spin"></div> Loading…</div>
+    </div>
+
+    <div class="section-heading">
+      3-PHASE BATTLE PLAN
+      <button class="btn btn-sm btn-secondary" onclick="nav('roadmap')">View Full Roadmap →</button>
+    </div>
+    <div class="phase-grid">
+      <div class="phase-card">
+        <div class="phase-num phase-1">Phase 1</div>
+        <div class="phase-title">Foundation (Weeks 1–4)</div>
+        <div class="phase-desc">Cover all 4 subjects. Focus on basic concepts, formulas, and vocabulary. Target: 200 questions/day.</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num phase-2">Phase 2</div>
+        <div class="phase-title">Practice (Weeks 5–8)</div>
+        <div class="phase-desc">Full mock tests daily. Analyze weak areas. Revise PYQs 2019–2024. Target: 2 mocks/day.</div>
+      </div>
+      <div class="phase-card">
+        <div class="phase-num phase-3">Phase 3</div>
+        <div class="phase-title">Final Sprint (Weeks 9–10)</div>
+        <div class="phase-desc">Speed drills, time management, last-minute GK revision. Sleep 7 hrs. Stay consistent.</div>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">
+          📈 Recent Attempts
+          <button class="btn btn-sm btn-secondary" onclick="nav('history')">View All →</button>
+        </div>
+        <div id="dashHistory"><div class="spinner-wrap"><div class="spin"></div> Loading…</div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">⚡ Quick Actions</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <button class="btn btn-primary" onclick="nav('quiz')" style="justify-content:flex-start;">🎯 Start Mock Test</button>
+          <button class="btn btn-secondary" onclick="nav('pyq')" style="justify-content:flex-start;">🗂️ PYQ Flashcards</button>
+          <button class="btn btn-secondary" onclick="nav('ai')" style="justify-content:flex-start;">🤖 Ask AI Tutor</button>
+          <button class="btn btn-secondary" onclick="nav('notes')" style="justify-content:flex-start;">📝 My Notes</button>
+          <button class="btn btn-secondary" onclick="nav('syllabus')" style="justify-content:flex-start;">📚 Syllabus + Videos</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ROADMAP ══ -->
+<div class="page" id="page-roadmap">
+  <div class="page-header">
+    <div class="header-eyebrow">STUDY ROADMAP</div>
+    <div class="header-title">Your <span class="highlight">10-Week</span> Plan</div>
+    <div class="header-desc">Structured week-by-week preparation roadmap for SSC CGL 2026.</div>
+  </div>
+  <div class="main-body">
+    <div id="roadmapContent"></div>
+  </div>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<div class="page" id="page-quiz">
+  <div class="page-header">
+    <div class="header-eyebrow">LIVE MOCK TESTS</div>
+    <div class="header-title">Test Your <span class="highlight">Knowledge</span></div>
+    <div class="header-desc">Database questions + real-time AI-generated tests with instant feedback.</div>
+  </div>
+  <div class="main-body">
+
+    <div id="quiz-setup-area">
+      <div class="grid-2" style="margin-bottom:16px;">
+        <div class="card">
+          <div class="card-title">📋 Database Quiz</div>
+          <div class="form-group">
+            <label class="form-label">Subject</label>
+            <select class="form-select" id="qSubject"></select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Questions</label>
+            <select class="form-select" id="qLimit">
+              <option value="5">5 Questions</option>
+              <option value="10" selected>10 Questions</option>
+              <option value="20">20 Questions</option>
+              <option value="25">25 Questions</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Difficulty</label>
+            <select class="form-select" id="qDiff">
+              <option value="">Mixed</option>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Timer (per question)</label>
+            <select class="form-select" id="qTimer">
+              <option value="0">No Timer</option>
+              <option value="60" selected>60 seconds</option>
+              <option value="90">90 seconds</option>
+              <option value="120">2 minutes</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="startDBQuiz()">🚀 Start Test</button>
+        </div>
+        <div class="card">
+          <div class="card-title">🤖 AI Mock Test (Real-Time)</div>
+          <p style="font-size:13px;color:var(--text-secondary);margin-bottom:14px;line-height:1.6;">Generate fresh SSC CGL questions on any topic using Claude AI — no database needed!</p>
+          <div class="form-group">
+            <label class="form-label">Topic</label>
+            <input class="form-input" id="aiTopic" placeholder="e.g. Percentage, Analogy, One Word Sub…">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Number of Questions</label>
+            <select class="form-select" id="aiQCount">
+              <option value="5">5 Questions</option>
+              <option value="10" selected>10 Questions</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="startAIQuiz()">⚡ Generate & Start</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="quiz-active-area" style="display:none;max-width:760px;">
+      <div class="quiz-header">
+        <div>
+          <span style="font-size:12px;font-weight:700;color:var(--text-muted);">Question </span>
+          <span style="font-size:14px;font-weight:800;" id="qNum">1</span>
+          <span style="font-size:12px;color:var(--text-muted);" id="qTot"> / 10</span>
+        </div>
+        <div class="timer-pill" id="timerPill" style="display:none;">⏱ <span id="timerVal">60</span>s</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text-secondary);">Score: <span id="liveScore">0</span></div>
+      </div>
+      <div class="quiz-progress-track"><div class="quiz-progress-fill" id="qProgressFill" style="width:10%;"></div></div>
+      <div id="qArea"></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:14px;">
+        <button class="btn btn-secondary" onclick="prevQ()" id="prevQBtn" disabled>← Prev</button>
+        <button class="btn btn-secondary" onclick="skipQ()">Skip ⏭</button>
+        <button class="btn btn-primary" onclick="nextQ()" id="nextQBtn">Next →</button>
+      </div>
+      <div style="text-align:center;margin-top:10px;">
+        <button class="btn btn-danger btn-sm" onclick="endQuiz()">End Test</button>
+      </div>
+    </div>
+
+    <div id="quiz-result-area" style="display:none;max-width:760px;">
+      <div class="result-hero">
+        <div class="result-pct" id="resPct">—%</div>
+        <div class="result-grade" id="resGrade">—</div>
+        <div class="result-msg" id="resMsg">—</div>
+        <div class="result-stats">
+          <div class="result-stat"><div class="val" id="resC" style="color:var(--accent-green);">0</div><div class="lab">Correct</div></div>
+          <div class="result-stat"><div class="val" id="resW" style="color:var(--accent-red);">0</div><div class="lab">Wrong</div></div>
+          <div class="result-stat"><div class="val" id="resS" style="color:var(--text-muted);">0</div><div class="lab">Skipped</div></div>
+          <div class="result-stat"><div class="val" id="resT" style="color:var(--accent-blue);">0s</div><div class="lab">Time</div></div>
+        </div>
+      </div>
+      <div id="resReview"></div>
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;">
+        <button class="btn btn-primary" onclick="resetQuiz()">🔁 New Test</button>
+        <button class="btn btn-secondary" onclick="nav('history')">📈 View Progress</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ PYQ FLASHCARDS ══ -->
+<div class="page" id="page-pyq">
+  <div class="page-header">
+    <div class="header-eyebrow">PYQ BANK</div>
+    <div class="header-title"><span class="highlight">Previous Year</span> Questions</div>
+    <div class="header-desc">All years (2019–2024) in one place. Flip to reveal answers. Track what you know.</div>
+  </div>
+  <div class="main-body">
+
+    <div class="fc-stats-row">
+      <div class="fc-stat-box">
+        <div class="fc-stat-val" id="fcKnown" style="color:var(--accent-green);">0</div>
+        <div class="fc-stat-lab">Know It ✓</div>
+      </div>
+      <div class="fc-stat-box">
+        <div class="fc-stat-val" id="fcDunno" style="color:var(--accent-red);">0</div>
+        <div class="fc-stat-lab">Need Practice ✗</div>
+      </div>
+      <div class="fc-stat-box">
+        <div class="fc-stat-val" id="fcLeft" style="color:var(--accent-orange);">0</div>
+        <div class="fc-stat-lab">Remaining</div>
+      </div>
+    </div>
+
+    <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;">Filter by Year</div>
+    <div class="filter-row" id="yearFilters"></div>
+    <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px;margin-top:6px;">Filter by Subject</div>
+    <div class="filter-row" id="subjectFilters"></div>
+
+    <div class="fc-scene" onclick="flipFC()">
+      <div class="fc-card" id="fcCard">
+        <div class="fc-face">
+          <div class="fc-tag">Question</div>
+          <div class="fc-year" id="fcYear">2023</div>
+          <div class="fc-question" id="fcQ">Loading…</div>
+          <div class="fc-hint">👆 Click to reveal answer</div>
+        </div>
+        <div class="fc-face back">
+          <div class="fc-tag">Answer</div>
+          <div class="fc-year" id="fcYearB">2023</div>
+          <div class="fc-answer" id="fcA"></div>
+          <div class="fc-explanation" id="fcExp"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fc-nav">
+      <button class="fc-nav-btn" onclick="fcGo(-1)">←</button>
+      <span class="fc-counter"><span id="fcIdx">1</span> / <span id="fcTot">0</span></span>
+      <button class="fc-nav-btn" onclick="fcGo(1)">→</button>
+    </div>
+
+    <div class="fc-actions">
+      <button class="btn btn-know" onclick="fcMark(true)">✓ Know It</button>
+      <button class="btn btn-dunno" onclick="fcMark(false)">✗ Practice More</button>
+      <button class="btn btn-secondary" onclick="fcShuffle()">🔀 Shuffle</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ SYLLABUS ══ -->
+<div class="page" id="page-syllabus">
+  <div class="page-header">
+    <div class="header-eyebrow">SYLLABUS & RESOURCES</div>
+    <div class="header-title">Topic-wise <span class="highlight">Best Videos</span></div>
+    <div class="header-desc">Curated YouTube resources for every SSC CGL topic. Check off subtopics as you finish them.</div>
+  </div>
+  <div class="main-body">
+    <div class="subject-tabs" id="syllabusTabs"></div>
+    <div id="syllabusBody"></div>
+  </div>
+</div>
+
+<!-- ══ NOTES ══ -->
+<div class="page" id="page-notes">
+  <div class="page-header">
+    <div class="header-eyebrow">MY NOTES</div>
+    <div class="header-title">Personal <span class="highlight">Study Notes</span></div>
+    <div class="header-desc">Write, format, and organize notes by subject. Auto-saves every 3 seconds.</div>
+  </div>
+  <div class="main-body" style="padding-bottom:0;">
+    <div class="notes-layout">
+      <div class="notes-sidebar">
+        <div class="notes-sidebar-header">
+          <span class="notes-sidebar-title">Notes</span>
+          <button class="btn btn-sm btn-primary" onclick="newNote()">+ New</button>
+        </div>
+        <div class="notes-list" id="notesList"></div>
+      </div>
+      <div class="notes-editor">
+        <div class="notes-toolbar">
+          <span style="font-size:11px;font-weight:700;color:var(--text-muted);margin-right:4px;">Format:</span>
+          <button class="tool-btn" onclick="fmt('bold')"><b>B</b></button>
+          <button class="tool-btn" onclick="fmt('italic')"><i>I</i></button>
+          <button class="tool-btn" onclick="fmt('h1')">H1</button>
+          <button class="tool-btn" onclick="fmt('h2')">H2</button>
+          <button class="tool-btn" onclick="fmt('bullet')">• List</button>
+          <button class="tool-btn" onclick="fmt('formula')">∑ Formula</button>
+          <div style="margin-left:auto;display:flex;align-items:center;gap:6px;">
+            <select class="form-select" id="noteTag" style="height:28px;padding:0 8px;font-size:11px;width:110px;">
+              <option value="general">General</option>
+              <option value="math">Math</option>
+              <option value="reasoning">Reasoning</option>
+              <option value="english">English</option>
+              <option value="gk">GK</option>
+              <option value="formula">Formula</option>
+              <option value="trick">Trick</option>
+            </select>
+            <button class="btn btn-sm btn-primary" onclick="saveNote()">💾 Save</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteNote()">🗑</button>
+          </div>
+        </div>
+        <input class="note-title-in" id="noteTitleIn" placeholder="Note title…">
+        <textarea class="note-body-in" id="noteBodyIn" placeholder="Start writing…
+
+Tips:
+• Use the toolbar to format
+• Tag your notes for easy filtering
+• Notes auto-save every 3 seconds
+• Add formulas, tricks, shortcuts here"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ AI TUTOR ══ -->
+<div class="page" id="page-ai">
+  <div class="page-header">
+    <div class="header-eyebrow">AI-POWERED TUTOR</div>
+    <div class="header-title">Your Personal <span class="highlight">Claude Tutor</span></div>
+    <div class="header-desc">Ask anything — math, reasoning, English, GK, or exam strategy. Powered by Claude AI.</div>
+  </div>
+  <div class="main-body">
+    <div class="ai-layout">
+      <div class="ai-messages" id="aiMsgs">
+        <div class="msg msg-ai">
+          👋 Hi Samin! I'm your personal SSC CGL tutor. I can help you with:<br><br>
+          📐 <b>Math</b> — step-by-step solutions for percentages, ratios, algebra, geometry<br>
+          🧠 <b>Reasoning</b> — analogies, series, blood relations, puzzles<br>
+          📝 <b>English</b> — grammar rules, vocabulary, one-word substitution<br>
+          🌍 <b>GK/GS</b> — history, geography, polity, science<br>
+          🎯 <b>Strategy</b> — time management, attempt order, exam tips<br><br>
+          What do you want to learn today?
+        </div>
+      </div>
+      <div class="ai-bar">
+        <input class="ai-input" id="aiIn" placeholder="Ask anything about SSC CGL…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAI();}">
+        <button class="ai-send" onclick="sendAI()">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ HISTORY ══ -->
+<div class="page" id="page-history">
+  <div class="page-header">
+    <div class="header-eyebrow">MOCK TRACKER</div>
+    <div class="header-title">Your <span class="highlight">Progress</span></div>
+    <div class="header-desc">All your test attempts, scores, and performance trends.</div>
+  </div>
+  <div class="main-body">
+    <div class="grid-2" style="margin-bottom:16px;">
+      <div class="stat-card orange">
+        <div class="stat-label">Total Attempts</div>
+        <div class="stat-value" id="hStatAttempts">—</div>
+      </div>
+      <div class="stat-card teal">
+        <div class="stat-label">Average Score</div>
+        <div class="stat-value" id="hStatAvg">—</div>
+      </div>
+    </div>
+    <div class="card">
+      <div id="histTable"><div class="spinner-wrap"><div class="spin"></div> Loading…</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PLANNER ══ -->
+<div class="page" id="page-planner">
+  <div class="page-header">
+    <div class="header-eyebrow">WEEKLY PLANNER</div>
+    <div class="header-title">Study <span class="highlight">Calendar</span></div>
+    <div class="header-desc">Track study days, manage daily tasks, build your streak.</div>
+  </div>
+  <div class="main-body">
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">📆 March 2026 — Study Log</div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div style="display:flex;gap:14px;margin-top:12px;font-size:11px;color:var(--text-muted);">
+          <span>🟨 Today</span><span>🟩 Studied</span><span>⬜ Pending</span>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">🎯 Daily Tasks</div>
+        <div id="taskList"></div>
+        <div style="display:flex;gap:8px;margin-top:12px;">
+          <input class="form-input" id="taskIn" placeholder="Add task…" style="flex:1;" onkeydown="if(event.key==='Enter')addTask()">
+          <button class="btn btn-primary btn-sm" onclick="addTask()">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EXAM PATTERN ══ -->
+<div class="page" id="page-pattern">
+  <div class="page-header">
+    <div class="header-eyebrow">EXAM PATTERN</div>
+    <div class="header-title">SSC CGL <span class="highlight">2026</span> Structure</div>
+    <div class="header-desc">Complete Tier I and Tier II breakdown — marks, timing, negative marking.</div>
+  </div>
+  <div class="main-body">
+    <div class="stats-row" style="margin-bottom:20px;">
+      <div class="stat-card orange"><div class="stat-label">Tier I Marks</div><div class="stat-value">200</div><div class="stat-sub">100 Qs · 60 min</div></div>
+      <div class="stat-card teal"><div class="stat-label">Neg. Marking</div><div class="stat-value" style="font-size:22px;">−0.50</div><div class="stat-sub">Per wrong answer</div></div>
+      <div class="stat-card blue"><div class="stat-label">Each Section</div><div class="stat-value">25</div><div class="stat-sub">Questions · 50 marks</div></div>
+      <div class="stat-card red"><div class="stat-label">Marking Scheme</div><div class="stat-value" style="font-size:22px;">+2/−½</div><div class="stat-sub">Correct / Wrong</div></div>
+    </div>
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-title">Tier I — Section Breakdown</div>
+      <table class="ep-table">
+        <thead><tr><th>Section</th><th>Questions</th><th>Marks</th><th>Time</th></tr></thead>
+        <tbody>
+          <tr><td>General Intelligence & Reasoning</td><td>25</td><td>50</td><td rowspan="4" style="color:var(--accent-orange);font-weight:700;vertical-align:middle;">60 min (combined)</td></tr>
+          <tr><td>General Awareness</td><td>25</td><td>50</td></tr>
+          <tr><td>Quantitative Aptitude</td><td>25</td><td>50</td></tr>
+          <tr><td>English Comprehension</td><td>25</td><td>50</td></tr>
+          <tr style="background:#fffbeb;"><td><strong>Total</strong></td><td><strong>100</strong></td><td><strong>200</strong></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Tier II — Paper Breakdown</div>
+      <table class="ep-table">
+        <thead><tr><th>Paper</th><th>Sections</th><th>Questions</th><th>Marks</th><th>Duration</th></tr></thead>
+        <tbody>
+          <tr><td>Paper I (Mandatory)</td><td>Math + Reasoning</td><td>90 + 30</td><td>180 + 60</td><td>3 hours</td></tr>
+          <tr><td>Paper II (Mandatory)</td><td>English + GK</td><td>90 + 30</td><td>180 + 60</td><td>2 hr 15 min</td></tr>
+          <tr><td>Paper III (JSO only)</td><td>Statistics</td><td>100</td><td>200</td><td>2 hours</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADD QUESTION ══ -->
+<div class="page" id="page-add">
+  <div class="page-header">
+    <div class="header-eyebrow">ADD QUESTION</div>
+    <div class="header-title">Expand the <span class="highlight">Question Bank</span></div>
+  </div>
+  <div class="main-body">
+    <div class="card" style="max-width:680px;">
+      <div class="form-group">
+        <label class="form-label">Subject</label>
+        <select class="form-select" id="addSub"></select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Question Text</label>
+        <textarea class="form-textarea" id="addQ" placeholder="Enter the question…"></textarea>
+      </div>
+      <div class="grid-2">
+        <div class="form-group"><label class="form-label">Option A</label><input class="form-input" id="addA"></div>
+        <div class="form-group"><label class="form-label">Option B</label><input class="form-input" id="addB"></div>
+        <div class="form-group"><label class="form-label">Option C</label><input class="form-input" id="addC"></div>
+        <div class="form-group"><label class="form-label">Option D</label><input class="form-input" id="addD"></div>
+      </div>
+      <div class="grid-2">
+        <div class="form-group">
+          <label class="form-label">Correct Option</label>
+          <select class="form-select" id="addCorrect"><option>A</option><option>B</option><option>C</option><option>D</option></select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Difficulty</label>
+          <select class="form-select" id="addDiff"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Explanation (optional)</label>
+        <textarea class="form-textarea" id="addExp" placeholder="Why is this the correct answer?"></textarea>
+      </div>
+      <button class="btn btn-primary" onclick="submitQ()">➕ Add Question</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main-content -->
+</div><!-- /app-layout -->
+
+<div class="toast-box" id="toastBox"></div>
+
+<script>
+// ════════════════════════════════════════════
+//  APP STATE
+// ════════════════════════════════════════════
+const S = {
+  subjects:     [],
+  quiz:         [],
+  qIdx:         0,
+  answers:      {},
+  startTime:    0,
+  timerPerQ:    0,
+  timeLeft:     0,
+  timerInt:     null,
+  subjectId:    null,
+  fcCards:      [],
+  fcIdx:        0,
+  fcKnown:      new Set(),
+  fcDunno:      new Set(),
+  fcYearFilter: 'all',
+  fcSubFilter:  'all',
+  notes:        JSON.parse(localStorage.getItem('ssc_notes2') || '[]'),
+  curNote:      null,
+  tasks:        JSON.parse(localStorage.getItem('ssc_tasks2') || '[]'),
+  studiedDays:  JSON.parse(localStorage.getItem('ssc_studied2') || '[]'),
+  aiHistory:    [],
+};
+
+// ════════════════════════════════════════════
+//  NAVIGATION
+// ════════════════════════════════════════════
+function nav(id, closeSb=true) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const pg = document.getElementById('page-' + id);
+  if (pg) pg.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick')?.includes(`'${id}'`)) n.classList.add('active');
+  });
+  if (closeSb) document.getElementById('sidebar').classList.remove('open');
+  if (id==='history')  loadHistory();
+  if (id==='dashboard') loadDash();
+  if (id==='notes')    renderNotesList();
+  if (id==='syllabus') buildSyllabus();
+  if (id==='planner')  buildCalendar();
+  if (id==='roadmap')  buildRoadmap();
+}
+
+// ════════════════════════════════════════════
+//  COUNTDOWN
+// ════════════════════════════════════════════
+function calcDays() {
+  const exam = new Date('2026-05-10');
+  const now  = new Date();
+  const d = Math.ceil((exam - now) / 86400000);
+  document.getElementById('daysLeft').textContent = d;
+  document.getElementById('daysLeftHeader').textContent = '~' + d;
+  document.getElementById('statDays').textContent = '~' + d;
+}
+
+// ════════════════════════════════════════════
+//  TOAST
+// ════════════════════════════════════════════
+function toast(msg, type='info') {
+  const el = document.createElement('div');
+  el.className = `toast ${type}`;
+  el.textContent = msg;
+  document.getElementById('toastBox').appendChild(el);
+  setTimeout(() => el.remove(), 2800);
+}
+
+// ════════════════════════════════════════════
+//  API
+// ════════════════════════════════════════════
+async function api(url, opts={}) {
+  try {
+    const r = await fetch(url, opts);
+    return await r.json();
+  } catch(e) { console.error(e); return null; }
+}
+
+// ════════════════════════════════════════════
+//  DASHBOARD
+// ════════════════════════════════════════════
+const SUBJECT_STYLES = [
+  { cls:'green',  color:'var(--accent-green)'  },
+  { cls:'orange', color:'var(--accent-orange)' },
+  { cls:'purple', color:'var(--accent-purple)' },
+  { cls:'blue',   color:'var(--accent-blue)'   },
+];
+
+async function loadDash() {
+  const [stats, subjects, history] = await Promise.all([
+    api('/api/stats'), api('/api/subjects'), api('/api/history')
+  ]);
+
+  if (stats) {
+    document.getElementById('statAttempts').textContent = stats.total_attempts || 0;
+    document.getElementById('statBest').textContent = stats.best_score ? stats.best_score + '%' : '—';
+    document.getElementById('statAttemptsSub').textContent = 'from database';
+    if (document.getElementById('hStatAttempts')) {
+      document.getElementById('hStatAttempts').textContent = stats.total_attempts || 0;
+      document.getElementById('hStatAvg').textContent = stats.avg_score ? stats.avg_score + '%' : '—';
+    }
+  }
+
+  if (subjects) {
+    S.subjects = subjects;
+    // Subject cards
+    document.getElementById('subjectsGrid').innerHTML = subjects.map((s, i) => {
+      const st = SUBJECT_STYLES[i % 4];
+      return `<div class="subject-card ${st.cls}" onclick="quickStart(${s.id})">
+        <div class="subject-icon-wrap ${st.cls}">${s.icon || '📘'}</div>
+        <div class="subject-name">${s.name}</div>
+        <div class="subject-meta">${s.question_count} question${s.question_count !== 1 ? 's' : ''} · click to start</div>
+      </div>`;
+    }).join('') || '<div class="empty-box"><p>No subjects found. Add questions first.</p></div>';
+
+    // Populate selects
+    const opts = subjects.map(s => `<option value="${s.id}">${s.icon || ''} ${s.name}</option>`).join('');
+    ['qSubject','addSub'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = opts;
+    });
+  }
+
+  if (history) {
+    const html = history.slice(0,5).map(h => {
+      const sc = parseFloat(h.score_percent);
+      const cls = sc >= 70 ? 'score-high' : sc >= 40 ? 'score-mid' : 'score-low';
+      return `<div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border-light);">
+        <span style="font-size:18px;">${h.icon||'📘'}</span>
+        <div style="flex:1;"><div style="font-size:13px;font-weight:600;">${h.subject_name||'AI Quiz'}</div>
+        <div style="font-size:11px;color:var(--text-muted);">${h.attempted_at?.slice(0,10)||''} · ${h.total_questions}Q</div></div>
+        <span class="score-badge ${cls}">${sc}%</span>
+      </div>`;
+    }).join('') || '<div class="empty-box" style="padding:20px;"><p>No attempts yet</p></div>';
+    document.getElementById('dashHistory').innerHTML = html;
+  }
+
+  updateSyllabusProgress();
+}
+
+function quickStart(subjectId) {
+  nav('quiz');
+  document.getElementById('qSubject').value = subjectId;
+}
+
+// ════════════════════════════════════════════
+//  QUIZ — DATABASE
+// ════════════════════════════════════════════
+async function startDBQuiz() {
+  const subjectId = document.getElementById('qSubject').value;
+  const limit     = document.getElementById('qLimit').value;
+  const diff      = document.getElementById('qDiff').value;
+  const timerPerQ = parseInt(document.getElementById('qTimer').value);
+  if (!subjectId) { toast('Select a subject', 'err'); return; }
+
+  const url = `/api/quiz/${subjectId}?limit=${limit}${diff ? '&difficulty='+diff : ''}`;
+  const qs  = await api(url);
+  if (!qs || !qs.length) { toast('No questions found! Add some first.', 'err'); return; }
+
+  S.quiz       = qs;
+  S.subjectId  = parseInt(subjectId);
+  S.timerPerQ  = timerPerQ;
+  beginQuiz();
+}
+
+// ════════════════════════════════════════════
+//  QUIZ — AI GENERATED
+// ════════════════════════════════════════════
+async function startAIQuiz() {
+  const topic = document.getElementById('aiTopic').value.trim();
+  const count = document.getElementById('aiQCount').value;
+  if (!topic) { toast('Enter a topic', 'err'); return; }
+
+  toast('Generating AI questions…', 'info');
+  showQuizSection('active');
+  document.getElementById('qArea').innerHTML = '<div class="spinner-wrap" style="justify-content:center;"><div class="spin"></div> Claude AI is generating questions…</div>';
+  document.getElementById('timerPill').style.display = 'none';
+
+  try {
+    const res  = await fetch('/api/ai/generate', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ topic: topic, num_questions: parseInt(count), save: false })
+    });
+    const data = await res.json();
+    if (!res.ok || data.error) throw new Error(data.error || 'AI error');
+    const qs = data.questions;
+
+    S.quiz       = qs;
+    S.subjectId  = null;
+    S.timerPerQ  = 60;
+    beginQuiz();
+    toast(`Generated ${qs.length} questions!`, 'ok');
+  } catch(e) {
+    toast('AI generation failed', 'err');
+    showQuizSection('setup');
+  }
+}
+
+function beginQuiz() {
+  S.qIdx      = 0;
+  S.answers   = {};
+  S.startTime = Date.now();
+  showQuizSection('active');
+  document.getElementById('qTot').textContent = ' / ' + S.quiz.length;
+  renderQ();
+}
+
+function showQuizSection(which) {
+  ['setup','active','result'].forEach(k => {
+    const el = document.getElementById('quiz-' + k + '-area');
+    if (el) el.style.display = which === k ? 'block' : 'none';
+  });
+}
+
+function renderQ() {
+  clearInterval(S.timerInt);
+  const q = S.quiz[S.qIdx];
+  if (!q) return;
+
+  const pct = ((S.qIdx + 1) / S.quiz.length) * 100;
+  document.getElementById('qProgressFill').style.width = pct + '%';
+  document.getElementById('qNum').textContent = S.qIdx + 1;
+  document.getElementById('prevQBtn').disabled = S.qIdx === 0;
+  document.getElementById('nextQBtn').textContent = S.qIdx === S.quiz.length - 1 ? 'Submit ✓' : 'Next →';
+
+  // live score
+  let sc = 0;
+  Object.values(S.answers).forEach(v => { if (v) sc++; });
+  document.getElementById('liveScore').textContent = sc;
+
+  const sel = S.answers[q.id] || null;
+  const opts = ['a','b','c','d'];
+  const optHtml = opts.map(o => {
+    const cls = sel && sel.toLowerCase() === o ? 'selected' : '';
+    return `<button class="option-btn ${cls}" onclick="pickOpt('${o.toUpperCase()}')">
+      <span class="option-key">${o.toUpperCase()}</span>
+      ${q['option_' + o]}
+    </button>`;
+  }).join('');
+
+  document.getElementById('qArea').innerHTML = `
+    <div class="question-card">
+      <div class="q-number">Q${S.qIdx+1} of ${S.quiz.length} · <span class="diff-${q.difficulty||'medium'}">${q.difficulty||'medium'}</span></div>
+      <div class="q-text">${q.question_text}</div>
+      <div class="options-list">${optHtml}</div>
+    </div>`;
+
+  if (S.timerPerQ) {
+    S.timeLeft = S.timerPerQ;
+    document.getElementById('timerPill').style.display = 'inline-flex';
+    document.getElementById('timerVal').textContent = S.timeLeft;
+    S.timerInt = setInterval(() => {
+      S.timeLeft--;
+      document.getElementById('timerVal').textContent = S.timeLeft;
+      const pill = document.getElementById('timerPill');
+      if (pill) pill.className = 'timer-pill' + (S.timeLeft <= 10 ? ' warning' : '');
+      if (S.timeLeft <= 0) { clearInterval(S.timerInt); nextQ(); }
+    }, 1000);
+  } else {
+    document.getElementById('timerPill').style.display = 'none';
+  }
+}
+
+function pickOpt(opt) {
+  S.answers[S.quiz[S.qIdx].id] = opt;
+  renderQ();
+}
+
+function nextQ() {
+  clearInterval(S.timerInt);
+  if (S.qIdx < S.quiz.length - 1) { S.qIdx++; renderQ(); }
+  else endQuiz();
+}
+function prevQ() { if (S.qIdx > 0) { S.qIdx--; renderQ(); } }
+function skipQ() { S.answers[S.quiz[S.qIdx].id] = null; nextQ(); }
+
+async function endQuiz() {
+  clearInterval(S.timerInt);
+  const elapsed = Math.round((Date.now() - S.startTime) / 1000);
+
+  let correct=0, wrong=0, skipped=0, details=[];
+
+  if (S.subjectId) {
+    // DB submit
+    const res = await api('/api/quiz/submit', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ subject_id: S.subjectId, answers: S.answers, time_taken_seconds: elapsed })
+    });
+    if (!res) { toast('Could not save result', 'err'); return; }
+    correct  = res.correct;
+    wrong    = res.wrong;
+    skipped  = res.skipped;
+    details  = res.details || [];
+    showResult({ correct, wrong, skipped, pct: res.score_percent, details, elapsed });
+  } else {
+    // AI quiz local score
+    S.quiz.forEach(q => {
+      const sel = S.answers[q.id];
+      if (!sel) { skipped++; details.push({qid:q.id,selected:null,is_correct:0,correct:q.correct_option,explanation:q.explanation||''}); }
+      else if (sel.toUpperCase()===(q.correct_option||'').toUpperCase()) { correct++; details.push({qid:q.id,selected:sel,is_correct:1,correct:q.correct_option,explanation:q.explanation||''}); }
+      else { wrong++; details.push({qid:q.id,selected:sel,is_correct:0,correct:q.correct_option,explanation:q.explanation||''}); }
+    });
+    const tot = correct+wrong+skipped;
+    showResult({ correct, wrong, skipped, pct: tot ? Math.round(correct/tot*100) : 0, details, elapsed });
+  }
+  markStudied();
+}
+
+function showResult({ correct, wrong, skipped, pct, details, elapsed }) {
+  showQuizSection('result');
+  const [grade, msg, color] = pct >= 90 ? ['Excellent! 🏆', 'Outstanding performance!', 'var(--accent-green)']
+    : pct >= 70 ? ['Good Job! 👍', 'Above average, keep going!', 'var(--accent-blue)']
+    : pct >= 50 ? ['Average 📈', 'Room to improve with practice', 'var(--accent-orange)']
+    : ['Keep Going 💪', 'More practice will get you there!', 'var(--accent-red)'];
+
+  document.getElementById('resPct').textContent   = pct + '%';
+  document.getElementById('resPct').style.color   = color;
+  document.getElementById('resGrade').textContent = grade;
+  document.getElementById('resGrade').style.color = color;
+  document.getElementById('resMsg').textContent   = msg;
+  document.getElementById('resC').textContent     = correct;
+  document.getElementById('resW').textContent     = wrong;
+  document.getElementById('resS').textContent     = skipped;
+  document.getElementById('resT').textContent     = Math.floor(elapsed/60)+'m '+( elapsed%60)+'s';
+
+  const review = details.map((d, i) => {
+    const q = S.quiz.find(x => x.id === d.qid);
+    if (!q) return '';
+    const icon = d.is_correct ? '✅' : d.selected ? '❌' : '⏭';
+    const border = d.is_correct ? 'var(--accent-green)' : d.selected ? 'var(--accent-red)' : '#d1d5db';
+    return `<div class="question-card" style="border-left:3px solid ${border};margin-bottom:10px;">
+      <div class="q-number">${icon} Q${i+1}</div>
+      <div class="q-text" style="font-size:14px;margin-bottom:8px;">${q.question_text}</div>
+      <div style="font-size:12px;display:flex;gap:14px;">
+        ${d.selected ? `<span style="color:${d.is_correct?'var(--accent-green)':'var(--accent-red)'};">Your answer: ${d.selected}</span>` : '<span style="color:var(--text-muted);">Skipped</span>'}
+        ${!d.is_correct && d.correct ? `<span style="color:var(--accent-green);">Correct: ${d.correct}</span>` : ''}
+      </div>
+      ${d.explanation ? `<div style="font-size:12px;color:var(--text-muted);margin-top:6px;font-style:italic;">💡 ${d.explanation}</div>` : ''}
+    </div>`;
+  }).join('');
+  document.getElementById('resReview').innerHTML = `<div style="font-size:13px;font-weight:700;color:var(--text-primary);margin:16px 0 10px;">📋 Review</div>${review}`;
+}
+
+function resetQuiz() { showQuizSection('setup'); }
+
+// ════════════════════════════════════════════
+//  PYQ FLASHCARDS
+// ════════════════════════════════════════════
+const PYQ = [
+  {id:1, year:2024, sub:'Math',      q:'A train 240m long passes a pole in 24 seconds. What is the speed?',                  a:'10 m/s = 36 km/h',       exp:'Speed = 240/24 = 10 m/s = 36 km/h'},
+  {id:2, year:2024, sub:'Reasoning', q:'If APPLE = 50, MANGO = 50, then ORANGE = ?',                                         a:'60',                     exp:'Sum of alphabetic positions of each letter'},
+  {id:3, year:2024, sub:'English',   q:'Synonym of "Ephemeral"?',                                                             a:'Transient (short-lived)', exp:'Ephemeral = lasting for a very short time'},
+  {id:4, year:2024, sub:'GK',        q:'Who was India\'s first woman President?',                                             a:'Pratibha Patil (2007)',   exp:'She was the 12th President of India'},
+  {id:5, year:2024, sub:'Math',      q:'What is 15% of 800?',                                                                 a:'120',                    exp:'800 × 15/100 = 120'},
+  {id:6, year:2024, sub:'English',   q:'Fill in the blank: He is ___ honest man.',                                           a:'"an" honest man',        exp:'"an" before vowel sounds'},
+  {id:7, year:2023, sub:'Math',      q:'LCM of 12, 18 and 24?',                                                              a:'72',                     exp:'2³×3² = 72'},
+  {id:8, year:2023, sub:'Reasoning', q:'Complete: 2, 6, 12, 20, 30, ?',                                                     a:'42',                     exp:'Differences: 4,6,8,10,12 → 30+12=42'},
+  {id:9, year:2023, sub:'English',   q:'Antonym of "Benevolent"?',                                                            a:'Malevolent',             exp:'Benevolent=kind; Malevolent=wishing harm'},
+  {id:10,year:2023, sub:'GK',        q:'Which planet is the "Red Planet"?',                                                   a:'Mars',                   exp:'Mars appears red due to iron oxide on surface'},
+  {id:11,year:2023, sub:'Math',      q:'If x:y = 3:5, find (3x+2y):(5x−y)',                                                 a:'19:10',                  exp:'x=3k,y=5k → 19k:10k'},
+  {id:12,year:2023, sub:'Reasoning', q:'Odd one out: Pen, Pencil, Marker, Eraser',                                           a:'Eraser',                 exp:'Eraser removes writing; others write'},
+  {id:13,year:2022, sub:'Math',      q:'A does work in 10 days, B in 15 days. Together?',                                    a:'6 days',                 exp:'1/10+1/15=1/6 → 6 days'},
+  {id:14,year:2022, sub:'English',   q:'Correct: "She don\'t know the answer."',                                              a:'"She doesn\'t know…"',   exp:'3rd person singular → "doesn\'t"'},
+  {id:15,year:2022, sub:'GK',        q:'National Animal of India?',                                                           a:'Bengal Tiger',           exp:'Declared National Animal in 1973'},
+  {id:16,year:2022, sub:'Reasoning', q:'In a row of 40, Ravi is 11th from left. Position from right?',                       a:'30th',                   exp:'40 − 11 + 1 = 30'},
+  {id:17,year:2022, sub:'Math',      q:'Simple interest on ₹5000 at 8% for 3 years?',                                       a:'₹1200',                  exp:'SI = 5000×8×3/100 = ₹1200'},
+  {id:18,year:2021, sub:'Math',      q:'Average of first 5 multiples of 3?',                                                  a:'9',                      exp:'(3+6+9+12+15)/5 = 45/5 = 9'},
+  {id:19,year:2021, sub:'GK',        q:'Largest continent by area?',                                                          a:'Asia',                   exp:'Asia ~44.6 million sq km'},
+  {id:20,year:2021, sub:'English',   q:'One-word substitution: "Present everywhere"?',                                       a:'Omnipresent',            exp:'Omni=all + present → omnipresent'},
+  {id:21,year:2021, sub:'Reasoning', q:'Clock shows 3:30. Angle between hands?',                                              a:'75°',                    exp:'Hour at 105°, minute at 180° → 75°'},
+  {id:22,year:2021, sub:'Math',      q:'Profit = 25%, SP = ₹500. Find CP?',                                                  a:'₹400',                   exp:'CP = 500×100/125 = ₹400'},
+  {id:23,year:2020, sub:'GK',        q:'Who wrote "Discovery of India"?',                                                     a:'Jawaharlal Nehru',       exp:'Written in Ahmednagar Fort, 1942–46'},
+  {id:24,year:2020, sub:'Math',      q:'Compound interest on ₹2000 at 10% for 2 years?',                                    a:'₹420',                   exp:'A=2000×(1.1)²=2420; CI=₹420'},
+  {id:25,year:2020, sub:'English',   q:'Idiom: "Once in a blue moon" means?',                                                 a:'Very rarely',            exp:'Blue moon = rare event'},
+  {id:26,year:2020, sub:'Reasoning', q:'A is father of B. B is sister of C. C is son of D. How is A related to D?',          a:'Husband of D',           exp:'D is mother; A is father → husband'},
+  {id:27,year:2019, sub:'Math',      q:'Number divided by 6 gives remainder 3. Remainder when divided by 2?',                a:'1',                      exp:'6k+3=2(3k+1)+1 → remainder=1'},
+  {id:28,year:2019, sub:'GK',        q:'Full form of GDP?',                                                                   a:'Gross Domestic Product', exp:'Measures total economic output'},
+  {id:29,year:2019, sub:'English',   q:'Correct spelling: Accomodation or Accommodation?',                                    a:'Accommodation',          exp:'Double c AND double m: A-C-C-O-M-M-O-D-A-T-I-O-N'},
+  {id:30,year:2019, sub:'Reasoning', q:'Mirror image of "SSC 2026": what does it look like?',                                 a:'"6202 CSS" (reversed)',  exp:'Mirror reverses text left-to-right'},
+];
+
+let fcFiltered = [...PYQ];
+
+function initPYQ() {
+  const years    = [...new Set(PYQ.map(c=>c.year))].sort((a,b)=>b-a);
+  const subjects = [...new Set(PYQ.map(c=>c.sub))];
+
+  document.getElementById('yearFilters').innerHTML =
+    `<button class="filter-chip active" onclick="setFCFilter('year','all',this)">All Years</button>` +
+    years.map(y => `<button class="filter-chip" onclick="setFCFilter('year','${y}',this)">${y}</button>`).join('');
+
+  document.getElementById('subjectFilters').innerHTML =
+    `<button class="filter-chip active" onclick="setFCFilter('sub','all',this)">All Subjects</button>` +
+    subjects.map(s => `<button class="filter-chip" onclick="setFCFilter('sub','${s}',this)">${s}</button>`).join('');
+
+  S.fcIdx = 0;
+  fcFiltered = [...PYQ];
+  renderFC();
+}
+
+function setFCFilter(type, val, el) {
+  if (type==='year') {
+    S.fcYearFilter = val;
+    document.querySelectorAll('#yearFilters .filter-chip').forEach(b=>b.classList.remove('active'));
+  } else {
+    S.fcSubFilter = val;
+    document.querySelectorAll('#subjectFilters .filter-chip').forEach(b=>b.classList.remove('active'));
+  }
+  el.classList.add('active');
+  fcFiltered = PYQ.filter(c =>
+    (S.fcYearFilter==='all' || c.year==S.fcYearFilter) &&
+    (S.fcSubFilter==='all'  || c.sub===S.fcSubFilter)
+  );
+  S.fcIdx = 0;
+  document.getElementById('fcCard').classList.remove('flipped');
+  renderFC();
+}
+
+function renderFC() {
+  const total = fcFiltered.length;
+  document.getElementById('fcTot').textContent     = total;
+  document.getElementById('fcIdx').textContent     = total ? S.fcIdx+1 : 0;
+  document.getElementById('fcKnown').textContent   = S.fcKnown.size;
+  document.getElementById('fcDunno').textContent   = S.fcDunno.size;
+  document.getElementById('fcLeft').textContent    = total - S.fcKnown.size - S.fcDunno.size;
+  if (!total) {
+    document.getElementById('fcQ').textContent = 'No cards match this filter.';
+    document.getElementById('fcA').textContent = '';
+    return;
+  }
+  const c = fcFiltered[S.fcIdx];
+  const badge = c.year + ' · ' + c.sub;
+  document.getElementById('fcQ').textContent   = c.q;
+  document.getElementById('fcA').textContent   = c.a;
+  document.getElementById('fcExp').textContent = c.exp ? '💡 ' + c.exp : '';
+  document.getElementById('fcYear').textContent  = badge;
+  document.getElementById('fcYearB').textContent = badge;
+}
+
+function flipFC() { document.getElementById('fcCard').classList.toggle('flipped'); }
+function fcGo(dir) {
+  document.getElementById('fcCard').classList.remove('flipped');
+  S.fcIdx = (S.fcIdx + dir + fcFiltered.length) % fcFiltered.length;
+  setTimeout(renderFC, 80);
+}
+function fcMark(know) {
+  const c = fcFiltered[S.fcIdx];
+  if (know) { S.fcKnown.add(c.id); S.fcDunno.delete(c.id); toast('Marked as known ✓', 'ok'); }
+  else       { S.fcDunno.add(c.id); S.fcKnown.delete(c.id); toast('Added to practice', 'info'); }
+  fcGo(1);
+}
+function fcShuffle() {
+  for (let i=fcFiltered.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [fcFiltered[i],fcFiltered[j]]=[fcFiltered[j],fcFiltered[i]];
+  }
+  S.fcIdx = 0;
+  document.getElementById('fcCard').classList.remove('flipped');
+  renderFC(); toast('Shuffled!', 'ok');
+}
+
+// ════════════════════════════════════════════
+//  SYLLABUS
+// ════════════════════════════════════════════
+const SYLLABUS = {
+  'Quantitative Aptitude': { icon:'📐', topics:[
+    { name:'Number System', subs:['LCM & HCF','Fractions & Decimals','Prime Numbers','Divisibility Rules'], videos:[
+      {t:'Number System Complete — SSC CGL', ch:'Rakesh Yadav Sir', dur:'2:45', u:'https://www.youtube.com/results?search_query=SSC+CGL+Number+System+Rakesh+Yadav'},
+      {t:'Number System Tricks & Shortcuts', ch:'Abhinay Maths',    dur:'1:30', u:'https://www.youtube.com/results?search_query=SSC+CGL+Number+System+Abhinay+Maths'},
+    ]},
+    { name:'Percentage', subs:['Basic %','% Change','Profit/Loss via %','% of %'], videos:[
+      {t:'Percentage Complete — SSC CGL', ch:'Rakesh Yadav',  dur:'3:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+Percentage+Rakesh+Yadav'},
+      {t:'Percentage — 100 Questions',    ch:'Abhinay Maths', dur:'2:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+Percentage+Abhinay+Maths'},
+    ]},
+    { name:'Ratio & Proportion', subs:['Basic Ratio','Compound Ratio','Mixture Alligation'], videos:[
+      {t:'Ratio & Proportion All Concepts', ch:'Gagan Pratap', dur:'2:20', u:'https://www.youtube.com/results?search_query=SSC+CGL+Ratio+Proportion+Gagan+Pratap'},
+    ]},
+    { name:'Time, Speed & Distance', subs:['TSD basics','Trains','Boats & Streams','Relative Speed'], videos:[
+      {t:'TSD Complete — SSC CGL 2026', ch:'Rakesh Yadav', dur:'4:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+Time+Speed+Distance'},
+      {t:'Trains & Boats Tricks',       ch:'Abhinay Maths',dur:'1:45', u:'https://www.youtube.com/results?search_query=SSC+CGL+trains+boats+tricks'},
+    ]},
+    { name:'Algebra', subs:['Linear Equations','Quadratic','Algebraic Identities'], videos:[
+      {t:'Algebra for SSC CGL Full Course', ch:'Gagan Pratap', dur:'5:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+Algebra+Gagan+Pratap'},
+    ]},
+    { name:'Geometry & Mensuration', subs:['Triangles','Circles','Area & Volume'], videos:[
+      {t:'Geometry Complete — SSC CGL', ch:'Rakesh Yadav',  dur:'6:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+Geometry+Rakesh+Yadav'},
+      {t:'Mensuration All Formulas',    ch:'Abhinay Maths', dur:'2:30', u:'https://www.youtube.com/results?search_query=SSC+CGL+Mensuration+Abhinay'},
+    ]},
+  ]},
+  'General Intelligence & Reasoning': { icon:'🧠', topics:[
+    { name:'Analogy', subs:['Word Analogy','Number Analogy','Letter Analogy'], videos:[
+      {t:'Analogy — 200 Questions SSC CGL', ch:'Reasoning by Deepak', dur:'2:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+Analogy+Reasoning'},
+      {t:'Analogy Tricks & Shortcuts',      ch:'Sachin Sir SSC',      dur:'1:30', u:'https://www.youtube.com/results?search_query=SSC+CGL+Analogy+tricks'},
+    ]},
+    { name:'Series', subs:['Number Series','Letter Series','Missing Term'], videos:[
+      {t:'Number Series Complete', ch:'Rakesh Yadav', dur:'1:45', u:'https://www.youtube.com/results?search_query=SSC+CGL+number+series'},
+    ]},
+    { name:'Coding-Decoding', subs:['Letter Coding','Number Coding','Mixed Coding'], videos:[
+      {t:'Coding Decoding Full Chapter', ch:'Reasoning by Deepak', dur:'2:15', u:'https://www.youtube.com/results?search_query=SSC+CGL+coding+decoding'},
+    ]},
+    { name:'Blood Relations', subs:['Direct Relations','Coded Relations'], videos:[
+      {t:'Blood Relations All Types', ch:'Sachin Sir SSC', dur:'1:20', u:'https://www.youtube.com/results?search_query=SSC+CGL+blood+relations'},
+    ]},
+    { name:'Seating Arrangement', subs:['Linear','Circular','Complex'], videos:[
+      {t:'Seating Arrangement — Linear & Circular', ch:'Reasoning by Deepak', dur:'1:30', u:'https://www.youtube.com/results?search_query=SSC+CGL+seating+arrangement'},
+    ]},
+    { name:'Syllogism & Venn Diagrams', subs:['Basic Syllogism','Possibility Cases','Venn Diagrams'], videos:[
+      {t:'Syllogism Complete — All Rules', ch:'Sachin Sir SSC', dur:'1:45', u:'https://www.youtube.com/results?search_query=SSC+CGL+syllogism+all+rules'},
+    ]},
+  ]},
+  'English Language': { icon:'📝', topics:[
+    { name:'Grammar', subs:['Tenses','Subject-Verb Agreement','Articles','Prepositions'], videos:[
+      {t:'Grammar for SSC CGL Full Course', ch:'Neetu Singh Mam', dur:'4:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+English+Grammar+Neetu+Singh'},
+      {t:'Grammar Rules & Tricks',          ch:'Rani Mam English',dur:'3:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+grammar+tricks'},
+    ]},
+    { name:'Vocabulary', subs:['Synonyms','Antonyms','One Word Substitution','Idioms & Phrases'], videos:[
+      {t:'1000 Vocabulary Words — SSC CGL',    ch:'Neetu Singh Mam', dur:'5:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+vocabulary+Neetu+Singh'},
+      {t:'Idioms & Phrases — 500 Most Asked',  ch:'Rani Mam English',dur:'2:30', u:'https://www.youtube.com/results?search_query=SSC+CGL+idioms+phrases'},
+    ]},
+    { name:'Reading Comprehension', subs:['Passage Types','Main Idea','Inference'], videos:[
+      {t:'RC Strategy for SSC CGL', ch:'Neetu Singh Mam', dur:'1:30', u:'https://www.youtube.com/results?search_query=SSC+CGL+reading+comprehension'},
+    ]},
+    { name:'Error Spotting', subs:['Grammatical Error','Usage Error','Structural Error'], videos:[
+      {t:'Error Spotting — 200 Sentences', ch:'Rani Mam English', dur:'2:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+error+spotting'},
+    ]},
+  ]},
+  'General Awareness': { icon:'🌍', topics:[
+    { name:'History', subs:['Ancient India','Medieval India','Modern India','Freedom Movement'], videos:[
+      {t:'History Complete — SSC CGL 2026', ch:'Lucent GK / Vishal', dur:'5:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+History+complete+2026'},
+      {t:'Modern History Quick Revision',   ch:'Adda247',            dur:'2:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+modern+history+revision'},
+    ]},
+    { name:'Geography', subs:['Indian Geography','World Geography','Climate','Resources'], videos:[
+      {t:'Geography — SSC CGL Full Course', ch:'Vishal Sarkari', dur:'4:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+Geography+full+course'},
+    ]},
+    { name:'Polity', subs:['Constitution','Parliament','Fundamental Rights','Judiciary'], videos:[
+      {t:'Polity Complete — SSC CGL',          ch:'Adda247',    dur:'3:30', u:'https://www.youtube.com/results?search_query=SSC+CGL+Polity+complete'},
+      {t:'Constitution — 100 Important Articles',ch:'Lucent GK',dur:'2:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+constitution+100+articles'},
+    ]},
+    { name:'Science', subs:['Physics (basics)','Chemistry (basics)','Biology (basics)'], videos:[
+      {t:'Science — 1000 Questions SSC CGL', ch:'Ghatna Chakra', dur:'4:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+Science+1000+questions'},
+    ]},
+    { name:'Current Affairs', subs:['Monthly CA','Awards & Honours','Sports','International'], videos:[
+      {t:'Monthly Current Affairs 2025–26', ch:'Adda247', dur:'2:00', u:'https://www.youtube.com/results?search_query=SSC+CGL+current+affairs+2026'},
+    ]},
+  ]},
+};
+
+function buildSyllabus() {
+  const subjects = Object.keys(SYLLABUS);
+  const tabEl    = document.getElementById('syllabusTabs');
+  const bodyEl   = document.getElementById('syllabusBody');
+
+  tabEl.innerHTML = subjects.map((s,i)=>
+    `<button class="sub-tab${i===0?' active':''}" onclick="showSylTab('${s}',this)">${SYLLABUS[s].icon} ${s}</button>`
+  ).join('');
+
+  function renderTab(sub) {
+    const data = SYLLABUS[sub];
+    const stored = JSON.parse(localStorage.getItem('ssc_subs2')||'{}');
+    bodyEl.innerHTML = data.topics.map((t,ti) => {
+      const subItems = t.subs.map(st => {
+        const key = `${sub}|${t.name}|${st}`;
+        const done = stored[key] ? 'done' : '';
+        return `<li class="subtopic-item">
+          <div class="check-box ${done}" onclick="toggleSub('${key}',this)">${done?'✓':''}</div>
+          ${st}
+        </li>`;
+      }).join('');
+      const vidItems = t.videos.map(v =>
+        `<a class="video-link" href="${v.u}" target="_blank">
+          <div class="yt-icon">▶</div>
+          <div><div class="video-title">${v.t}</div><div class="video-channel">📺 ${v.ch}</div></div>
+          <span class="video-dur">${v.dur}</span>
+        </a>`
+      ).join('');
+      return `<div class="topic-row" id="tr${ti}">
+        <div class="topic-header" onclick="toggleTopic('tr${ti}')">
+          <span class="topic-arrow">▶</span>
+          <span class="topic-name">${t.name}</span>
+          <span style="font-size:11px;color:var(--text-muted);">${t.subs.length} subtopics</span>
+        </div>
+        <div class="topic-body">
+          <div style="margin-bottom:12px;">
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px;">📋 Subtopics (check when done)</div>
+            <ul class="subtopic-list">${subItems}</ul>
+          </div>
+          <div>
+            <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px;">🎬 Best Videos</div>
+            ${vidItems}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+    updateSyllabusProgress();
+  }
+
+  window.showSylTab = (sub, el) => {
+    document.querySelectorAll('.sub-tab').forEach(t=>t.classList.remove('active'));
+    el.classList.add('active');
+    renderTab(sub);
+  };
+  renderTab(subjects[0]);
+}
+
+function toggleTopic(id) { document.getElementById(id).classList.toggle('open'); }
+
+function toggleSub(key, el) {
+  const stored = JSON.parse(localStorage.getItem('ssc_subs2')||'{}');
+  if (stored[key]) { delete stored[key]; el.classList.remove('done'); el.textContent = ''; }
+  else { stored[key]=true; el.classList.add('done'); el.textContent='✓'; }
+  localStorage.setItem('ssc_subs2', JSON.stringify(stored));
+  updateSyllabusProgress();
+}
+
+function updateSyllabusProgress() {
+  const stored = JSON.parse(localStorage.getItem('ssc_subs2')||'{}');
+  const total = Object.values(SYLLABUS).reduce((n,s)=>n+s.topics.reduce((m,t)=>m+t.subs.length,0),0);
+  const done  = Object.keys(stored).length;
+  const pct   = total ? Math.round(done/total*100) : 0;
+  const el1 = document.getElementById('syllabusProgressPct');
+  const el2 = document.getElementById('syllabusProgressBar');
+  if (el1) el1.textContent = pct + '%';
+  if (el2) el2.style.width = pct + '%';
+}
+
+// ════════════════════════════════════════════
+//  NOTES
+// ════════════════════════════════════════════
+const TAG_CLS = { math:'tag-math', reasoning:'tag-reasoning', english:'tag-english', gk:'tag-gk', formula:'tag-formula', trick:'tag-trick', general:'tag-general' };
+
+function renderNotesList() {
+  const el = document.getElementById('notesList');
+  if (!S.notes.length) {
+    el.innerHTML = '<div class="empty-box" style="padding:24px;"><div class="ei">📝</div><p>No notes yet. Click + New!</p></div>';
+    return;
+  }
+  el.innerHTML = S.notes.map(n =>
+    `<div class="note-item ${S.curNote===n.id?'active':''}" onclick="openNote('${n.id}')">
+      <div class="note-item-title">${n.title||'Untitled'}</div>
+      <span class="note-tag ${TAG_CLS[n.tag]||'tag-general'}">${n.tag||'general'}</span>
+      <div class="note-item-date">${new Date(n.upd).toLocaleDateString()}</div>
+    </div>`
+  ).join('');
+}
+
+function newNote() {
+  const id = Date.now().toString();
+  S.notes.unshift({ id, title:'', body:'', tag:'general', upd:Date.now() });
+  S.curNote = id;
+  saveNotes(); renderNotesList();
+  document.getElementById('noteTitleIn').value = '';
+  document.getElementById('noteBodyIn').value  = '';
+  document.getElementById('noteTag').value     = 'general';
+  document.getElementById('noteTitleIn').focus();
+}
+
+function openNote(id) {
+  const n = S.notes.find(x=>x.id===id);
+  if (!n) return;
+  S.curNote = id;
+  document.getElementById('noteTitleIn').value = n.title||'';
+  document.getElementById('noteBodyIn').value  = n.body||'';
+  document.getElementById('noteTag').value     = n.tag||'general';
+  renderNotesList();
+}
+
+function saveNote() {
+  if (!S.curNote) { newNote(); return; }
+  const n = S.notes.find(x=>x.id===S.curNote);
+  if (!n) return;
+  n.title = document.getElementById('noteTitleIn').value||'Untitled';
+  n.body  = document.getElementById('noteBodyIn').value;
+  n.tag   = document.getElementById('noteTag').value;
+  n.upd   = Date.now();
+  saveNotes(); renderNotesList(); toast('Saved ✓', 'ok');
+}
+
+function deleteNote() {
+  S.notes = S.notes.filter(x=>x.id!==S.curNote);
+  S.curNote = null;
+  saveNotes(); renderNotesList();
+  document.getElementById('noteTitleIn').value = '';
+  document.getElementById('noteBodyIn').value  = '';
+  toast('Deleted', 'err');
+}
+
+function saveNotes() { localStorage.setItem('ssc_notes2', JSON.stringify(S.notes)); }
+
+function fmt(type) {
+  const ta = document.getElementById('noteBodyIn');
+  const s = ta.selectionStart, e = ta.selectionEnd;
+  const sel = ta.value.substring(s,e);
+  const m = { bold:`**${sel}**`, italic:`_${sel}_`, h1:`\n# ${sel}`, h2:`\n## ${sel}`, bullet:`\n• ${sel}`, formula:`\n📐 ${sel}` };
+  ta.value = ta.value.substring(0,s) + (m[type]||sel) + ta.value.substring(e);
+}
+
+setInterval(()=>{
+  if (!S.curNote) return;
+  const n = S.notes.find(x=>x.id===S.curNote);
+  if (!n) return;
+  const t = document.getElementById('noteTitleIn')?.value||'';
+  const b = document.getElementById('noteBodyIn')?.value||'';
+  if (n.title!==t||n.body!==b) { n.title=t||'Untitled'; n.body=b; n.upd=Date.now(); saveNotes(); }
+}, 3000);
+
+// ════════════════════════════════════════════
+//  AI TUTOR
+// ════════════════════════════════════════════
+async function sendAI() {
+  const inp = document.getElementById('aiIn');
+  const msg = inp.value.trim();
+  if (!msg) return;
+  inp.value = '';
+  const box = document.getElementById('aiMsgs');
+  box.innerHTML += `<div class="msg msg-user">${msg}</div>`;
+
+  const typing = document.createElement('div');
+  typing.className = 'msg msg-ai';
+  typing.innerHTML = '<div class="spinner-wrap" style="padding:4px 0;gap:6px;"><div class="spin"></div> Thinking…</div>';
+  box.appendChild(typing);
+  box.scrollTop = box.scrollHeight;
+
+  S.aiHistory.push({ role:'user', content:msg });
+
+  try {
+    const res  = await fetch('/api/ai/tutor', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({ message: msg, history: S.aiHistory.slice(-10) })
+    });
+    const data  = await res.json();
+    const reply = data.reply || 'Sorry, I could not respond.';
+    S.aiHistory.push({ role:'assistant', content:reply });
+    typing.textContent = reply;
+  } catch {
+    typing.textContent = '⚠️ Connection error. Check your internet.';
+  }
+  box.scrollTop = box.scrollHeight;
+}
+
+// ════════════════════════════════════════════
+//  HISTORY
+// ════════════════════════════════════════════
+async function loadHistory() {
+  const data = await api('/api/history');
+  const el = document.getElementById('histTable');
+  if (!data || !data.length) {
+    el.innerHTML = '<div class="empty-box"><div class="ei">📊</div><h3>No attempts yet</h3><p>Take tests to see progress!</p></div>';
+    return;
+  }
+  el.innerHTML = `<table class="data-table">
+    <thead><tr><th>Subject</th><th>Date</th><th>Questions</th><th>Correct</th><th>Wrong</th><th>Score</th><th>Time</th></tr></thead>
+    <tbody>${data.map(h=>{
+      const sc = parseFloat(h.score_percent);
+      const cls = sc>=70?'score-high':sc>=40?'score-mid':'score-low';
+      const secs = h.time_taken_seconds||0;
+      return `<tr>
+        <td>${h.icon||'📘'} ${h.subject_name||'AI Quiz'}</td>
+        <td>${h.attempted_at?.slice(0,10)||'—'}</td>
+        <td>${h.total_questions}</td>
+        <td style="color:var(--accent-green);font-weight:600;">${h.correct_answers}</td>
+        <td style="color:var(--accent-red);font-weight:600;">${h.wrong_answers}</td>
+        <td><span class="score-badge ${cls}">${sc}%</span></td>
+        <td style="font-size:12px;color:var(--text-muted);">${Math.floor(secs/60)}m ${secs%60}s</td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table>`;
+}
+
+// ════════════════════════════════════════════
+//  PLANNER
+// ════════════════════════════════════════════
+function buildCalendar() {
+  const grid  = document.getElementById('calGrid');
+  const today = new Date();
+  const yr    = today.getFullYear();
+  const mo    = today.getMonth();
+  const days  = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+  let html = days.map(d=>`<div class="cal-cell hdr">${d}</div>`).join('');
+  const first  = new Date(yr,mo,1).getDay();
+  const offset = (first+6)%7;
+  for (let i=0;i<offset;i++) html += '<div class="cal-cell" style="opacity:0;pointer-events:none;"></div>';
+
+  const inMonth = new Date(yr,mo+1,0).getDate();
+  for (let d=1;d<=inMonth;d++) {
+    const ds = `${yr}-${String(mo+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isT = d===today.getDate();
+    const isS = S.studiedDays.includes(ds);
+    html += `<div class="cal-cell ${isT?'today':isS?'studied':''}" onclick="toggleDay('${ds}',this)">${d}</div>`;
+  }
+  grid.innerHTML = html;
+  renderTasks();
+}
+
+function toggleDay(ds, el) {
+  const idx = S.studiedDays.indexOf(ds);
+  if (idx>-1) { S.studiedDays.splice(idx,1); el.classList.remove('studied'); }
+  else { S.studiedDays.push(ds); el.classList.add('studied'); toast('Study day logged! ✓','ok'); }
+  localStorage.setItem('ssc_studied2', JSON.stringify(S.studiedDays));
+}
+
+function markStudied() {
+  const d=new Date();
+  const ds=`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  if (!S.studiedDays.includes(ds)) {
+    S.studiedDays.push(ds);
+    localStorage.setItem('ssc_studied2',JSON.stringify(S.studiedDays));
+  }
+}
+
+function addTask() {
+  const inp = document.getElementById('taskIn');
+  const txt = inp.value.trim();
+  if (!txt) return;
+  S.tasks.push({ id:Date.now(), text:txt, done:false });
+  localStorage.setItem('ssc_tasks2',JSON.stringify(S.tasks));
+  inp.value=''; renderTasks();
+}
+
+function toggleTask(id) {
+  const t = S.tasks.find(x=>x.id===id);
+  if (t) { t.done=!t.done; localStorage.setItem('ssc_tasks2',JSON.stringify(S.tasks)); renderTasks(); }
+}
+
+function renderTasks() {
+  const el = document.getElementById('taskList');
+  if (!el) return;
+  if (!S.tasks.length) { el.innerHTML='<p style="font-size:13px;color:var(--text-muted);">No tasks yet!</p>'; return; }
+  el.innerHTML = S.tasks.map(t=>
+    `<div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--border-light);">
+      <div class="check-box ${t.done?'done':''}" onclick="toggleTask(${t.id})">${t.done?'✓':''}</div>
+      <span style="flex:1;font-size:13px;color:${t.done?'var(--text-muted)':'var(--text-primary)'};text-decoration:${t.done?'line-through':'none'};">${t.text}</span>
+      <button onclick="S.tasks=S.tasks.filter(x=>x.id!==${t.id});localStorage.setItem('ssc_tasks2',JSON.stringify(S.tasks));renderTasks();" style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:14px;">×</button>
+    </div>`
+  ).join('');
+}
+
+// ════════════════════════════════════════════
+//  ROADMAP
+// ════════════════════════════════════════════
+function buildRoadmap() {
+  const weeks = [
+    { w:'Weeks 1–2', color:'var(--accent-orange)', title:'Foundation — Math & Reasoning', items:['Number System, LCM/HCF','Percentage, Ratio & Proportion','Basic Reasoning: Analogy, Series','Target: 100 Qs/day'] },
+    { w:'Weeks 3–4', color:'var(--accent-blue)',   title:'Foundation — English & GK',      items:['Grammar: Tenses, Articles, S-V Agreement','Vocabulary: 20 words/day','History & Geography','Target: 100 Qs/day'] },
+    { w:'Weeks 5–6', color:'var(--accent-green)',  title:'Speed Practice',                 items:['TSD, Algebra, Geometry','Coding-Decoding, Blood Relations','Reading Comprehension','First full mock test'] },
+    { w:'Weeks 7–8', color:'var(--accent-purple)', title:'Mocks & Analysis',               items:['2 full mocks/day','Deep error analysis','PYQ 2019–2024 revision','Weak area focus sessions'] },
+    { w:'Weeks 9–10',color:'var(--accent-red)',    title:'Final Sprint',                   items:['Speed drills — 25 Qs/10 min','Current affairs revision','Formula & trick sheets','Attempt order strategy'] },
+  ];
+  document.getElementById('roadmapContent').innerHTML = weeks.map(w=>
+    `<div class="card" style="margin-bottom:12px;border-left:4px solid ${w.color};">
+      <div style="font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:${w.color};margin-bottom:4px;">${w.w}</div>
+      <div style="font-size:15px;font-weight:700;color:var(--text-primary);margin-bottom:10px;">${w.title}</div>
+      <ul style="list-style:none;">${w.items.map(i=>`<li style="font-size:13px;color:var(--text-secondary);padding:4px 0;border-bottom:1px solid var(--border-light);">• ${i}</li>`).join('')}</ul>
+    </div>`
+  ).join('');
+}
+
+// ════════════════════════════════════════════
+//  ADD QUESTION
+// ════════════════════════════════════════════
+async function submitQ() {
+  const d = {
+    subject_id:    parseInt(document.getElementById('addSub').value),
+    question_text: document.getElementById('addQ').value.trim(),
+    option_a:      document.getElementById('addA').value.trim(),
+    option_b:      document.getElementById('addB').value.trim(),
+    option_c:      document.getElementById('addC').value.trim(),
+    option_d:      document.getElementById('addD').value.trim(),
+    correct_option:document.getElementById('addCorrect').value,
+    difficulty:    document.getElementById('addDiff').value,
+    explanation:   document.getElementById('addExp').value.trim(),
+  };
+  if (!d.question_text||!d.option_a||!d.option_b||!d.option_c||!d.option_d) { toast('Fill all fields','err'); return; }
+  const res = await api('/api/questions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+  if (res?.success) {
+    toast('Question added! ✓','ok');
+    ['addQ','addA','addB','addC','addD','addExp'].forEach(id=>document.getElementById(id).value='');
+  } else { toast('Failed to add','err'); }
+}
+
+// ════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════
+calcDays();
+loadDash();
+initPYQ();
+updateSyllabusProgress();
+</script>
+</body>
+</html>
