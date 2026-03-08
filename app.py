@@ -769,6 +769,13 @@ def not_found(e):
 def server_error(e):
     return jsonify({'error': 'Internal server error'}), 500
 
+@app.route('/api/ai/test')
+def ai_test():
+    try:
+        result = call_groq("You are a helpful assistant.", "Say hello in one word.", max_tokens=10)
+        return jsonify({'success': True, 'response': result})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
 
 # Init DB at module load (works with gunicorn)
 try:
