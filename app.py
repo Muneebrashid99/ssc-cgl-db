@@ -22,7 +22,7 @@ DATABASE_URL = os.environ.get('DATABASE_URL', '')
 
 GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '')
 GROQ_API_URL = 'https://api.groq.com/openai/v1/chat/completions'
-GROQ_MODEL = 'llama-3.1-8b-instant'
+GROQ_MODEL = os.environ.get('GROQ_MODEL', 'llama-3.1-8b-instant')
 
 ANTHROPIC_API_KEY = os.environ.get('ANTHROPIC_API_KEY', '')
 ANTHROPIC_API_URL = 'https://api.anthropic.com/v1/messages'
@@ -126,9 +126,14 @@ def call_groq(system_prompt, user_prompt, max_tokens=2048):
             {'role': 'user', 'content': user_prompt},
         ],
     }
-    resp = http_requests.post(GROQ_API_URL, headers=headers, json=payload, timeout=25)
-    resp.raise_for_status()
-    return resp.json()['choices'][0]['message']['content'].strip()
+    try:
+        resp = http_requests.post(GROQ_API_URL, headers=headers, json=payload, timeout=25)
+        resp.raise_for_status()
+        return resp.json()['choices'][0]['message']['content'].strip()
+    except http_requests.exceptions.Timeout:
+        raise ValueError("Groq API timed out. Try fewer questions.")
+    except http_requests.exceptions.RequestException as e:
+        raise ValueError(f"Groq API error: {str(e)}")
 
 
 def call_claude(system_prompt, messages, max_tokens=1024):
