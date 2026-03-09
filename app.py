@@ -14,7 +14,7 @@ from urllib.parse import urlparse
 app = Flask(__name__, static_folder='static')
 CORS(app)
 
-app.secret_key = os.environ.get('SECRET_KEY', 'ssc-cgl-secret-2026-change-this')
+app.secret_key = os.environ.get('SECRET_KEY', 'rbi-grade-b-2026-change-this')
 LOGIN_USERNAME = os.environ.get('LOGIN_USER', 'Samin')
 LOGIN_PASSWORD = os.environ.get('LOGIN_PASS', 'NewPassword123')
 
@@ -96,10 +96,13 @@ def init_db():
         cur.execute("SELECT COUNT(*) FROM subjects")
         if cur.fetchone()[0] == 0:
             seeds = [
-                (1, 'Quantitative Aptitude', '📐'),
-                (2, 'General Intelligence & Reasoning', '🧠'),
+                (1, 'General Awareness', '🌍'),
+                (2, 'Quantitative Aptitude', '📐'),
                 (3, 'English Language', '📝'),
-                (4, 'General Awareness', '🌍'),
+                (4, 'Reasoning', '🧠'),
+                (5, 'Economic & Social Issues', '📊'),
+                (6, 'Finance & Management', '💼'),
+                (7, 'English Writing Skills', '✍️'),
             ]
             cur.executemany("INSERT INTO subjects (id,name,icon) VALUES (%s,%s,%s)", seeds)
         db.commit()
@@ -228,7 +231,7 @@ def login():
     page = """<!DOCTYPE html>
 <html>
 <head>
-<title>SSC CGL Login</title>
+<title>RBI Grade B Login</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -249,17 +252,17 @@ button:hover{opacity:0.88;}
 <body>
 <div class="box">
   <div class="logo">&#9889;</div>
-  <h2>SSC CGL 2026</h2>
-  <p>Master Prep Hub &mdash; Private Access</p>
+  <h2>RBI Grade B 2026</h2>
+  <p>Command Centre &mdash; Private Access</p>
   """ + err_html + """
   <form method="POST">
     <label>Username</label>
     <input type="text" name="username" placeholder="Enter username" required autofocus autocomplete="username">
     <label>Password</label>
     <input type="password" name="password" placeholder="Enter password" required autocomplete="current-password">
-    <button type="submit">Login to Dashboard</button>
+    <button type="submit">Access Command Centre</button>
   </form>
-  <div class="foot">Your personal SSC CGL 2026 prep dashboard</div>
+  <div class="foot">Your personal RBI Grade B 2026 prep dashboard</div>
 </div>
 </body>
 </html>"""
@@ -449,9 +452,9 @@ def ai_generate_questions():
     save_to_db = bool(data.get('save', False))
     if not topic:
         return jsonify({'error': 'topic is required'}), 400
-    system_prompt = "You are an expert SSC CGL exam question creator. Always respond with a valid JSON array only, no preamble, no markdown."
+    system_prompt = "You are an expert RBI Grade B exam question creator. Always respond with a valid JSON array only, no preamble, no markdown."
     user_prompt = (
-        f"Generate {num_questions} SSC CGL multiple-choice questions on the topic: \"{topic}\".\n\n"
+        f"Generate {num_questions} RBI Grade B multiple-choice questions on the topic: \"{topic}\".\n\n"
         "Return a JSON array where every element has exactly these keys:\n"
         "question_text, option_a, option_b, option_c, option_d, correct_option (A/B/C/D), explanation, difficulty (easy/medium/hard)\n\n"
         "Ensure questions are factually correct, distinct, and exam-appropriate."
@@ -517,7 +520,7 @@ def quiz_by_topic():
 
 @app.route('/api/mock/daily')
 def daily_mock_test():
-    section_map = {1:('Quantitative Aptitude',25), 2:('General Intelligence & Reasoning',25), 3:('English Language',25), 4:('General Awareness',25)}
+    section_map = {1:('General Awareness',25), 2:('Quantitative Aptitude',10), 3:('English Language',10), 4:('Reasoning',20)}
     db = get_db()
     cur = db.cursor()
     sections = []
@@ -676,7 +679,7 @@ def ai_generate_explanation():
         return jsonify({'error': 'Provide question_id OR full question fields'}), 400
     prompt = (f"Question: {q['question_text']}\nA) {q['option_a']}  B) {q['option_b']}  C) {q['option_c']}  D) {q['option_d']}\nCorrect Answer: {q['correct_option']}\n\nWrite a clear, concise explanation (2-4 sentences) why this answer is correct.")
     try:
-        explanation = call_groq("You are an SSC CGL expert tutor.", prompt, max_tokens=400)
+        explanation = call_groq("You are an RBI Grade B expert tutor.", prompt, max_tokens=400)
     except Exception as e:
         return jsonify({'error': 'AI service error', 'detail': str(e)}), 502
     if qid and db:
@@ -693,7 +696,7 @@ def ai_tutor():
     if not message:
         return jsonify({'error': 'message is required'}), 400
     system_prompt = (
-        "You are an expert SSC CGL 2026 tutor helping a student named Samin prepare for the exam.\n"
+        "You are an expert RBI Grade B 2026 tutor helping a student named Samin prepare for the exam.\n"
         "Specialise in: Quantitative Aptitude, General Intelligence & Reasoning, English Language, General Awareness.\n"
         "Give step-by-step solutions, use simple language, be encouraging and exam-focused."
     )
@@ -718,9 +721,9 @@ def ai_study_plan():
     hours_per_day = int(data.get('hours_per_day', 3))
     weak_subjects = data.get('weak_subjects', [])
     weak_str = ', '.join(weak_subjects) if weak_subjects else 'None identified yet'
-    user_prompt = (f"Create a 4-week SSC CGL 2026 study plan. Exam: {exam_date}. Hours/day: {hours_per_day}. Weak subjects: {weak_str}. Include weekly breakdown, daily schedule, top 5 tips, and final week revision strategy.")
+    user_prompt = (f"Create a 4-week RBI Grade B 2026 study plan. Exam: {exam_date}. Hours/day: {hours_per_day}. Weak subjects: {weak_str}. Include weekly breakdown, daily schedule, top 5 tips, and final week revision strategy.")
     try:
-        plan = call_claude("You are an expert SSC CGL exam coach.", [{'role':'user','content':user_prompt}], max_tokens=1500)
+        plan = call_claude("You are an expert RBI Grade B 2026 exam coach. Focus on Banking, Economy, ESI, Finance & Management.", [{'role':'user','content':user_prompt}], max_tokens=1500)
     except Exception as e:
         return jsonify({'error': 'AI service error', 'detail': str(e)}), 502
     return jsonify({'plan': plan, 'weak_subjects': weak_subjects})
@@ -744,7 +747,7 @@ def ai_get_hint():
         return jsonify({'error': 'question_id or question_text required'}), 400
     prompt = (f"Question: {q['question_text']}\nA) {q.get('option_a','')}  B) {q.get('option_b','')}  C) {q.get('option_c','')}  D) {q.get('option_d','')}\n\nGive ONE helpful hint without revealing the answer. 1-2 sentences.")
     try:
-        hint = call_groq("You are an SSC CGL tutor giving helpful hints.", prompt, max_tokens=200)
+        hint = call_groq("You are an RBI Grade B tutor giving helpful hints.", prompt, max_tokens=200)
     except Exception as e:
         return jsonify({'error': 'AI service error', 'detail': str(e)}), 502
     return jsonify({'hint': hint})
