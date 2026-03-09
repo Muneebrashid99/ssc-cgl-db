@@ -1,0 +1,2232 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBI Grade B 2026 — Command Centre</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+/* ════════════════════════════════════════════════
+   RBI GRADE B 2026 — COMMAND CENTRE v2
+   Design: Dual-theme (Dark / Light) institutional
+   Fonts: Playfair Display · Sora · DM Mono
+════════════════════════════════════════════════ */
+
+/* ── DARK THEME (default) ── */
+[data-theme="dark"] {
+  --bg:          #070810;
+  --bg2:         #0c0e1a;
+  --bg3:         #111428;
+  --surface:     #131729;
+  --surface2:    #1a1f38;
+  --border:      rgba(255,255,255,0.07);
+  --border2:     rgba(255,255,255,0.13);
+  --border3:     rgba(255,255,255,0.22);
+
+  --text1:       #eef0fc;
+  --text2:       #8892c0;
+  --text3:       #454d78;
+  --text4:       #2a3060;
+
+  --gold:        #d4a843;
+  --gold2:       #f0c96a;
+  --gold-dim:    rgba(212,168,67,0.13);
+  --gold-glow:   rgba(212,168,67,0.06);
+  --gold-border: rgba(212,168,67,0.22);
+
+  --teal:        #2cd9c5;
+  --teal-dim:    rgba(44,217,197,0.1);
+  --teal-border: rgba(44,217,197,0.22);
+
+  --blue:        #5ba3f5;
+  --blue-dim:    rgba(91,163,245,0.1);
+  --blue-border: rgba(91,163,245,0.22);
+
+  --purple:      #a87ff5;
+  --purple-dim:  rgba(168,127,245,0.1);
+
+  --green:       #30d988;
+  --green-dim:   rgba(48,217,136,0.1);
+  --green-border:rgba(48,217,136,0.22);
+
+  --red:         #f56b6b;
+  --red-dim:     rgba(245,107,107,0.1);
+  --red-border:  rgba(245,107,107,0.22);
+
+  --orange:      #f7953e;
+  --orange-dim:  rgba(247,149,62,0.1);
+
+  --shadow-sm:   0 2px 12px rgba(0,0,0,0.4);
+  --shadow:      0 6px 28px rgba(0,0,0,0.55);
+  --shadow-lg:   0 16px 48px rgba(0,0,0,0.7);
+  --glow-gold:   0 0 20px rgba(212,168,67,0.18);
+  --glow-teal:   0 0 20px rgba(44,217,197,0.15);
+}
+
+/* ── LIGHT THEME ── */
+[data-theme="light"] {
+  --bg:          #f2f4fa;
+  --bg2:         #ffffff;
+  --bg3:         #edf0f8;
+  --surface:     #ffffff;
+  --surface2:    #f7f9ff;
+  --border:      rgba(0,0,0,0.07);
+  --border2:     rgba(0,0,0,0.12);
+  --border3:     rgba(0,0,0,0.2);
+
+  --text1:       #111428;
+  --text2:       #4a5280;
+  --text3:       #8892b8;
+  --text4:       #bbbfd8;
+
+  --gold:        #b8891e;
+  --gold2:       #d4a843;
+  --gold-dim:    rgba(184,137,30,0.1);
+  --gold-glow:   rgba(184,137,30,0.05);
+  --gold-border: rgba(184,137,30,0.2);
+
+  --teal:        #0fa898;
+  --teal-dim:    rgba(15,168,152,0.08);
+  --teal-border: rgba(15,168,152,0.2);
+
+  --blue:        #2563eb;
+  --blue-dim:    rgba(37,99,235,0.08);
+  --blue-border: rgba(37,99,235,0.2);
+
+  --purple:      #7c3aed;
+  --purple-dim:  rgba(124,58,237,0.08);
+
+  --green:       #059669;
+  --green-dim:   rgba(5,150,105,0.08);
+  --green-border:rgba(5,150,105,0.2);
+
+  --red:         #dc2626;
+  --red-dim:     rgba(220,38,38,0.07);
+  --red-border:  rgba(220,38,38,0.18);
+
+  --orange:      #d97706;
+  --orange-dim:  rgba(217,119,6,0.08);
+
+  --shadow-sm:   0 2px 10px rgba(0,0,0,0.08);
+  --shadow:      0 4px 20px rgba(0,0,0,0.1);
+  --shadow-lg:   0 12px 40px rgba(0,0,0,0.14);
+  --glow-gold:   0 0 16px rgba(184,137,30,0.12);
+  --glow-teal:   0 0 16px rgba(15,168,152,0.1);
+}
+
+/* ── BASE ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --radius:    14px;
+  --radius-sm: 9px;
+  --radius-xs: 6px;
+  --sidebar-w: 248px;
+  --topbar-h:  58px;
+  --transition: all 0.2s cubic-bezier(0.4,0,0.2,1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text1);
+  font-family: 'Sora', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--border3); }
+
+/* ── LAYOUT ── */
+.app { display: flex; min-height: 100vh; }
+
+/* ════════════════════════════════════════
+   SIDEBAR
+════════════════════════════════════════ */
+.sidebar {
+  width: var(--sidebar-w);
+  min-width: var(--sidebar-w);
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: var(--transition);
+}
+
+/* Brand */
+.sb-brand {
+  padding: 20px 16px 16px;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.sb-brand::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 16px; right: 16px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--gold-border), transparent);
+}
+.sb-logo-row {
+  display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+}
+.sb-logo-icon {
+  width: 36px; height: 36px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  box-shadow: var(--glow-gold);
+  flex-shrink: 0;
+}
+.sb-logo-text { font-size: 15px; font-weight: 700; color: var(--text1); line-height: 1.2; }
+.sb-logo-text span { color: var(--gold); }
+.sb-tagline { font-size: 10px; color: var(--text3); letter-spacing: 0.5px; }
+
+/* Countdown widget */
+.sb-countdown {
+  margin: 10px 12px 6px;
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold-glow));
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  position: relative;
+  overflow: hidden;
+  cursor: default;
+}
+.sb-countdown::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2), transparent);
+}
+.sbc-label {
+  font-size: 9px; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 3px;
+}
+.sbc-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 34px; font-weight: 500; color: var(--gold); line-height: 1;
+}
+.sbc-sub { font-size: 9px; color: var(--text3); margin-top: 3px; }
+
+/* App notif chip */
+.sb-notif-chip {
+  margin: 4px 12px 10px;
+  padding: 7px 11px;
+  background: var(--red-dim);
+  border: 1px solid var(--red-border);
+  border-radius: var(--radius-xs);
+  font-size: 11px; color: var(--red);
+  display: flex; align-items: center; gap: 6px;
+  line-height: 1.4;
+}
+
+/* Nav */
+.sb-section {
+  padding: 14px 16px 4px;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 1.8px; text-transform: uppercase;
+  color: var(--text4);
+}
+
+.nav-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8.5px 16px;
+  cursor: pointer;
+  color: var(--text3);
+  font-size: 12.5px; font-weight: 500;
+  transition: var(--transition);
+  border-left: 2.5px solid transparent;
+  position: relative;
+}
+.nav-item:hover { color: var(--text1); background: var(--border); }
+.nav-item.active {
+  color: var(--text1);
+  background: var(--gold-glow);
+  border-left-color: var(--gold);
+  font-weight: 600;
+}
+.nav-icon { font-size: 14px; width: 18px; text-align: center; flex-shrink: 0; }
+.nav-label { flex: 1; }
+.nav-chip {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.5px;
+  padding: 1.5px 6px; border-radius: 8px; flex-shrink: 0;
+}
+.chip-ai   { background: var(--teal-dim); color: var(--teal); border: 1px solid var(--teal-border); }
+.chip-live { background: var(--red-dim); color: var(--red); border: 1px solid var(--red-border); }
+.chip-new  { background: var(--gold-dim); color: var(--gold); border: 1px solid var(--gold-border); }
+
+/* Sidebar progress */
+.sb-progress {
+  margin: auto 0 0;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+}
+.sp-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+.sp-label { font-size: 10px; color: var(--text3); }
+.sp-pct { font-size: 10px; font-weight: 700; color: var(--gold); font-family: 'DM Mono', monospace; }
+.sp-track { height: 4px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
+.sp-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--gold2)); border-radius: 4px; transition: width 0.7s ease; }
+
+/* Sidebar bottom user */
+.sb-user {
+  display: flex; align-items: center; gap: 9px;
+  padding: 12px 14px;
+  border-top: 1px solid var(--border);
+}
+.ua {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 800; color: #000; flex-shrink: 0;
+}
+.un { font-size: 12px; font-weight: 600; color: var(--text1); }
+.ur { font-size: 10px; color: var(--text3); }
+.sb-actions { display: flex; gap: 4px; margin-left: auto; }
+.icon-btn {
+  width: 28px; height: 28px; border-radius: 7px;
+  background: var(--bg3); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 13px; color: var(--text2);
+  transition: var(--transition); flex-shrink: 0;
+}
+.icon-btn:hover { background: var(--surface2); color: var(--text1); border-color: var(--border2); }
+
+/* ════════════════════════════════════════
+   TOPBAR
+════════════════════════════════════════ */
+.main { margin-left: var(--sidebar-w); flex: 1; min-height: 100vh; display: flex; flex-direction: column; }
+
+.topbar {
+  height: var(--topbar-h);
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 100;
+  gap: 12px;
+}
+.tb-left { display: flex; flex-direction: column; min-width: 0; }
+.tb-eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); }
+.tb-title { font-size: 15px; font-weight: 700; color: var(--text1); line-height: 1.2; }
+.tb-title em { color: var(--gold); font-style: normal; }
+
+.tb-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+
+.tb-countdown-pill {
+  font-size: 11px; font-weight: 600;
+  padding: 5px 12px; border-radius: 20px;
+  background: var(--gold-dim); color: var(--gold);
+  border: 1px solid var(--gold-border);
+  font-family: 'DM Mono', monospace;
+  white-space: nowrap;
+}
+
+/* Theme toggle */
+.theme-toggle {
+  width: 56px; height: 28px;
+  background: var(--bg3);
+  border: 1.5px solid var(--border2);
+  border-radius: 20px;
+  position: relative;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+}
+.theme-toggle:hover { border-color: var(--gold-border); }
+.theme-toggle-knob {
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 20px; height: 20px;
+  background: var(--gold);
+  border-radius: 50%;
+  transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+[data-theme="light"] .theme-toggle-knob { transform: translateX(28px); }
+.theme-toggle-icons {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6px;
+  pointer-events: none;
+}
+.theme-icon { font-size: 11px; line-height: 1; }
+
+.tb-gen-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border: none; border-radius: 9px;
+  padding: 7px 14px;
+  font-family: 'Sora', sans-serif;
+  font-size: 12px; font-weight: 700; color: #000;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(212,168,67,0.3);
+}
+.tb-gen-btn:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(212,168,67,0.4); }
+
+/* ════════════════════════════════════════
+   PAGES
+════════════════════════════════════════ */
+.page-content { padding: 24px; flex: 1; }
+.page { display: none; }
+.page.active { display: block; animation: pageIn 0.2s ease; }
+@keyframes pageIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Page header */
+.pg-head { margin-bottom: 24px; }
+.pg-eyebrow { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--text3); margin-bottom: 5px; }
+.pg-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 900; color: var(--text1); line-height: 1.15; letter-spacing: -0.3px;
+}
+.pg-title em { color: var(--gold); font-style: italic; }
+.pg-sub { font-size: 12.5px; color: var(--text2); margin-top: 5px; }
+
+/* ── GRIDS ── */
+.g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; margin-bottom: 18px; }
+.g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; margin-bottom: 18px; }
+.g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 18px; }
+.g-auto { display: grid; grid-template-columns: repeat(auto-fill,minmax(240px,1fr)); gap: 14px; margin-bottom: 18px; }
+
+/* ── CARD ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.card:hover { border-color: var(--border2); }
+.card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.card-ttl { font-size: 10.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text3); }
+.card-link { font-size: 11px; font-weight: 600; color: var(--gold); cursor: pointer; }
+.card-link:hover { text-decoration: underline; }
+
+/* ── STAT CARDS ── */
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  position: relative; overflow: hidden;
+  transition: var(--transition);
+}
+.stat-card:hover { border-color: var(--border2); transform: translateY(-2px); box-shadow: var(--shadow); }
+.stat-card::after {
+  content: attr(data-icon);
+  position: absolute; right: 14px; bottom: 10px;
+  font-size: 40px; opacity: 0.06; pointer-events: none;
+}
+.stat-card-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.stat-lbl { font-size: 9.5px; font-weight: 700; letter-spacing: 1.3px; text-transform: uppercase; color: var(--text3); margin-bottom: 7px; margin-top: 6px; }
+.stat-val { font-family: 'DM Mono', monospace; font-size: 28px; font-weight: 500; color: var(--text1); line-height: 1; }
+.stat-sub { font-size: 10.5px; color: var(--text3); margin-top: 5px; }
+
+/* ── COUNTDOWN HERO ── */
+.cd-hero {
+  background: var(--surface);
+  border: 1px solid var(--gold-border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  position: relative; overflow: hidden;
+}
+.cd-hero::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 220px; height: 220px;
+  background: radial-gradient(circle, rgba(212,168,67,0.1) 0%, transparent 65%);
+  pointer-events: none;
+}
+.cd-hero::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold2), transparent 70%);
+}
+.cdh-lbl { font-size: 9px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); opacity: 0.7; margin-bottom: 6px; }
+.cdh-row { display: flex; align-items: baseline; gap: 8px; }
+.cdh-num { font-family: 'Playfair Display', serif; font-size: 60px; font-weight: 900; color: var(--gold); line-height: 1; }
+.cdh-unit { font-size: 16px; font-weight: 600; color: var(--text2); }
+.cdh-sub { font-size: 11px; color: var(--text3); margin-top: 6px; }
+.cdh-tags { display: flex; gap: 6px; margin-top: 12px; flex-wrap: wrap; }
+.cdh-tag {
+  font-size: 9.5px; font-weight: 600; padding: 3px 9px; border-radius: 20px;
+  background: var(--bg3); border: 1px solid var(--border); color: var(--text2);
+}
+.cdh-tag.active { background: var(--gold-dim); border-color: var(--gold-border); color: var(--gold); }
+
+/* ── NOTIFICATION BANNER ── */
+.notif-banner {
+  border-radius: var(--radius);
+  padding: 13px 16px;
+  display: flex; align-items: flex-start; gap: 12px;
+  margin-bottom: 18px;
+  border: 1px solid;
+  position: relative; overflow: hidden;
+  animation: slideDown 0.3s ease;
+}
+@keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+.notif-banner.warning { background: rgba(212,168,67,0.07); border-color: var(--gold-border); }
+.notif-banner.urgent  { background: var(--red-dim); border-color: var(--red-border); }
+.notif-banner.info    { background: var(--blue-dim); border-color: var(--blue-border); }
+.notif-banner.success { background: var(--green-dim); border-color: var(--green-border); }
+.nb-ico { font-size: 20px; flex-shrink: 0; }
+.nb-body { flex: 1; min-width: 0; }
+.nb-ttl { font-size: 12.5px; font-weight: 700; margin-bottom: 2px; }
+.notif-banner.warning .nb-ttl { color: var(--gold); }
+.notif-banner.urgent .nb-ttl  { color: var(--red); }
+.notif-banner.info .nb-ttl    { color: var(--blue); }
+.notif-banner.success .nb-ttl { color: var(--green); }
+.nb-msg { font-size: 11.5px; color: var(--text2); }
+.nb-close { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 14px; padding: 2px; flex-shrink: 0; opacity: 0.6; }
+.nb-close:hover { opacity: 1; }
+
+/* ── SUBJECT CARDS ── */
+.subj-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative; overflow: hidden;
+}
+.subj-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--ac, var(--gold));
+  opacity: 0; transition: opacity 0.2s;
+}
+.subj-card:hover { border-color: var(--border2); transform: translateY(-3px); box-shadow: var(--shadow); }
+.subj-card:hover::before { opacity: 1; }
+.sc-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+.sc-phase-badge {
+  font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  padding: 2px 8px; border-radius: 10px; display: inline-block; margin-bottom: 6px;
+}
+.p1-badge { background: var(--blue-dim); color: var(--blue); border: 1px solid var(--blue-border); }
+.p2-badge { background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(168,127,245,0.2); }
+.sc-name { font-size: 13px; font-weight: 700; color: var(--text1); margin-bottom: 3px; }
+.sc-count { font-size: 10.5px; color: var(--text3); margin-bottom: 10px; }
+.sc-prog { height: 3px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+.sc-prog-fill { height: 100%; border-radius: 3px; }
+.sc-btns { display: flex; gap: 5px; margin-top: 11px; }
+.sc-btn {
+  flex: 1; padding: 6px 4px; text-align: center;
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-xs); font-size: 9.5px; font-weight: 600;
+  color: var(--text2); cursor: pointer; transition: var(--transition);
+}
+.sc-btn:hover { background: var(--surface2); color: var(--text1); border-color: var(--border2); }
+.sc-btn.primary { background: var(--gold-dim); color: var(--gold); border-color: var(--gold-border); }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 9px 18px; border-radius: var(--radius-sm);
+  font-family: 'Sora', sans-serif;
+  font-size: 12.5px; font-weight: 600;
+  cursor: pointer; transition: var(--transition);
+  border: 1px solid transparent;
+  text-decoration: none; white-space: nowrap;
+}
+.btn-gold { background: linear-gradient(135deg, var(--gold), var(--gold2)); color: #000; box-shadow: 0 2px 8px rgba(212,168,67,0.25); }
+.btn-gold:hover { opacity: 0.9; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(212,168,67,0.35); }
+.btn-teal { background: var(--teal-dim); border-color: var(--teal-border); color: var(--teal); }
+.btn-teal:hover { background: rgba(44,217,197,0.18); }
+.btn-outline { background: transparent; border-color: var(--border2); color: var(--text2); }
+.btn-outline:hover { background: var(--surface2); color: var(--text1); border-color: var(--border3); }
+.btn-ghost { background: transparent; border-color: transparent; color: var(--text2); }
+.btn-ghost:hover { background: var(--bg3); color: var(--text1); }
+.btn-red { background: var(--red-dim); border-color: var(--red-border); color: var(--red); }
+.btn-sm { padding: 6px 12px; font-size: 11.5px; border-radius: var(--radius-xs); }
+.btn-lg { padding: 11px 22px; font-size: 13.5px; border-radius: var(--radius-sm); }
+.btn-full { width: 100%; justify-content: center; }
+
+/* ── QUIZ ── */
+.quiz-wrap { max-width: 760px; }
+.quiz-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.quiz-prog-wrap { margin-bottom: 18px; }
+.qpw-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text3); margin-bottom: 6px; }
+.qpw-track { height: 5px; background: var(--bg3); border-radius: 5px; overflow: hidden; }
+.qpw-fill { height: 100%; background: linear-gradient(90deg, var(--gold), var(--teal)); border-radius: 5px; transition: width 0.35s ease; }
+
+.q-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 14px;
+}
+.q-label { font-size: 9.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.q-text { font-size: 14.5px; font-weight: 500; color: var(--text1); line-height: 1.65; margin-bottom: 18px; }
+.q-opts { display: flex; flex-direction: column; gap: 7px; }
+.q-opt {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: var(--bg3); border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm); padding: 12px 14px;
+  cursor: pointer; transition: var(--transition);
+}
+.q-opt:hover { background: var(--surface2); border-color: var(--border2); }
+.q-opt.sel    { background: var(--gold-dim); border-color: var(--gold-border); }
+.q-opt.right  { background: var(--green-dim); border-color: var(--green-border); }
+.q-opt.wrong  { background: var(--red-dim); border-color: var(--red-border); }
+.q-opt-k { font-family: 'DM Mono', monospace; font-size: 10.5px; font-weight: 700; color: var(--text3); flex-shrink: 0; width: 18px; margin-top: 1px; }
+.q-opt.sel .q-opt-k  { color: var(--gold); }
+.q-opt.right .q-opt-k { color: var(--green); }
+.q-opt.wrong .q-opt-k { color: var(--red); }
+.q-opt-txt { font-size: 13px; color: var(--text2); line-height: 1.5; }
+
+.q-exp {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-left: 3px solid var(--teal);
+  border-radius: var(--radius-sm); padding: 12px 14px;
+  margin-top: 11px; font-size: 12.5px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+.q-exp.show { display: block; }
+.exp-lbl { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; display: block; }
+
+.quiz-ctrls { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+
+/* ── AI PANEL ── */
+.ai-panel {
+  background: linear-gradient(135deg, var(--surface), var(--surface2));
+  border: 1px solid var(--teal-border);
+  border-radius: var(--radius);
+  padding: 20px;
+  position: relative; overflow: hidden;
+  margin-bottom: 20px;
+}
+.ai-panel::before {
+  content: '';
+  position: absolute; top: -30px; right: -30px;
+  width: 140px; height: 140px;
+  background: radial-gradient(circle, var(--teal-dim) 0%, transparent 65%);
+  pointer-events: none;
+}
+.ai-panel-ttl { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: var(--text1); margin-bottom: 3px; }
+.ai-panel-sub { font-size: 11.5px; color: var(--text3); margin-bottom: 14px; }
+.ai-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; }
+.ai-field { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 150px; }
+.ai-lbl { font-size: 9.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); }
+.ai-inp, .ai-sel {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text1);
+  font-family: 'Sora', sans-serif; font-size: 12.5px;
+  padding: 8px 11px; outline: none; transition: var(--transition);
+}
+.ai-inp:focus, .ai-sel:focus { border-color: var(--teal-border); box-shadow: 0 0 0 3px var(--teal-dim); }
+.ai-inp::placeholder { color: var(--text3); }
+.ai-sel option { background: var(--bg2); }
+
+/* Generated question cards */
+.gen-q-card {
+  background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); padding: 15px; margin-bottom: 11px;
+  transition: border-color 0.2s;
+}
+.gen-q-card:hover { border-color: var(--border2); }
+.gq-header { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; }
+.gq-type { font-size: 8.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 2px 7px; border-radius: 8px; }
+.gqt-concept    { background: var(--blue-dim); color: var(--blue); }
+.gqt-analytical { background: var(--purple-dim); color: var(--purple); }
+.gqt-pyq        { background: var(--gold-dim); color: var(--gold); }
+.gqt-quiz       { background: var(--teal-dim); color: var(--teal); }
+.gq-text { font-size: 13px; font-weight: 500; color: var(--text1); line-height: 1.55; margin-bottom: 9px; }
+.gq-opts { display: flex; flex-direction: column; gap: 4px; margin-bottom: 7px; }
+.gq-opt { font-size: 12px; color: var(--text2); padding: 5px 8px; border-radius: 5px; cursor: pointer; display: flex; gap: 6px; transition: background 0.15s; }
+.gq-opt:hover { background: var(--surface2); }
+.gq-opt.correct { background: var(--green-dim); color: var(--green); font-weight: 600; }
+.gq-exp { font-size: 11.5px; color: var(--text3); border-top: 1px solid var(--border); padding-top: 7px; margin-top: 5px; line-height: 1.55; display: none; }
+.gq-exp.show { display: block; }
+.gq-toggle { font-size: 10.5px; color: var(--teal); cursor: pointer; font-weight: 600; }
+.gq-toggle:hover { text-decoration: underline; }
+
+/* ── CHAT ── */
+.chat-wrap { display: flex; flex-direction: column; height: 480px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.chat-msgs { flex: 1; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 12px; }
+.cbubble { max-width: 82%; padding: 11px 15px; border-radius: 12px; font-size: 13px; line-height: 1.6; }
+.cbubble.user { background: var(--gold-dim); border: 1px solid var(--gold-border); align-self: flex-end; color: var(--text1); border-radius: 12px 12px 2px 12px; }
+.cbubble.ai   { background: var(--surface2); border: 1px solid var(--border); align-self: flex-start; color: var(--text2); border-radius: 12px 12px 12px 2px; }
+.ai-chip { font-size: 8.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--teal); margin-bottom: 4px; display: block; }
+.chat-input-row { display: flex; gap: 7px; padding: 11px; border-top: 1px solid var(--border); align-items: flex-end; background: var(--bg3); }
+.chat-ta {
+  flex: 1; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 9px; color: var(--text1);
+  font-family: 'Sora', sans-serif; font-size: 12.5px;
+  padding: 9px 12px; outline: none; resize: none;
+  min-height: 40px; max-height: 110px; transition: border-color 0.2s;
+}
+.chat-ta:focus { border-color: var(--teal-border); }
+.chat-send { padding: 9px 14px; background: var(--teal-dim); border: 1px solid var(--teal-border); color: var(--teal); border-radius: 9px; font-family: 'Sora', sans-serif; font-weight: 700; cursor: pointer; font-size: 13px; transition: var(--transition); flex-shrink: 0; }
+.chat-send:hover { background: rgba(44,217,197,0.2); }
+
+/* ── PERF BARS ── */
+.perf-row { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+.perf-lbl { font-size: 11.5px; color: var(--text2); width: 170px; flex-shrink: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.perf-track { flex: 1; height: 7px; background: var(--bg3); border-radius: 4px; overflow: hidden; }
+.perf-fill { height: 100%; border-radius: 4px; transition: width 0.6s ease; }
+.perf-pct { font-family: 'DM Mono', monospace; font-size: 11px; font-weight: 500; color: var(--text3); width: 34px; text-align: right; flex-shrink: 0; }
+
+/* ── RESULT CARD ── */
+.result-card { text-align: center; padding: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); }
+.result-score { font-family: 'Playfair Display', serif; font-size: 72px; font-weight: 900; line-height: 1; margin-bottom: 6px; }
+.result-grade { font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+.result-sub { font-size: 11.5px; color: var(--text3); }
+.result-stats { display: flex; justify-content: center; gap: 28px; margin: 18px 0; }
+.rs-val { font-family: 'DM Mono', monospace; font-size: 24px; font-weight: 500; color: var(--text1); }
+.rs-key { font-size: 9.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); }
+
+/* ── DAILY PLAN ── */
+.dp-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.dp-head { background: var(--bg3); padding: 13px 16px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border); }
+.dp-title { font-size: 11px; font-weight: 700; color: var(--text1); }
+.dp-date { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text3); }
+.dp-body { padding: 0; }
+.dp-row { display: flex; align-items: center; gap: 10px; padding: 11px 16px; border-bottom: 1px solid var(--border); transition: background 0.15s; }
+.dp-row:last-child { border-bottom: none; }
+.dp-row:hover { background: var(--bg3); }
+.dp-time { font-size: 9.5px; font-family: 'DM Mono', monospace; color: var(--text3); width: 64px; flex-shrink: 0; }
+.dp-info { flex: 1; }
+.dp-subject { font-size: 12px; font-weight: 600; color: var(--text1); }
+.dp-task { font-size: 10.5px; color: var(--text3); }
+.dp-check {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid var(--border2); flex-shrink: 0; cursor: pointer;
+  transition: var(--transition); display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+}
+.dp-check.done { background: var(--green); border-color: var(--green); color: #fff; }
+
+/* ── HISTORY TABLE ── */
+.table-scroll { overflow-x: auto; border-radius: var(--radius-sm); }
+.data-table { width: 100%; border-collapse: collapse; min-width: 500px; }
+.data-table th { text-align: left; padding: 9px 13px; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border); white-space: nowrap; }
+.data-table td { padding: 10px 13px; border-bottom: 1px solid rgba(255,255,255,0.04); font-size: 12px; color: var(--text2); }
+[data-theme="light"] .data-table td { border-bottom: 1px solid rgba(0,0,0,0.04); }
+.data-table tr:last-child td { border-bottom: none; }
+.data-table tr:hover td { background: var(--bg3); }
+.s-badge { display: inline-flex; font-size: 10.5px; font-weight: 700; padding: 2px 9px; border-radius: 10px; font-family: 'DM Mono', monospace; }
+.s-hi  { background: var(--green-dim); color: var(--green); }
+.s-mid { background: var(--gold-dim); color: var(--gold); }
+.s-lo  { background: var(--red-dim); color: var(--red); }
+
+/* ── DIFF BADGES ── */
+.diff { font-size: 9px; font-weight: 700; padding: 1.5px 6px; border-radius: 7px; text-transform: uppercase; letter-spacing: 0.5px; }
+.d-easy { background: var(--green-dim); color: var(--green); }
+.d-med  { background: var(--gold-dim); color: var(--gold); }
+.d-hard { background: var(--red-dim); color: var(--red); }
+
+/* ── FORMS ── */
+.fg { margin-bottom: 13px; }
+.fl { display: block; font-size: 9.5px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text3); margin-bottom: 5px; }
+.fi, .fs, .fta {
+  width: 100%; background: var(--bg3); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); color: var(--text1);
+  font-family: 'Sora', sans-serif; font-size: 12.5px;
+  padding: 9px 12px; outline: none; transition: var(--transition);
+}
+.fi:focus, .fs:focus, .fta:focus { border-color: var(--gold-border); box-shadow: 0 0 0 3px var(--gold-glow); }
+.fi::placeholder { color: var(--text3); }
+.fta { min-height: 80px; resize: vertical; }
+.fs option { background: var(--bg2); }
+.fhint { font-size: 10.5px; color: var(--text3); margin-top: 3px; }
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ── TOPIC NAV TABS ── */
+.tab-row { display: inline-flex; gap: 2px; background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 3px; margin-bottom: 18px; }
+.tab-btn { padding: 7px 14px; border-radius: 8px; font-size: 12px; font-weight: 600; cursor: pointer; color: var(--text2); transition: var(--transition); }
+.tab-btn.active { background: var(--surface); color: var(--text1); box-shadow: var(--shadow-sm); }
+
+/* ── NOTES ── */
+.notes-layout { display: grid; grid-template-columns: 252px 1fr; gap: 14px; }
+.note-list { display: flex; flex-direction: column; gap: 5px; }
+.note-item { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 11px 13px; cursor: pointer; transition: var(--transition); }
+.note-item:hover { border-color: var(--border2); }
+.note-item.active { border-color: var(--gold-border); background: var(--gold-glow); }
+.note-ttl { font-size: 12px; font-weight: 700; color: var(--text1); margin-bottom: 2px; }
+.note-meta { font-size: 10px; color: var(--text3); }
+.note-editor { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.ne-bar { padding: 9px 13px; border-bottom: 1px solid var(--border); display: flex; gap: 5px; flex-wrap: wrap; align-items: center; background: var(--bg3); }
+.ne-title { flex: 1; background: transparent; border: none; color: var(--text1); font-family: 'Sora',sans-serif; font-size: 13.5px; font-weight: 700; outline: none; min-width: 120px; }
+.ne-btn { padding: 4px 9px; background: var(--surface); border: 1px solid var(--border); border-radius: 5px; font-size: 10.5px; font-weight: 600; color: var(--text2); cursor: pointer; transition: var(--transition); }
+.ne-btn:hover { background: var(--surface2); color: var(--text1); }
+.ne-body { width: 100%; min-height: 360px; background: transparent; border: none; color: var(--text1); font-family: 'Sora',sans-serif; font-size: 12.5px; padding: 16px; outline: none; resize: none; line-height: 1.75; }
+
+/* ── EXAM PATTERN ── */
+.ep-sec { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 13px; }
+.eps-head { padding: 13px 16px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid var(--border); background: var(--bg3); }
+.eps-ttl { font-size: 13px; font-weight: 700; color: var(--text1); }
+.eps-tbl { width: 100%; border-collapse: collapse; }
+.eps-tbl th { text-align: left; padding: 8px 16px; font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text3); border-bottom: 1px solid var(--border); }
+.eps-tbl td { padding: 10px 16px; font-size: 12px; color: var(--text2); border-bottom: 1px solid rgba(255,255,255,0.03); }
+[data-theme="light"] .eps-tbl td { border-bottom: 1px solid rgba(0,0,0,0.04); }
+.eps-tbl tr:last-child td { border-bottom: none; }
+
+/* ── PLAN WEEKS ── */
+.plan-week { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; margin-bottom: 12px; }
+.pw-head { background: var(--bg3); padding: 11px 16px; display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
+.pw-ttl { font-size: 12.5px; font-weight: 700; color: var(--text1); }
+.pw-body { padding: 14px 16px; display: none; }
+.pw-body.open { display: block; }
+
+/* ── TOAST ── */
+.toast-wrap { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 7px; pointer-events: none; }
+.toast { background: var(--surface2); border: 1px solid var(--border2); border-radius: var(--radius-sm); padding: 11px 15px; font-size: 12.5px; font-weight: 600; color: var(--text1); box-shadow: var(--shadow); animation: toastIn 0.25s ease; pointer-events: all; min-width: 220px; display: flex; align-items: center; gap: 8px; }
+.toast.ok   { border-left: 3px solid var(--green); }
+.toast.err  { border-left: 3px solid var(--red); }
+.toast.info { border-left: 3px solid var(--gold); }
+@keyframes toastIn { from { opacity: 0; transform: translateX(10px); } to { opacity: 1; transform: translateX(0); } }
+
+/* ── LOADING / EMPTY ── */
+.loading { display: flex; align-items: center; gap: 8px; padding: 20px; color: var(--text3); font-size: 12.5px; }
+.spin { width: 15px; height: 15px; border: 2px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.6s linear infinite; flex-shrink: 0; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.empty { text-align: center; padding: 44px 20px; }
+.empty-icon { font-size: 38px; margin-bottom: 9px; }
+.empty-msg { font-size: 13px; color: var(--text2); margin-bottom: 3px; font-weight: 500; }
+.empty-sub { font-size: 11.5px; color: var(--text3); }
+
+/* ── TOPIC PAGE ── */
+.topic-header { background: linear-gradient(135deg, var(--surface), var(--surface2)); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; margin-bottom: 18px; }
+.topic-bc { font-size: 10.5px; color: var(--text3); margin-bottom: 6px; }
+.topic-bc span { color: var(--gold); }
+.topic-ttl { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--text1); }
+.topic-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px; }
+.topic-tag { font-size: 9.5px; font-weight: 600; padding: 2px 9px; border-radius: 10px; background: var(--bg3); border: 1px solid var(--border); color: var(--text2); }
+
+/* ── MOBILE ── */
+.mob-toggle { display: none; position: fixed; top: 11px; left: 11px; z-index: 300; width: 36px; height: 36px; background: var(--surface); border: 1px solid var(--border2); border-radius: 9px; align-items: center; justify-content: center; font-size: 16px; cursor: pointer; color: var(--text1); box-shadow: var(--shadow-sm); }
+
+@media (max-width: 960px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { width: 248px; transform: translateX(-248px); transition: transform 0.28s ease; }
+  .sidebar.open { transform: translateX(0); box-shadow: var(--shadow-lg); }
+  .main { margin-left: 0; }
+  .g4 { grid-template-columns: 1fr 1fr; }
+  .g3 { grid-template-columns: 1fr 1fr; }
+  .g2 { grid-template-columns: 1fr; }
+  .notes-layout { grid-template-columns: 1fr; }
+  .mob-toggle { display: flex !important; }
+}
+@media (max-width: 600px) {
+  .g4, .g3, .g2 { grid-template-columns: 1fr; }
+  .page-content { padding: 14px; }
+  .cdh-num { font-size: 48px; }
+  .tb-gen-btn span { display: none; }
+  .frow { grid-template-columns: 1fr; }
+}
+
+/* ── HIGHLIGHT UTIL ── */
+.hi-gold    { color: var(--gold); }
+.hi-teal    { color: var(--teal); }
+.hi-green   { color: var(--green); }
+.hi-red     { color: var(--red); }
+.hi-blue    { color: var(--blue); }
+
+.divider { height: 1px; background: var(--border); margin: 14px 0; }
+
+/* Quick action card hover */
+.qa-card { cursor: pointer; transition: var(--transition); }
+.qa-card:hover { border-color: var(--border2); transform: translateY(-2px); box-shadow: var(--shadow); }
+
+/* ── OVERLAY for mobile ── */
+.overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 199; }
+.sidebar.open ~ .overlay { display: block; }
+</style>
+</head>
+<body>
+
+<button class="mob-toggle" id="mobToggle">☰</button>
+
+<div class="app">
+
+<!-- ═══════════════════════════════════
+     SIDEBAR
+═══════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+
+  <div class="sb-brand">
+    <div class="sb-logo-row">
+      <div class="sb-logo-icon">🏛️</div>
+      <div>
+        <div class="sb-logo-text">Grade B <span>Command</span></div>
+        <div class="sb-tagline">AI-Powered Prep Ecosystem</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sb-countdown">
+    <div class="sbc-label">Days to Phase 1</div>
+    <div class="sbc-num" id="sbDays">—</div>
+    <div class="sbc-sub" id="sbTarget">RBI Grade B 2026</div>
+  </div>
+
+  <div class="sb-notif-chip" id="sidebarNotif">
+    <span>🔔</span>
+    <span id="sidebarNotifText">Notification expected May–June 2026</span>
+  </div>
+
+  <div class="sb-section">Main Menu</div>
+  <div class="nav-item active" onclick="nav('dashboard')"><span class="nav-icon">📊</span><span class="nav-label">Dashboard</span></div>
+  <div class="nav-item" onclick="nav('syllabus')"><span class="nav-icon">📚</span><span class="nav-label">Syllabus & Topics</span></div>
+  <div class="nav-item" onclick="nav('pyq')"><span class="nav-icon">🗂️</span><span class="nav-label">PYQ Generator</span><span class="nav-chip chip-ai">AI</span></div>
+  <div class="nav-item" onclick="nav('quiz')"><span class="nav-icon">⚡</span><span class="nav-label">Mock Tests</span><span class="nav-chip chip-live">LIVE</span></div>
+  <div class="nav-item" onclick="nav('generate')"><span class="nav-icon">✨</span><span class="nav-label">AI Practice Gen</span><span class="nav-chip chip-ai">AI</span></div>
+
+  <div class="sb-section">Analysis</div>
+  <div class="nav-item" onclick="nav('analytics')"><span class="nav-icon">📈</span><span class="nav-label">Performance</span></div>
+  <div class="nav-item" onclick="nav('planner')"><span class="nav-icon">📅</span><span class="nav-label">Study Planner</span></div>
+  <div class="nav-item" onclick="nav('history')"><span class="nav-icon">🕐</span><span class="nav-label">Quiz History</span></div>
+
+  <div class="sb-section">Tools</div>
+  <div class="nav-item" onclick="nav('ai')"><span class="nav-icon">🤖</span><span class="nav-label">AI Tutor</span><span class="nav-chip chip-ai">AI</span></div>
+  <div class="nav-item" onclick="nav('notes')"><span class="nav-icon">📝</span><span class="nav-label">My Notes</span></div>
+  <div class="nav-item" onclick="nav('pattern')"><span class="nav-icon">📋</span><span class="nav-label">Exam Pattern</span></div>
+  <div class="nav-item" onclick="nav('add')"><span class="nav-icon">➕</span><span class="nav-label">Add Question</span></div>
+
+  <div class="sb-progress">
+    <div class="sp-row">
+      <span class="sp-label">Syllabus Covered</span>
+      <span class="sp-pct" id="syllabusPct">0%</span>
+    </div>
+    <div class="sp-track"><div class="sp-fill" id="syllabusBar" style="width:0%"></div></div>
+  </div>
+
+  <div class="sb-user">
+    <div class="ua" id="userAvatar">A</div>
+    <div>
+      <div class="un" id="userName">Aspirant</div>
+      <div class="ur">RBI Grade B 2026</div>
+    </div>
+    <div class="sb-actions">
+      <div class="icon-btn" id="themeToggleSidebar" onclick="toggleTheme()" title="Toggle theme">🌙</div>
+      <div class="icon-btn" onclick="location.href='/logout'" title="Logout">⏏</div>
+    </div>
+  </div>
+
+</aside>
+<div class="overlay" onclick="document.getElementById('sidebar').classList.remove('open')"></div>
+
+<!-- ═══════════════════════════════════
+     MAIN
+═══════════════════════════════════ -->
+<div class="main">
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-left">
+    <div class="tb-eyebrow" id="tbEyebrow">RBI GRADE B 2026</div>
+    <div class="tb-title" id="tbTitle">Dashboard</div>
+  </div>
+  <div class="tb-right">
+    <div class="tb-countdown-pill" id="tbCountdown">Loading...</div>
+    <!-- Theme toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()" title="Toggle dark/light mode" id="themeToggleBtn">
+      <div class="theme-toggle-icons">
+        <span class="theme-icon">🌙</span>
+        <span class="theme-icon">☀️</span>
+      </div>
+      <div class="theme-toggle-knob" id="themeKnob">
+        <span id="themeKnobIcon">🌙</span>
+      </div>
+    </div>
+    <button class="tb-gen-btn" onclick="nav('generate')">✨ <span>Generate Practice</span></button>
+  </div>
+</div>
+
+<div class="page-content">
+
+<!-- ═══ DASHBOARD ═══ -->
+<div class="page active" id="page-dashboard">
+
+  <div class="notif-banner warning" id="appNotifBanner">
+    <span class="nb-ico">📢</span>
+    <div class="nb-body">
+      <div class="nb-ttl">RBI Grade B 2026 — Application Status</div>
+      <div class="nb-msg" id="appNotifMsg">Official notification expected in May–June 2026. Check rbi.org.in for updates. Begin preparation now!</div>
+    </div>
+    <button class="nb-close" onclick="this.closest('.notif-banner').remove()">✕</button>
+  </div>
+
+  <div class="g4">
+    <div class="stat-card" data-icon="⚡">
+      <div class="stat-card-accent" style="background:linear-gradient(90deg,var(--teal),transparent)"></div>
+      <div class="stat-lbl">Total Attempts</div>
+      <div class="stat-val" id="statAttempts">—</div>
+      <div class="stat-sub">Quiz sessions done</div>
+    </div>
+    <div class="stat-card" data-icon="🎯">
+      <div class="stat-card-accent" style="background:linear-gradient(90deg,var(--gold),transparent)"></div>
+      <div class="stat-lbl">Avg Score</div>
+      <div class="stat-val" id="statAvg">—</div>
+      <div class="stat-sub">Across all subjects</div>
+    </div>
+    <div class="stat-card" data-icon="🏆">
+      <div class="stat-card-accent" style="background:linear-gradient(90deg,var(--green),transparent)"></div>
+      <div class="stat-lbl">Best Score</div>
+      <div class="stat-val" id="statBest">—</div>
+      <div class="stat-sub">Personal best</div>
+    </div>
+    <div class="stat-card" data-icon="📦">
+      <div class="stat-card-accent" style="background:linear-gradient(90deg,var(--purple),transparent)"></div>
+      <div class="stat-lbl">Question Bank</div>
+      <div class="stat-val" id="statQbank">—</div>
+      <div class="stat-sub">Questions available</div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <!-- Countdown hero -->
+    <div class="cd-hero">
+      <div class="cdh-lbl">⏳ Exam Countdown</div>
+      <div class="cdh-row">
+        <div class="cdh-num" id="heroCountdown">—</div>
+        <div class="cdh-unit">Days Remaining</div>
+      </div>
+      <div class="cdh-sub" id="heroCdSub">Target: RBI Grade B Phase 1 — Aug/Sep 2026</div>
+      <div class="cdh-tags">
+        <span class="cdh-tag active">Phase 1: GA · QA · English · Reasoning</span>
+        <span class="cdh-tag">Phase 2: ESI · FM · English Writing</span>
+      </div>
+    </div>
+    <!-- Daily plan -->
+    <div class="dp-wrap">
+      <div class="dp-head">
+        <div class="dp-title">📅 Today's Study Plan</div>
+        <div class="dp-date" id="todayDate">—</div>
+      </div>
+      <div class="dp-body" id="dailyPlanBody">
+        <div class="loading"><div class="spin"></div> Building plan...</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g3">
+    <div class="card">
+      <div class="card-head"><div class="card-ttl">⚠️ Weak Areas</div><div class="card-link" onclick="nav('analytics')">View All</div></div>
+      <div id="weakContent"><div class="loading"><div class="spin"></div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-ttl">🕐 Recent Activity</div><div class="card-link" onclick="nav('history')">See All</div></div>
+      <div id="recentContent"><div class="loading"><div class="spin"></div></div></div>
+    </div>
+    <div class="card">
+      <div class="card-head"><div class="card-ttl">🚀 Quick Actions</div></div>
+      <div style="display:flex;flex-direction:column;gap:7px">
+        <button class="btn btn-gold btn-full" onclick="startQuickQuiz()">⚡ Start Quick Quiz</button>
+        <button class="btn btn-teal btn-full" onclick="nav('generate')">✨ AI Practice Generator</button>
+        <button class="btn btn-outline btn-full" onclick="nav('pyq')">🗂️ PYQ Style Questions</button>
+        <button class="btn btn-outline btn-full" onclick="nav('ai')">🤖 Ask AI Tutor</button>
+        <button class="btn btn-outline btn-full" onclick="nav('planner')">📋 Generate Study Plan</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-head"><div class="card-ttl">📚 Subject Performance</div><div class="card-link" onclick="nav('syllabus')">Go to Syllabus</div></div>
+    <div id="subjectPerfBars"><div class="loading"><div class="spin"></div> Loading subjects...</div></div>
+  </div>
+</div>
+
+<!-- ═══ SYLLABUS ═══ -->
+<div class="page" id="page-syllabus">
+  <div class="pg-head">
+    <div class="pg-eyebrow">RBI GRADE B</div>
+    <div class="pg-title">Complete <em>Syllabus</em> & Topics</div>
+    <div class="pg-sub">Click any topic to get AI-generated explanations and practice questions</div>
+  </div>
+  <div class="notif-banner info" style="margin-bottom:16px">
+    <span class="nb-ico">💡</span>
+    <div class="nb-body">
+      <div class="nb-ttl">Smart Study Mode</div>
+      <div class="nb-msg">Every topic generates: Concept check questions · Analytical questions · PYQ-style problems · Mini quiz — all with explanations.</div>
+    </div>
+  </div>
+  <div style="margin-bottom:8px;font-size:9.5px;font-weight:700;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase">Phase 1 Subjects</div>
+  <div class="g-auto" id="phase1Grid"></div>
+  <div style="margin-bottom:8px;font-size:9.5px;font-weight:700;color:var(--text3);letter-spacing:1.5px;text-transform:uppercase">Phase 2 Subjects</div>
+  <div class="g-auto" id="phase2Grid"></div>
+</div>
+
+<!-- ═══ TOPIC PAGE ═══ -->
+<div class="page" id="page-topic"><div id="topicContent"></div></div>
+
+<!-- ═══ PYQ GENERATOR ═══ -->
+<div class="page" id="page-pyq">
+  <div class="pg-head">
+    <div class="pg-eyebrow">AI POWERED</div>
+    <div class="pg-title">PYQ <em>Style</em> Generator</div>
+    <div class="pg-sub">Unlimited RBI Grade B previous-year pattern questions with detailed explanations</div>
+  </div>
+  <div class="g2" style="margin-bottom:18px">
+    <div class="card">
+      <div class="card-head"><div class="card-ttl">🎯 Configure Generator</div></div>
+      <div class="fg"><label class="fl">Subject</label><select class="fs" id="pyqSubject" onchange="updatePyqTopics()"><option value="">Select Subject</option></select></div>
+      <div class="fg"><label class="fl">Topic</label><select class="fs" id="pyqTopic"><option value="">All Topics</option></select></div>
+      <div class="fg"><label class="fl">Year Pattern</label><select class="fs" id="pyqYear"><option value="2024">2024 Pattern</option><option value="2023">2023 Pattern</option><option value="2022">2022 Pattern</option><option value="mixed" selected>Mixed Years</option></select></div>
+      <div class="fg"><label class="fl">Number of Questions (max 10)</label><input type="number" class="fi" id="pyqCount" value="5" min="1" max="10"></div>
+      <button class="btn btn-gold btn-full" onclick="generatePYQ()" id="pyqGenBtn">🤖 Generate PYQ Style Questions</button>
+    </div>
+    <div class="card">
+      <div class="card-ttl" style="margin-bottom:12px">📌 RBI Grade B PYQ Insights</div>
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:12px;color:var(--text2)">
+        <div style="padding:8px 10px;background:var(--bg3);border-radius:7px;border-left:2px solid var(--gold)">Phase 1 GA focuses on banking, economy & current affairs</div>
+        <div style="padding:8px 10px;background:var(--bg3);border-radius:7px;border-left:2px solid var(--teal)">QA in Phase 1 is heavily Data Interpretation focused</div>
+        <div style="padding:8px 10px;background:var(--bg3);border-radius:7px;border-left:2px solid var(--purple)">Phase 2 ESI covers Indian economy, social issues & sustainability</div>
+        <div style="padding:8px 10px;background:var(--bg3);border-radius:7px;border-left:2px solid var(--blue)">FM covers management theory & financial concepts</div>
+        <div style="padding:8px 10px;background:var(--bg3);border-radius:7px;border-left:2px solid var(--green)">English Phase 2 is descriptive — essays, précis, comprehension</div>
+      </div>
+    </div>
+  </div>
+  <div id="pyqResults"></div>
+</div>
+
+<!-- ═══ MOCK TESTS ═══ -->
+<div class="page" id="page-quiz">
+  <div class="pg-head">
+    <div class="pg-eyebrow">MOCK TESTS</div>
+    <div class="pg-title">Live <em>Mock</em> Tests</div>
+    <div class="pg-sub">Timed mock tests with instant feedback and detailed review</div>
+  </div>
+  <div id="quizContent"></div>
+</div>
+
+<!-- ═══ AI PRACTICE GEN ═══ -->
+<div class="page" id="page-generate">
+  <div class="pg-head">
+    <div class="pg-eyebrow">AI POWERED</div>
+    <div class="pg-title">AI <em>Practice</em> Generator</div>
+    <div class="pg-sub">Instantly generate RBI-level questions on any topic — concept checks, analyticals, PYQ-style</div>
+  </div>
+  <div class="ai-panel">
+    <div class="ai-panel-ttl">Smart Question Generator</div>
+    <div class="ai-panel-sub">Powered by AI · Generates concept checks, analytical & PYQ-style questions</div>
+    <div class="ai-row">
+      <div class="ai-field" style="flex:2">
+        <label class="ai-lbl">Topic or Concept</label>
+        <input class="ai-inp" id="genTopic" placeholder="e.g. Monetary Policy, Indian Economy, Data Interpretation…" />
+      </div>
+      <div class="ai-field">
+        <label class="ai-lbl">Question Type</label>
+        <select class="ai-sel" id="genType">
+          <option value="mixed">Mixed (Recommended)</option>
+          <option value="concept">Concept Check</option>
+          <option value="analytical">Analytical</option>
+          <option value="pyq">PYQ Style</option>
+        </select>
+      </div>
+      <div class="ai-field" style="flex:0;min-width:90px">
+        <label class="ai-lbl">Count</label>
+        <input class="ai-inp" type="number" id="genCount" value="8" min="1" max="10"/>
+      </div>
+      <button class="btn btn-teal" id="genBtn" onclick="generatePractice()" style="align-self:flex-end">✨ Generate</button>
+    </div>
+  </div>
+  <div class="g3" style="margin-bottom:18px">
+    <div class="card qa-card" onclick="quickGenerate('Monetary Policy and RBI Functions')">
+      <div style="font-size:22px;margin-bottom:6px">🏦</div>
+      <div style="font-size:12px;font-weight:700;color:var(--text1);margin-bottom:2px">Monetary Policy</div>
+      <div style="font-size:10.5px;color:var(--text3)">RBI Functions & Policy Tools</div>
+    </div>
+    <div class="card qa-card" onclick="quickGenerate('Indian Economy GDP Inflation Fiscal Policy')">
+      <div style="font-size:22px;margin-bottom:6px">📊</div>
+      <div style="font-size:12px;font-weight:700;color:var(--text1);margin-bottom:2px">Indian Economy</div>
+      <div style="font-size:10.5px;color:var(--text3)">GDP, Inflation, Fiscal Policy</div>
+    </div>
+    <div class="card qa-card" onclick="quickGenerate('Data Interpretation Tables Charts Graphs')">
+      <div style="font-size:22px;margin-bottom:6px">📈</div>
+      <div style="font-size:12px;font-weight:700;color:var(--text1);margin-bottom:2px">Data Interpretation</div>
+      <div style="font-size:10.5px;color:var(--text3)">Tables, Charts & Graphs</div>
+    </div>
+    <div class="card qa-card" onclick="quickGenerate('Banking Sector NPA Basel Norms Financial System')">
+      <div style="font-size:22px;margin-bottom:6px">🏦</div>
+      <div style="font-size:12px;font-weight:700;color:var(--text1);margin-bottom:2px">Banking Sector</div>
+      <div style="font-size:10.5px;color:var(--text3)">NPA, Basel Norms, FRBM</div>
+    </div>
+    <div class="card qa-card" onclick="quickGenerate('Poverty Inequality Human Development Social Issues India')">
+      <div style="font-size:22px;margin-bottom:6px">🤝</div>
+      <div style="font-size:12px;font-weight:700;color:var(--text1);margin-bottom:2px">Social Issues</div>
+      <div style="font-size:10.5px;color:var(--text3)">Poverty, Development, Schemes</div>
+    </div>
+    <div class="card qa-card" onclick="quickGenerate('Finance Management Organizational Behaviour Leadership')">
+      <div style="font-size:22px;margin-bottom:6px">💼</div>
+      <div style="font-size:12px;font-weight:700;color:var(--text1);margin-bottom:2px">Finance & Management</div>
+      <div style="font-size:10.5px;color:var(--text3)">FM Theory & Concepts</div>
+    </div>
+  </div>
+  <div id="genResults"></div>
+</div>
+
+<!-- ═══ ANALYTICS ═══ -->
+<div class="page" id="page-analytics">
+  <div class="pg-head">
+    <div class="pg-eyebrow">YOUR PROGRESS</div>
+    <div class="pg-title">Performance <em>Analytics</em></div>
+    <div class="pg-sub">Deep-dive into your preparation across all subjects</div>
+  </div>
+  <div id="analyticsContent"><div class="loading"><div class="spin"></div> Loading analytics…</div></div>
+</div>
+
+<!-- ═══ STUDY PLANNER ═══ -->
+<div class="page" id="page-planner">
+  <div class="pg-head">
+    <div class="pg-eyebrow">AI STUDY PLAN</div>
+    <div class="pg-title">Smart <em>Study</em> Planner</div>
+    <div class="pg-sub">Personalised AI-generated study plan for RBI Grade B 2026</div>
+  </div>
+  <div class="g2" style="margin-bottom:18px">
+    <div class="card">
+      <div class="card-head"><div class="card-ttl">⚙️ Configure Your Plan</div></div>
+      <div class="fg"><label class="fl">Available Hours Per Day</label><select class="fs" id="planHours"><option value="2">2 hrs/day</option><option value="3" selected>3 hrs/day</option><option value="4">4 hrs/day</option><option value="5">5+ hrs/day</option></select></div>
+      <div class="fg"><label class="fl">Phase Focus</label><select class="fs" id="planPhase"><option value="phase1">Phase 1 Focus</option><option value="phase2">Phase 2 Focus</option><option value="both" selected>Both Phases</option></select></div>
+      <div class="fg"><label class="fl">Your Weak Areas (optional)</label><input class="fi" id="planWeak" placeholder="e.g. ESI, Reasoning, Data Interpretation…"></div>
+      <button class="btn btn-gold btn-full" onclick="generateStudyPlan()" id="planBtn">🤖 Generate AI Study Plan</button>
+    </div>
+    <div class="card">
+      <div class="card-ttl" style="margin-bottom:12px">📌 RBI Grade B Tips</div>
+      <div style="display:flex;flex-direction:column;gap:7px;font-size:12px;color:var(--text2)">
+        <div style="padding:7px 10px;background:var(--bg3);border-radius:6px;border-left:2px solid var(--gold)">Phase 1 is objective — focus on speed and accuracy</div>
+        <div style="padding:7px 10px;background:var(--bg3);border-radius:6px;border-left:2px solid var(--teal)">Phase 2 ESI + FM papers are highly analytical</div>
+        <div style="padding:7px 10px;background:var(--bg3);border-radius:6px;border-left:2px solid var(--blue)">Read RBI Annual Report & Economic Survey for GA</div>
+        <div style="padding:7px 10px;background:var(--bg3);border-radius:6px;border-left:2px solid var(--purple)">Practice essays and précis writing for Phase 2 English</div>
+        <div style="padding:7px 10px;background:var(--bg3);border-radius:6px;border-left:2px solid var(--green)">Solve minimum 20 questions per day per subject</div>
+      </div>
+    </div>
+  </div>
+  <div id="planContent"></div>
+</div>
+
+<!-- ═══ HISTORY ═══ -->
+<div class="page" id="page-history">
+  <div class="pg-head">
+    <div class="pg-eyebrow">QUIZ RECORDS</div>
+    <div class="pg-title">Quiz <em>History</em></div>
+  </div>
+  <div class="card">
+    <div class="card-head"><div class="card-ttl">All Attempts</div></div>
+    <div class="table-scroll">
+      <table class="data-table">
+        <thead><tr><th>Subject</th><th>Score</th><th>Correct</th><th>Wrong</th><th>Skipped</th><th>Time</th><th>Date</th></tr></thead>
+        <tbody id="historyBody"><tr><td colspan="7"><div class="loading"><div class="spin"></div> Loading…</div></td></tr></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ AI TUTOR ═══ -->
+<div class="page" id="page-ai">
+  <div class="pg-head">
+    <div class="pg-eyebrow">AI ASSISTANT</div>
+    <div class="pg-title">RBI Grade B <em>AI Tutor</em></div>
+    <div class="pg-sub">Ask anything — concepts, doubts, exam strategy, topic deep-dives</div>
+  </div>
+  <div class="g2">
+    <div>
+      <div class="chat-wrap">
+        <div class="chat-msgs" id="chatMsgs">
+          <div class="cbubble ai">
+            <span class="ai-chip">RBI AI TUTOR</span>
+            Hello! I'm your RBI Grade B AI tutor. I can help with:<br><br>
+            🏦 <b>Banking & Monetary Policy</b> — Repo rate, CRR, RBI functions<br>
+            📊 <b>Economic & Social Issues</b> — GDP, fiscal policy, social schemes<br>
+            💼 <b>Finance & Management</b> — FM theory, Basel norms, markets<br>
+            📐 <b>Quantitative Aptitude</b> — Data interpretation, quant methods<br>
+            ✍️ <b>English Writing</b> — Essay strategy, précis, comprehension<br><br>
+            What would you like to study today?
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <textarea class="chat-ta" id="chatInput" placeholder="Ask about monetary policy, ESI, FM, quant…" rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat();}"></textarea>
+          <button class="chat-send" onclick="sendChat()">→</button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div class="card">
+        <div class="card-ttl" style="margin-bottom:10px">⚡ Quick Questions</div>
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <button class="btn btn-outline btn-sm" onclick="quickChat('Explain Repo Rate and Reverse Repo Rate with current values')" style="text-align:left;justify-content:flex-start">Repo Rate vs Reverse Repo Rate?</button>
+          <button class="btn btn-outline btn-sm" onclick="quickChat('What is NPA classification in Indian Banking system?')" style="text-align:left;justify-content:flex-start">NPA Classification in Banking?</button>
+          <button class="btn btn-outline btn-sm" onclick="quickChat('Explain FRBM Act and its current status')" style="text-align:left;justify-content:flex-start">FRBM Act significance?</button>
+          <button class="btn btn-outline btn-sm" onclick="quickChat('Difference between Fiscal Policy and Monetary Policy with examples')" style="text-align:left;justify-content:flex-start">Fiscal vs Monetary Policy?</button>
+          <button class="btn btn-outline btn-sm" onclick="quickChat('Key management theories for RBI Grade B FM paper: Taylor, Maslow, Herzberg etc')" style="text-align:left;justify-content:flex-start">FM Management Theories?</button>
+          <button class="btn btn-outline btn-sm" onclick="quickChat('How to write a good essay for RBI Grade B Phase 2 English descriptive paper?')" style="text-align:left;justify-content:flex-start">Essay writing tips Phase 2?</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-ttl" style="margin-bottom:10px">🔍 Topic Deep Dive</div>
+        <div class="fg"><input class="fi" id="deepTopic" placeholder="Enter any topic for in-depth explanation…" /></div>
+        <button class="btn btn-teal btn-sm btn-full" onclick="deepDive()">🔍 Deep Dive</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ NOTES ═══ -->
+<div class="page" id="page-notes">
+  <div class="pg-head">
+    <div class="pg-eyebrow">STUDY NOTES</div>
+    <div class="pg-title">My <em>Notes</em></div>
+  </div>
+  <div class="notes-layout">
+    <div>
+      <button class="btn btn-gold btn-sm btn-full" onclick="addNote()" style="margin-bottom:9px">+ New Note</button>
+      <div class="note-list" id="noteList"></div>
+    </div>
+    <div id="noteEditorArea">
+      <div id="noteEmpty" style="display:flex;align-items:center;justify-content:center;height:100%;min-height:340px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)">
+        <div class="empty"><div class="empty-icon">📝</div><div class="empty-msg">Select or create a note</div><div class="empty-sub">Click "+ New Note" to get started</div></div>
+      </div>
+      <div class="note-editor" id="noteEditor" style="display:none">
+        <div class="ne-bar">
+          <input type="text" class="ne-title" id="noteTitleInput" placeholder="Note title…">
+          <select class="ne-btn" id="noteTag" style="cursor:pointer">
+            <option value="">Tag Subject</option>
+            <option value="GA">General Awareness</option>
+            <option value="QA">Quantitative Aptitude</option>
+            <option value="ENG">English</option>
+            <option value="RSN">Reasoning</option>
+            <option value="ESI">ESI</option>
+            <option value="FM">Finance & Management</option>
+          </select>
+          <button class="ne-btn" onclick="saveNote()">💾 Save</button>
+          <button class="ne-btn" onclick="deleteNote()" style="color:var(--red)">🗑️</button>
+        </div>
+        <textarea class="ne-body" id="noteBody" placeholder="Start writing your notes here…"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ EXAM PATTERN ═══ -->
+<div class="page" id="page-pattern">
+  <div class="pg-head">
+    <div class="pg-eyebrow">EXAM STRUCTURE</div>
+    <div class="pg-title">RBI Grade B <em>Exam Pattern</em></div>
+    <div class="pg-sub">Complete Phase 1 & Phase 2 examination structure</div>
+  </div>
+  <div class="notif-banner info" style="margin-bottom:18px">
+    <span class="nb-ico">ℹ️</span>
+    <div class="nb-body">
+      <div class="nb-ttl">Selection Process: Phase 1 → Phase 2 → Interview</div>
+      <div class="nb-msg">Only candidates clearing Phase 1 cutoffs are invited for Phase 2. Final merit is based on Phase 2 + Interview scores only.</div>
+    </div>
+  </div>
+  <div class="ep-sec">
+    <div class="eps-head"><span class="sc-phase-badge p1-badge">Phase 1</span><span class="eps-ttl">Objective Examination (Online · 120 Minutes)</span></div>
+    <table class="eps-tbl"><thead><tr><th>Subject</th><th>Questions</th><th>Marks</th><th>Neg. Marking</th></tr></thead>
+    <tbody>
+      <tr><td>General Awareness</td><td>80</td><td>80</td><td>−0.25</td></tr>
+      <tr><td>English Language</td><td>30</td><td>30</td><td>−0.25</td></tr>
+      <tr><td>Quantitative Aptitude & Data Analysis</td><td>30</td><td>30</td><td>−0.25</td></tr>
+      <tr><td>Reasoning</td><td>60</td><td>60</td><td>−0.25</td></tr>
+      <tr style="font-weight:700"><td style="color:var(--text1)">Total Phase 1</td><td style="color:var(--gold)">200</td><td style="color:var(--gold)">200</td><td style="color:var(--text3)">—</td></tr>
+    </tbody></table>
+  </div>
+  <div class="ep-sec">
+    <div class="eps-head"><span class="sc-phase-badge p2-badge">Phase 2</span><span class="eps-ttl">Paper I — Economic & Social Issues + Finance & Management</span></div>
+    <table class="eps-tbl"><thead><tr><th>Section</th><th>Type</th><th>Questions</th><th>Marks</th><th>Duration</th></tr></thead>
+    <tbody>
+      <tr><td>ESI (Objective)</td><td>MCQ</td><td>30</td><td>30</td><td>90 min</td></tr>
+      <tr><td>ESI (Descriptive)</td><td>Written</td><td>3</td><td>30</td><td rowspan="2">90 min</td></tr>
+      <tr><td>Finance & Management</td><td>Obj + Desc</td><td>30+3</td><td>30+30</td></tr>
+      <tr style="font-weight:700"><td style="color:var(--text1)">Total Paper I</td><td>—</td><td style="color:var(--gold)">66</td><td style="color:var(--gold)">120</td><td style="color:var(--text1)">3 hrs</td></tr>
+    </tbody></table>
+  </div>
+  <div class="ep-sec">
+    <div class="eps-head"><span class="sc-phase-badge p2-badge">Phase 2</span><span class="eps-ttl">Paper II — English Writing Skills (Descriptive · 90 min)</span></div>
+    <table class="eps-tbl"><thead><tr><th>Component</th><th>Description</th><th>Marks</th></tr></thead>
+    <tbody>
+      <tr><td>Essay Writing</td><td>2 essays on economic/social/financial topics</td><td>40</td></tr>
+      <tr><td>Précis Writing</td><td>Compression of given passage</td><td>20</td></tr>
+      <tr><td>Reading Comprehension & Grammar</td><td>Passage-based + grammar questions</td><td>40</td></tr>
+      <tr style="font-weight:700"><td style="color:var(--text1)">Total Paper II</td><td>—</td><td style="color:var(--gold)">100</td></tr>
+    </tbody></table>
+  </div>
+  <div class="g3">
+    <div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--gold)">
+      <div style="font-size:10px;font-weight:700;color:var(--gold);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase">Educational Qualification</div>
+      <div style="font-size:12px;color:var(--text2)">Minimum 60% in graduation (55% SC/ST/PwBD). Final year students eligible.</div>
+    </div>
+    <div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--teal)">
+      <div style="font-size:10px;font-weight:700;color:var(--teal);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase">Age Limit</div>
+      <div style="font-size:12px;color:var(--text2)">21 to 30 years on cut-off date. Relaxation per RBI norms for SC/ST/OBC/PwBD.</div>
+    </div>
+    <div style="padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);border-left:3px solid var(--purple)">
+      <div style="font-size:10px;font-weight:700;color:var(--purple);margin-bottom:4px;letter-spacing:1px;text-transform:uppercase">Selection Process</div>
+      <div style="font-size:12px;color:var(--text2)">Phase 1 → Phase 2 → Interview (50 marks). Final merit = Phase 2 + Interview.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ ADD QUESTION ═══ -->
+<div class="page" id="page-add">
+  <div class="pg-head">
+    <div class="pg-eyebrow">QUESTION BANK</div>
+    <div class="pg-title">Add <em>Questions</em></div>
+    <div class="pg-sub">Manually add or AI-generate questions to the database</div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-ttl" style="margin-bottom:14px">✍️ Add Manually</div>
+      <div class="fg"><label class="fl">Subject</label><select class="fs" id="addSubjectId"><option value="">Select subject…</option></select></div>
+      <div class="fg"><label class="fl">Question Text</label><textarea class="fta" id="addQtext" placeholder="Enter the question…"></textarea></div>
+      <div class="frow"><div class="fg"><label class="fl">Option A</label><input class="fi" id="addOa" placeholder="Option A"></div><div class="fg"><label class="fl">Option B</label><input class="fi" id="addOb" placeholder="Option B"></div></div>
+      <div class="frow"><div class="fg"><label class="fl">Option C</label><input class="fi" id="addOc" placeholder="Option C"></div><div class="fg"><label class="fl">Option D</label><input class="fi" id="addOd" placeholder="Option D"></div></div>
+      <div class="frow">
+        <div class="fg"><label class="fl">Correct Option</label><select class="fs" id="addCorrect"><option>A</option><option>B</option><option>C</option><option>D</option></select></div>
+        <div class="fg"><label class="fl">Difficulty</label><select class="fs" id="addDiff"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></div>
+      </div>
+      <div class="fg"><label class="fl">Explanation (optional)</label><textarea class="fta" id="addExp" placeholder="Explain why this answer is correct…"></textarea></div>
+      <button class="btn btn-gold btn-full" onclick="addQuestion()">➕ Add Question</button>
+    </div>
+    <div class="card">
+      <div class="card-ttl" style="margin-bottom:14px">🤖 AI Bulk Generate & Save</div>
+      <div class="fg"><label class="fl">Topic</label><input class="fi" id="addAiTopic" placeholder="e.g. Monetary Policy, Banking Regulation…"></div>
+      <div class="fg"><label class="fl">Save to Subject</label><select class="fs" id="addAiSubject"><option value="">Select subject…</option></select></div>
+      <div class="fg"><label class="fl">Number of Questions</label><input type="number" class="fi" id="addAiCount" value="5" min="1" max="10"></div>
+      <button class="btn btn-teal btn-full" onclick="aiGenerateAndSave()" style="margin-bottom:10px">🤖 Generate & Save to Bank</button>
+      <div class="divider"></div>
+      <div class="fg"><label class="fl">Or Import CSV</label><input type="file" class="fi" id="csvFile" accept=".csv"><div class="fhint">Columns: question_text, option_a–d, correct_option, explanation, difficulty</div></div>
+      <button class="btn btn-outline btn-full" onclick="importCSV()">📥 Import CSV</button>
+      <div id="addAiResults" style="margin-top:12px"></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page-content -->
+</div><!-- /main -->
+</div><!-- /app -->
+
+<div class="toast-wrap" id="toastWrap"></div>
+
+<script>
+/* ════════════════════════════════════════════
+   RBI GRADE B — COMMAND CENTRE  JS v2
+════════════════════════════════════════════ */
+
+// ── THEME TOGGLE ──
+(function() {
+  const saved = localStorage.getItem('rbi_theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', saved);
+  updateThemeUI(saved);
+})();
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('rbi_theme', next);
+  updateThemeUI(next);
+}
+
+function updateThemeUI(theme) {
+  const icon = theme === 'dark' ? '🌙' : '☀️';
+  const el = document.getElementById('themeKnobIcon');
+  const sb = document.getElementById('themeToggleSidebar');
+  if (el) el.textContent = icon;
+  if (sb) sb.textContent = icon;
+}
+
+// ── SUBJECTS ──
+const RBI_SUBJECTS = {
+  phase1: [
+    { id:1, name:'General Awareness', icon:'🌍', color:'#d4a843', topics:['Banking & RBI','Indian Economy','Monetary Policy','Fiscal Policy','Capital Markets','Government Schemes','Current Affairs','International Organisations','Indian Constitution','Science & Technology','Awards & Honours','Sports & Culture'] },
+    { id:2, name:'Quantitative Aptitude', icon:'📐', color:'#5ba3f5', topics:['Data Interpretation','Number Systems','Percentage & Ratio','Profit & Loss','Simple & Compound Interest','Averages & Mixtures','Time & Work','Speed Distance Time','Mensuration','Probability','Permutation & Combination','Quadratic Equations'] },
+    { id:3, name:'English Language', icon:'📝', color:'#30d988', topics:['Reading Comprehension','Fill in the Blanks','Error Detection','Sentence Rearrangement','Vocabulary & Synonyms','Antonyms','Idioms & Phrases','Cloze Test'] },
+    { id:4, name:'Reasoning', icon:'🧠', color:'#a87ff5', topics:['Logical Reasoning','Syllogism','Blood Relations','Seating Arrangement','Coding & Decoding','Series Completion','Direction Sense','Input Output','Statement & Assumptions','Critical Reasoning','Data Sufficiency','Puzzles'] }
+  ],
+  phase2: [
+    { id:5, name:'Economic & Social Issues', icon:'📊', color:'#f7953e', topics:['Indian Economy Overview','Economic Reforms','Poverty & Inequality','Agriculture & Rural Development','Industry & Services','Infrastructure','Human Development','Social Justice & Inclusion','Sustainable Development','India & World Economy','WTO & International Trade','Climate Change & Environment'] },
+    { id:6, name:'Finance & Management', icon:'💼', color:'#f56b6b', topics:['Financial System','Money & Capital Markets','International Finance','Risk Management','Financial Inclusion','Public Finance','Management Principles','Organizational Behaviour','Leadership & Motivation','HR Management','Banking Technology','Corporate Governance','Basel Norms & Regulations'] },
+    { id:7, name:'English Writing Skills', icon:'✍️', color:'#2cd9c5', topics:['Essay Writing','Précis Writing','Reading Comprehension','Letter Writing','Report Writing','Grammar & Usage'] }
+  ]
+};
+
+// ── STATE ──
+let S = {
+  page: 'dashboard',
+  quizQs: [], quizAnswers: {}, quizSubjectId: null, quizStart: null,
+  chatHistory: [],
+  notes: JSON.parse(localStorage.getItem('rbi_notes') || '[]'),
+  activeNote: null,
+};
+
+// ── NAVIGATION ──
+function nav(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  const pg = document.getElementById('page-' + page);
+  if (pg) pg.classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => {
+    if (n.getAttribute('onclick')?.includes(`'${page}'`)) n.classList.add('active');
+  });
+  S.page = page;
+  document.getElementById('sidebar').classList.remove('open');
+  const titles = { dashboard:'Dashboard', syllabus:'Syllabus & Topics', topic:'Topic Study', pyq:'PYQ Generator', quiz:'Mock Tests', generate:'AI Practice Generator', analytics:'Performance Analytics', planner:'Study Planner', history:'Quiz History', ai:'AI Tutor', notes:'My Notes', pattern:'Exam Pattern', add:'Add Question' };
+  document.getElementById('tbTitle').textContent = titles[page] || page;
+  if (page==='analytics') loadAnalytics();
+  if (page==='history')   loadHistory();
+  if (page==='dashboard') loadDashboard();
+  if (page==='notes')     renderNotes();
+  if (page==='syllabus')  renderSyllabus();
+  if (page==='quiz')      showQuizSelection();
+  if (page==='add')       loadSubjectSelects();
+  window.scrollTo(0, 0);
+}
+
+// ── COUNTDOWN ──
+function updateCountdown() {
+  const exam = new Date('2026-09-05');
+  const diff = Math.floor((exam - new Date()) / 86400000);
+  const d = diff > 0 ? diff : '—';
+  document.getElementById('sbDays').textContent = d;
+  document.getElementById('heroCountdown').textContent = d;
+  document.getElementById('tbCountdown').textContent = diff > 0 ? `${diff} Days to Exam` : 'Exam Season';
+  document.getElementById('tbEyebrow').textContent = `RBI GRADE B 2026 — ${new Date().toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'}).toUpperCase()}`;
+}
+
+// ── APP NOTIFICATION ──
+function setNotification() {
+  const m = new Date().getMonth();
+  let msg, cls, ttl, sideText;
+  if (m <= 3) {
+    ttl = 'Notification Expected Soon'; msg = '⚠️ Official RBI Grade B notification expected May–June 2026. Prepare now — applications open 4–6 weeks after notification.';
+    cls = 'warning'; sideText = '📢 Notification expected May–June 2026';
+  } else if (m <= 5) {
+    ttl = '🚨 Application Window May Be OPEN'; msg = 'Check rbi.org.in immediately. Last date typically 3–4 weeks from notification.';
+    cls = 'urgent'; sideText = '🚨 Application window may be OPEN now';
+  } else if (m <= 7) {
+    ttl = '⏰ Application Closing Soon'; msg = 'Ensure you submit before the deadline. Focus on Phase 1 preparation!';
+    cls = 'urgent'; sideText = '⏰ Application window closing soon';
+  } else {
+    ttl = '📌 Application Complete — Exam Mode'; msg = 'Focus 100% on Phase 1 prep. Check rbi.org.in for admit card.';
+    cls = 'info'; sideText = '✅ Prepare for Phase 1 exam';
+  }
+  const banner = document.getElementById('appNotifBanner');
+  if (banner) { banner.className = `notif-banner ${cls}`; banner.querySelector('.nb-ttl').textContent = ttl; document.getElementById('appNotifMsg').textContent = msg; }
+  document.getElementById('sidebarNotifText').textContent = sideText;
+}
+
+// ── DASHBOARD ──
+async function loadDashboard() {
+  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});
+  loadStats(); loadWeakAreas(); loadRecentActivity(); loadSubjectPerfBars(); buildDailyPlan();
+}
+
+async function loadStats() {
+  try {
+    const d = await fetch('/api/stats').then(r=>r.json());
+    document.getElementById('statAttempts').textContent = d.total_attempts || 0;
+    document.getElementById('statAvg').textContent = (d.avg_score || 0) + '%';
+    document.getElementById('statBest').textContent = (d.best_score || 0) + '%';
+    document.getElementById('statQbank').textContent = d.total_questions || 0;
+  } catch(e) {}
+}
+
+async function loadWeakAreas() {
+  const el = document.getElementById('weakContent');
+  try {
+    const d = await fetch('/api/analytics').then(r=>r.json());
+    const wk = (d.subject_stats||[]).filter(s=>s.accuracy<60).slice(0,4);
+    if (!wk.length) { el.innerHTML = `<div class="empty" style="padding:20px"><div class="empty-icon">✅</div><div class="empty-msg">No weak areas</div><div class="empty-sub">Keep practising!</div></div>`; return; }
+    el.innerHTML = wk.map(s=>`<div style="display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--border)"><span>⚠️</span><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--text1)">${s.name}</div><div style="font-size:10px;color:var(--text3)">${s.attempts} attempts</div></div><span style="font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:var(--red)">${s.accuracy}%</span></div>`).join('');
+  } catch(e) { el.innerHTML = `<div style="padding:14px;font-size:12px;color:var(--text3)">Start practising to see weak areas</div>`; }
+}
+
+async function loadRecentActivity() {
+  const el = document.getElementById('recentContent');
+  try {
+    const rows = await fetch('/api/history?limit=4').then(r=>r.json());
+    if (!rows.length) { el.innerHTML = `<div style="padding:14px;font-size:12px;color:var(--text3)">No attempts yet</div>`; return; }
+    el.innerHTML = rows.map(r=>{
+      const cls = r.score_percent>=70?'s-hi':r.score_percent>=50?'s-mid':'s-lo';
+      return `<div style="display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--border)"><span>${r.icon||'📚'}</span><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--text1)">${r.subject_name||'Unknown'}</div><div style="font-size:10px;color:var(--text3)">${new Date(r.attempted_at).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div></div><span class="s-badge ${cls}">${r.score_percent}%</span></div>`;
+    }).join('');
+  } catch(e) {}
+}
+
+async function loadSubjectPerfBars() {
+  const el = document.getElementById('subjectPerfBars');
+  try {
+    const d = await fetch('/api/analytics').then(r=>r.json());
+    if (!d.subject_stats?.length) { el.innerHTML = `<div style="font-size:12px;color:var(--text3);padding:10px">Start practising to see progress</div>`; return; }
+    el.innerHTML = d.subject_stats.map(s=>{
+      const pct = Math.min(100, s.accuracy||0);
+      const col = pct>=70?'var(--green)':pct>=50?'var(--gold)':'var(--red)';
+      return `<div class="perf-row"><div class="perf-lbl">${s.icon||'📚'} ${s.name}</div><div class="perf-track"><div class="perf-fill" style="width:${pct}%;background:${col}"></div></div><div class="perf-pct">${pct}%</div></div>`;
+    }).join('');
+  } catch(e) {}
+}
+
+function buildDailyPlan() {
+  const all = [...RBI_SUBJECTS.phase1, ...RBI_SUBJECTS.phase2];
+  const d = new Date().getDay();
+  const sessions = [
+    { time:'6:00–7:30', subject: all[d%all.length].icon+' '+all[d%all.length].name, task:'Concept Study + Notes' },
+    { time:'8:00–9:00', subject:'🤖 AI Practice', task:'AI-Generated Question Practice' },
+    { time:'9:00–9:30', subject:'📊 Analytics', task:'Review yesterday\'s weak areas' },
+    { time:'7:00–8:30', subject: all[(d+1)%all.length].icon+' '+all[(d+1)%all.length].name, task:'Mock Quiz + Revision' },
+  ];
+  const key = 'rbi_daily_'+new Date().toDateString();
+  const done = JSON.parse(localStorage.getItem(key)||'[]');
+  document.getElementById('dailyPlanBody').innerHTML = sessions.map((s,i)=>`
+    <div class="dp-row">
+      <div class="dp-time">${s.time}</div>
+      <div class="dp-info"><div class="dp-subject">${s.subject}</div><div class="dp-task">${s.task}</div></div>
+      <div class="dp-check ${done.includes(i)?'done':''}" onclick="toggleTask(${i},this)">${done.includes(i)?'✓':''}</div>
+    </div>`).join('');
+}
+
+function toggleTask(i, el) {
+  const key = 'rbi_daily_'+new Date().toDateString();
+  let done = JSON.parse(localStorage.getItem(key)||'[]');
+  if (done.includes(i)) done = done.filter(x=>x!==i);
+  else done.push(i);
+  localStorage.setItem(key, JSON.stringify(done));
+  el.classList.toggle('done');
+  el.textContent = el.classList.contains('done') ? '✓' : '';
+}
+
+// ── SYLLABUS ──
+function renderSyllabus() {
+  document.getElementById('phase1Grid').innerHTML = RBI_SUBJECTS.phase1.map(s=>subjCardHTML(s,'phase1')).join('');
+  document.getElementById('phase2Grid').innerHTML = RBI_SUBJECTS.phase2.map(s=>subjCardHTML(s,'phase2')).join('');
+  fetch('/api/subjects').then(r=>r.json()).then(subs=>subs.forEach(s=>{ const el=document.getElementById('qcount_'+s.id); if(el) el.textContent=s.question_count+' in bank'; })).catch(()=>{});
+}
+
+function subjCardHTML(s, phase) {
+  const badge = phase==='phase1'?'<span class="sc-phase-badge p1-badge">Phase 1</span>':'<span class="sc-phase-badge p2-badge">Phase 2</span>';
+  return `<div class="subj-card" style="--ac:${s.color}" onclick="openSubject(${s.id})">
+    <span class="sc-icon">${s.icon}</span>${badge}
+    <div class="sc-name">${s.name}</div>
+    <div class="sc-count" id="qcount_${s.id}">Loading…</div>
+    <div class="sc-prog"><div class="sc-prog-fill" style="width:${Math.random()*60+10}%;background:${s.color}"></div></div>
+    <div class="sc-btns">
+      <div class="sc-btn primary" onclick="event.stopPropagation();openSubject(${s.id})">📚 Study</div>
+      <div class="sc-btn" onclick="event.stopPropagation();startSubjectQuiz(${s.id},'${s.name}')">⚡ Quiz</div>
+      <div class="sc-btn" onclick="event.stopPropagation();quickGenerate('${s.name} key concepts')">✨ AI</div>
+    </div>
+  </div>`;
+}
+
+function openSubject(id) {
+  const sub = [...RBI_SUBJECTS.phase1,...RBI_SUBJECTS.phase2].find(s=>s.id===id);
+  if (!sub) return;
+  renderTopicPage(sub);
+  nav('topic');
+}
+
+function renderTopicPage(sub) {
+  const phase = RBI_SUBJECTS.phase1.includes(sub) ? 'Phase 1' : 'Phase 2';
+  document.getElementById('topicContent').innerHTML = `
+    <div class="topic-header">
+      <div class="topic-bc">Syllabus → <span>${phase}</span> → ${sub.name}</div>
+      <div class="topic-ttl">${sub.icon} ${sub.name}</div>
+      <div class="topic-tags"><span class="topic-tag" style="color:var(--gold);border-color:var(--gold-border);background:var(--gold-dim)">${phase}</span><span class="topic-tag">${sub.topics.length} Topics</span><span class="topic-tag" style="color:var(--teal);border-color:var(--teal-border);background:var(--teal-dim)">AI Practice Ready</span></div>
+    </div>
+    <div class="tab-row">
+      <div class="tab-btn active" onclick="showTab(this,'tTopics')">📋 All Topics</div>
+      <div class="tab-btn" onclick="showTab(this,'tPractice')">✨ AI Practice</div>
+      <div class="tab-btn" onclick="showTab(this,'tPYQ')">🗂️ PYQ Style</div>
+    </div>
+    <div id="tTopics">
+      <div class="g3">${sub.topics.map(t=>`
+        <div class="card qa-card" onclick="studyTopic(${sub.id},'${sub.name}','${t.replace(/'/g,"\\'")}')">
+          <div style="font-size:12px;font-weight:700;color:var(--text1);margin-bottom:3px">${t}</div>
+          <div style="font-size:10.5px;color:var(--text3);margin-bottom:8px">Click to study + get AI questions</div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap">
+            <span style="font-size:8.5px;padding:2px 6px;border-radius:5px;background:var(--blue-dim);color:var(--blue)">2 Concept</span>
+            <span style="font-size:8.5px;padding:2px 6px;border-radius:5px;background:var(--purple-dim);color:var(--purple)">3 Analytical</span>
+            <span style="font-size:8.5px;padding:2px 6px;border-radius:5px;background:var(--gold-dim);color:var(--gold)">3 PYQ</span>
+            <span style="font-size:8.5px;padding:2px 6px;border-radius:5px;background:var(--teal-dim);color:var(--teal)">5Q Quiz</span>
+          </div>
+        </div>`).join('')}</div>
+    </div>
+    <div id="tPractice" style="display:none">
+      <div class="ai-panel">
+        <div class="ai-panel-ttl">AI Practice for ${sub.name}</div>
+        <div class="ai-panel-sub">Generate RBI-level questions on any topic in this subject</div>
+        <div class="ai-row">
+          <div class="ai-field" style="flex:2"><label class="ai-lbl">Topic</label><input class="ai-inp" id="subTopicInp" placeholder="Enter a topic from ${sub.name}…"/></div>
+          <div class="ai-field" style="flex:0;min-width:80px"><label class="ai-lbl">Count</label><input type="number" class="ai-inp" id="subTopicCnt" value="8" min="1" max="10"/></div>
+          <button class="btn btn-teal" onclick="generateForSubject(${sub.id},'${sub.name}')" style="align-self:flex-end">✨ Generate</button>
+        </div>
+      </div>
+      <div id="subPracticeOut"></div>
+    </div>
+    <div id="tPYQ" style="display:none">
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-ttl" style="margin-bottom:10px">🗂️ Quick PYQ by Topic</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">${sub.topics.slice(0,6).map(t=>`<button class="btn btn-outline btn-sm" onclick="genPYQTopic(${sub.id},'${sub.name}','${t.replace(/'/g,"\\'")}')"> ${t}</button>`).join('')}</div>
+      </div>
+      <div id="subPYQOut"></div>
+    </div>`;
+}
+
+function showTab(btn, tabId) {
+  btn.closest('.page-content, div').querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  ['tTopics','tPractice','tPYQ'].forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = id===tabId?'':'none'; });
+}
+
+async function studyTopic(subId, subName, topic) {
+  document.getElementById('topicContent').innerHTML = `
+    <div class="topic-header">
+      <div class="topic-bc">Syllabus → <span>${subName}</span> → ${topic}</div>
+      <div class="topic-ttl">📖 ${topic}</div>
+    </div>
+    <div id="topicStudyOut"><div class="loading"><div class="spin"></div> Generating practice for "${topic}"…</div></div>`;
+  nav('topic');
+  try {
+    const r = await fetch('/api/ai/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:`RBI Grade B ${subName}: ${topic}`,num_questions:5})});
+    const d = await r.json();
+    const qs = d.questions || [];
+    document.getElementById('topicStudyOut').innerHTML = qs.length ? `
+      <div class="card" style="margin-bottom:14px">
+        <div class="card-head"><div class="card-ttl">✨ AI Practice Questions — ${topic}</div><div class="card-link" onclick="quickGenerate('${topic}')">Generate More</div></div>
+        ${qs.map((q,i)=>genQHTML(q,i,'mixed')).join('')}
+        <div style="margin-top:14px;display:flex;gap:7px;flex-wrap:wrap">
+          <button class="btn btn-teal btn-sm" onclick='startMiniQuiz(${JSON.stringify(qs).replace(/'/g,"&#39;")})'>⚡ Take as Quiz</button>
+          <button class="btn btn-outline btn-sm" onclick="quickGenerate('${topic}')">✨ More Questions</button>
+        </div>
+      </div>` : `<div class="ai-panel"><div class="ai-panel-ttl">Generate Practice for "${topic}"</div><button class="btn btn-gold" onclick="quickGenerate('${topic}')" style="margin-top:4px">✨ Generate Now</button></div>`;
+  } catch(e) { document.getElementById('topicStudyOut').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-msg">Could not generate</div></div>`; }
+}
+
+// ── PYQ GENERATOR ──
+function updatePyqTopics() {
+  const id = parseInt(document.getElementById('pyqSubject').value);
+  const sub = [...RBI_SUBJECTS.phase1,...RBI_SUBJECTS.phase2].find(s=>s.id===id);
+  const sel = document.getElementById('pyqTopic');
+  sel.innerHTML = '<option value="">All Topics</option>';
+  if (sub) sub.topics.forEach(t=>sel.innerHTML+=`<option value="${t}">${t}</option>`);
+}
+
+async function generatePYQ() {
+  const subId = document.getElementById('pyqSubject').value;
+  const topic = document.getElementById('pyqTopic').value;
+  const year  = document.getElementById('pyqYear').value;
+  const count = parseInt(document.getElementById('pyqCount').value)||5;
+  const sub = [...RBI_SUBJECTS.phase1,...RBI_SUBJECTS.phase2].find(s=>s.id==subId);
+  const topicStr = topic || (sub?sub.name:'RBI Grade B');
+  const btn = document.getElementById('pyqGenBtn');
+  btn.textContent = '⏳ Generating…'; btn.disabled=true;
+  document.getElementById('pyqResults').innerHTML = `<div class="loading"><div class="spin"></div> Generating ${year} pattern questions on "${topicStr}"…</div>`;
+  try {
+    const r = await fetch('/api/ai/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:`RBI Grade B ${year} PYQ style: ${topicStr}`,num_questions:count})});
+    const d = await r.json();
+    if (d.questions?.length) renderGenQs(d.questions,`PYQ Style: ${topicStr} (${year})`, 'pyq','pyqResults');
+    else document.getElementById('pyqResults').innerHTML = `<div class="empty"><div class="empty-icon">❌</div><div class="empty-msg">Generation failed</div></div>`;
+  } catch(e) { document.getElementById('pyqResults').innerHTML = `<div class="empty"><div class="empty-icon">❌</div><div class="empty-msg">Error</div></div>`; }
+  btn.textContent='🤖 Generate PYQ Style Questions'; btn.disabled=false;
+}
+
+// ── AI PRACTICE GEN ──
+async function generatePractice() {
+  const topic = document.getElementById('genTopic').value.trim();
+  const count = parseInt(document.getElementById('genCount').value)||8;
+  if (!topic) { toast('Enter a topic first','err'); return; }
+  const btn = document.getElementById('genBtn');
+  btn.textContent='⏳…'; btn.disabled=true;
+  document.getElementById('genResults').innerHTML = `<div class="loading"><div class="spin"></div> Generating practice on "${topic}"…</div>`;
+  try {
+    const r = await fetch('/api/ai/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:`RBI Grade B level: ${topic}`,num_questions:Math.min(count,10)})});
+    const d = await r.json();
+    if (d.questions?.length) renderGenQs(d.questions,topic,'mixed','genResults');
+    else document.getElementById('genResults').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-msg">No questions generated</div><div class="empty-sub">Try a more specific topic</div></div>`;
+  } catch(e) { toast('Error generating','err'); }
+  btn.textContent='✨ Generate'; btn.disabled=false;
+}
+
+function quickGenerate(topic) { document.getElementById('genTopic').value=topic; nav('generate'); setTimeout(generatePractice,100); }
+
+async function generateForSubject(subId, subName) {
+  const topic = document.getElementById('subTopicInp')?.value.trim();
+  if (!topic) { toast('Enter a topic','err'); return; }
+  const el = document.getElementById('subPracticeOut');
+  el.innerHTML = `<div class="loading"><div class="spin"></div> Generating…</div>`;
+  try {
+    const r = await fetch('/api/ai/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:`RBI Grade B ${subName}: ${topic}`,num_questions:parseInt(document.getElementById('subTopicCnt')?.value)||8})});
+    const d = await r.json();
+    if (d.questions) renderGenQs(d.questions,topic,'mixed','subPracticeOut');
+    else el.innerHTML=`<div class="empty"><div class="empty-icon">❌</div><div class="empty-msg">Error</div></div>`;
+  } catch(e) { el.innerHTML=`<div class="empty"><div class="empty-icon">❌</div><div class="empty-msg">Error</div></div>`; }
+}
+
+async function genPYQTopic(subId, subName, topic) {
+  const el = document.getElementById('subPYQOut');
+  el.innerHTML = `<div class="loading"><div class="spin"></div> Generating PYQ for "${topic}"…</div>`;
+  try {
+    const r = await fetch('/api/ai/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:`RBI Grade B PYQ style ${subName}: ${topic}`,num_questions:5})});
+    const d = await r.json();
+    if (d.questions) renderGenQs(d.questions,topic,'pyq','subPYQOut');
+  } catch(e) {}
+}
+
+// ── RENDER GENERATED QUESTIONS ──
+function genQHTML(q, idx, type) {
+  const typeCls = { mixed:'gqt-analytical', concept:'gqt-concept', analytical:'gqt-analytical', pyq:'gqt-pyq', quiz:'gqt-quiz' };
+  const typeLbl = { mixed:'RBI Level', concept:'Concept', analytical:'Analytical', pyq:'PYQ Style', quiz:'Quiz' };
+  const diffCls = q.difficulty==='hard'?'d-hard':q.difficulty==='easy'?'d-easy':'d-med';
+  const uid = 'gq_'+Math.random().toString(36).substr(2,7);
+  return `<div class="gen-q-card" id="${uid}">
+    <div class="gq-header"><span class="gq-type ${typeCls[type]||'gqt-analytical'}">${typeLbl[type]||'Practice'}</span><span class="diff ${diffCls}">${q.difficulty||'medium'}</span><span style="font-size:10px;color:var(--text3);margin-left:auto">Q${idx+1}</span></div>
+    <div class="gq-text">${q.question_text}</div>
+    <div class="gq-opts" id="${uid}_opts">
+      ${['a','b','c','d'].map(k=>`<div class="gq-opt" onclick="revealQ('${uid}','${k.toUpperCase()}','${q.correct_option?.toUpperCase()}')"><span style="font-family:'DM Mono',monospace;font-size:10px;font-weight:700;color:var(--text3);width:16px;flex-shrink:0">${k.toUpperCase()}.</span><span>${q['option_'+k]||''}</span></div>`).join('')}
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:5px">
+      <div class="gq-toggle" onclick="document.getElementById('${uid}_exp').classList.toggle('show');this.textContent=this.textContent.includes('Show')?'💡 Hide Explanation':'💡 Show Explanation'">💡 Show Explanation</div>
+    </div>
+    <div class="gq-exp" id="${uid}_exp"><span style="font-size:9px;font-weight:700;color:var(--teal);letter-spacing:1px;text-transform:uppercase;display:block;margin-bottom:4px">Explanation</span>${q.explanation||'Correct answer: '+q.correct_option}</div>
+  </div>`;
+}
+
+function revealQ(uid, sel, correct) {
+  document.querySelectorAll(`#${uid}_opts .gq-opt`).forEach((opt,i) => {
+    const k = ['A','B','C','D'][i];
+    if (k===correct) opt.classList.add('correct');
+    else if (k===sel) opt.style.opacity='0.45';
+  });
+}
+
+function renderGenQs(qs, title, type, containerId) {
+  const col = { mixed:'var(--teal)', concept:'var(--blue)', analytical:'var(--purple)', pyq:'var(--gold)', quiz:'var(--green)' }[type]||'var(--gold)';
+  document.getElementById(containerId).innerHTML = `
+    <div class="card">
+      <div class="card-head"><div class="card-ttl" style="color:${col}">${title}</div><div style="font-size:10px;color:var(--text3)">${qs.length} questions</div></div>
+      ${qs.map((q,i)=>genQHTML(q,i,type)).join('')}
+      <div style="margin-top:14px;display:flex;gap:7px;flex-wrap:wrap">
+        <button class="btn btn-teal btn-sm" onclick='startMiniQuiz(${JSON.stringify(qs).replace(/'/g,"&#39;")})'>⚡ Take as Quiz</button>
+        <button class="btn btn-outline btn-sm" onclick="document.getElementById('genTopic').value='${title.substring(0,40)}';nav('generate');setTimeout(generatePractice,100)">✨ Generate More</button>
+      </div>
+    </div>`;
+}
+
+// ── QUIZ ENGINE ──
+async function startQuickQuiz() {
+  try {
+    const subs = await fetch('/api/subjects').then(r=>r.json());
+    const sub = subs.find(s=>s.question_count>0);
+    if (!sub) { toast('No questions yet! Generate some first.','info'); nav('generate'); return; }
+    startSubjectQuiz(sub.id, sub.name);
+  } catch(e) { toast('Could not start quiz','err'); }
+}
+
+async function startSubjectQuiz(subjectId, subjectName) {
+  nav('quiz');
+  document.getElementById('quizContent').innerHTML = `<div class="loading"><div class="spin"></div> Loading questions for ${subjectName}…</div>`;
+  try {
+    const qs = await fetch(`/api/quiz/${subjectId}?limit=10`).then(r=>r.json());
+    if (!qs.length) {
+      document.getElementById('quizContent').innerHTML = `<div class="empty"><div class="empty-icon">📭</div><div class="empty-msg">No questions for ${subjectName}</div><div class="empty-sub" style="margin-bottom:14px">Generate AI questions first</div><button class="btn btn-teal" onclick="quickGenerate('${subjectName}')">✨ Generate Now</button></div>`;
+      return;
+    }
+    S.quizQs=qs; S.quizAnswers={}; S.quizSubjectId=subjectId; S.quizStart=Date.now();
+    renderQuizQ(0);
+  } catch(e) { document.getElementById('quizContent').innerHTML=`<div class="empty"><div class="empty-icon">❌</div><div class="empty-msg">Error loading quiz</div></div>`; }
+}
+
+function renderQuizQ(idx) {
+  const total = S.quizQs.length, q = S.quizQs[idx];
+  if (!q) { submitQuiz(); return; }
+  const sel = S.quizAnswers[q.id];
+  const elapsed = Math.floor((Date.now()-S.quizStart)/1000);
+  const timeStr = `${Math.floor(elapsed/60).toString().padStart(2,'0')}:${(elapsed%60).toString().padStart(2,'0')}`;
+  document.getElementById('quizContent').innerHTML = `
+    <div class="quiz-wrap">
+      <div class="quiz-topbar">
+        <div style="display:flex;align-items:center;gap:8px"><span style="font-size:10px;font-weight:700;padding:3px 9px;border-radius:10px;background:var(--gold-dim);color:var(--gold)">RBI Grade B</span><span style="font-size:11px;color:var(--text3)">${q.subject_name||'Practice'}</span></div>
+        <span style="font-family:'DM Mono',monospace;font-size:13px;color:var(--text2)">⏱️ ${timeStr}</span>
+      </div>
+      <div class="quiz-prog-wrap">
+        <div class="qpw-labels"><span>Question ${idx+1} of ${total}</span><span>${Math.round((idx/total)*100)}% complete</span></div>
+        <div class="qpw-track"><div class="qpw-fill" style="width:${(idx/total)*100}%"></div></div>
+      </div>
+      <div class="q-card">
+        <div class="q-label">Q${idx+1} of ${total} <span class="diff ${q.difficulty==='hard'?'d-hard':q.difficulty==='easy'?'d-easy':'d-med'}" style="margin-left:4px">${q.difficulty||'medium'}</span></div>
+        <div class="q-text">${q.question_text}</div>
+        <div class="q-opts">
+          ${['a','b','c','d'].map(k=>`<div class="q-opt ${sel===k.toUpperCase()?'sel':''}" onclick="pickAnswer(${q.id},'${k.toUpperCase()}',${idx})"><span class="q-opt-k">${k.toUpperCase()}.</span><span class="q-opt-txt">${q['option_'+k]}</span></div>`).join('')}
+        </div>
+      </div>
+      <div class="quiz-ctrls">
+        ${idx>0?`<button class="btn btn-outline" onclick="renderQuizQ(${idx-1})">← Back</button>`:''}
+        ${idx<total-1?`<button class="btn btn-gold" onclick="renderQuizQ(${idx+1})">Next →</button>`:`<button class="btn btn-gold" onclick="submitQuiz()">Submit ✓</button>`}
+        <button class="btn btn-ghost btn-sm" onclick="getHint(${q.id})" style="margin-left:auto">💡 Hint</button>
+      </div>
+      <div id="hintBox" style="margin-top:10px"></div>
+    </div>`;
+}
+
+function pickAnswer(qid, opt, idx) { S.quizAnswers[qid]=opt; renderQuizQ(idx); }
+
+async function getHint(qid) {
+  document.getElementById('hintBox').innerHTML=`<div class="loading" style="padding:8px"><div class="spin"></div> Getting hint…</div>`;
+  try {
+    const d = await fetch('/api/ai/hint',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question_id:qid})}).then(r=>r.json());
+    document.getElementById('hintBox').innerHTML=`<div style="padding:11px 13px;background:var(--bg3);border-left:3px solid var(--gold);border-radius:var(--radius-sm);font-size:12.5px;color:var(--text2)">💡 <b>Hint:</b> ${d.hint}</div>`;
+  } catch(e) {}
+}
+
+async function submitQuiz() {
+  const time = Math.floor((Date.now()-S.quizStart)/1000);
+  document.getElementById('quizContent').innerHTML=`<div class="loading"><div class="spin"></div> Submitting…</div>`;
+  try {
+    const d = await fetch('/api/quiz/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({subject_id:S.quizSubjectId,answers:S.quizAnswers,time_taken_seconds:time})}).then(r=>r.json());
+    showQuizResult(d);
+  } catch(e) { toast('Submit error','err'); }
+}
+
+function showQuizResult(d) {
+  if (!d) { showQuizSelection(); return; }
+  const pct=d.score_percent||0;
+  const col=pct>=70?'var(--green)':pct>=50?'var(--gold)':'var(--red)';
+  const grade=pct>=80?'Excellent! 🎉':pct>=65?'Good Effort 👏':pct>=50?'Keep Practising 📚':'Needs Improvement 💪';
+  const t=d.time_taken_seconds||0;
+  document.getElementById('quizContent').innerHTML = `
+    <div style="max-width:520px;margin:0 auto">
+      <div class="result-card">
+        <div class="result-score" style="color:${col}">${pct}%</div>
+        <div class="result-grade" style="color:${col}">${grade}</div>
+        <div class="result-sub">Completed in ${Math.floor(t/60)}m ${t%60}s</div>
+        <div class="result-stats">
+          <div><div class="rs-val" style="color:var(--green)">${d.correct||0}</div><div class="rs-key">Correct</div></div>
+          <div><div class="rs-val" style="color:var(--red)">${d.wrong||0}</div><div class="rs-key">Wrong</div></div>
+          <div><div class="rs-val" style="color:var(--text3)">${d.skipped||0}</div><div class="rs-key">Skipped</div></div>
+        </div>
+        ${pct<60?`<div class="notif-banner warning" style="text-align:left;margin-bottom:12px"><span class="nb-ico">💡</span><div class="nb-body"><div class="nb-ttl">Recommendation</div><div class="nb-msg">Score below 60%. Use AI Practice Generator for targeted practice on weak topics.</div></div></div>`:''}
+        <div style="display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin-top:8px">
+          <button class="btn btn-gold" onclick="startSubjectQuiz(${S.quizSubjectId},'Retry')">🔄 Retry</button>
+          <button class="btn btn-teal" onclick="quickGenerate('Practice')">✨ More Practice</button>
+          <button class="btn btn-outline" onclick="showQuizSelection()">📋 Change Subject</button>
+          <button class="btn btn-outline" onclick="nav('analytics')">📈 Analytics</button>
+        </div>
+      </div>
+      ${d.details?.length?`<div class="card" style="margin-top:14px;text-align:left"><div class="card-ttl" style="margin-bottom:12px">📋 Answer Review</div>${d.details.map((x,i)=>`<div style="padding:9px 12px;background:var(--bg3);border-radius:8px;border-left:3px solid ${x.is_correct?'var(--green)':'var(--red)'};margin-bottom:7px"><div style="font-size:11.5px;color:var(--text2)">Q${i+1} — Your: <b>${x.selected||'Skipped'}</b> · Correct: <b>${x.correct}</b></div>${x.explanation?`<div style="font-size:10.5px;color:var(--text3);margin-top:3px">${x.explanation.substring(0,100)}…</div>`:''}</div>`).join('')}</div>`:''}
+    </div>`;
+}
+
+function showQuizSelection() {
+  fetch('/api/subjects').then(r=>r.json()).then(subs=>{
+    document.getElementById('quizContent').innerHTML = `
+      <div class="g-auto" style="margin-bottom:18px">
+        ${subs.map(s=>`<div class="subj-card" onclick="startSubjectQuiz(${s.id},'${s.name}')"><span class="sc-icon">${s.icon||'📚'}</span><div class="sc-name">${s.name}</div><div class="sc-count">${s.question_count} questions</div>${s.question_count===0?'<div style="font-size:10px;color:var(--red);margin-top:4px">No questions yet</div>':''}</div>`).join('')}
+      </div>
+      <div class="card">
+        <div class="card-ttl" style="margin-bottom:10px">🏆 Full Phase 1 Mock Test</div>
+        <div style="font-size:12px;color:var(--text2);margin-bottom:12px">Simulate the complete RBI Grade B Phase 1 exam — all subjects combined (200 marks)</div>
+        <button class="btn btn-gold" onclick="startFullMock()">⚡ Start Full Mock Test</button>
+      </div>`;
+  }).catch(()=>{});
+}
+
+async function startFullMock() {
+  nav('quiz');
+  document.getElementById('quizContent').innerHTML=`<div class="loading"><div class="spin"></div> Loading full mock test…</div>`;
+  try {
+    const d = await fetch('/api/mock/daily').then(r=>r.json());
+    const qs = d.sections.flatMap(s=>s.questions.map(q=>({...q,subject_name:s.subject_name})));
+    if (!qs.length) { document.getElementById('quizContent').innerHTML=`<div class="empty"><div class="empty-icon">📭</div><div class="empty-msg">Not enough questions. Add questions to all subjects first.</div></div>`; return; }
+    S.quizQs=qs; S.quizAnswers={}; S.quizSubjectId=null; S.quizStart=Date.now();
+    renderQuizQ(0);
+  } catch(e) {}
+}
+
+function startMiniQuiz(questions) {
+  nav('quiz');
+  const qs = questions.map((q,i)=>({...q, id:'ai_'+i, subject_name:'AI Generated'}));
+  S.quizQs=qs; S.quizAnswers={}; S.quizSubjectId=null; S.quizStart=Date.now();
+  renderAIQuizQ(0, qs);
+}
+
+function renderAIQuizQ(idx, qs) {
+  const total=qs.length, q=qs[idx];
+  if (!q) { showAIQuizResult(qs); return; }
+  const sel=S.quizAnswers[q.id];
+  document.getElementById('quizContent').innerHTML = `
+    <div class="quiz-wrap">
+      <div class="quiz-prog-wrap">
+        <div class="qpw-labels"><span>Q ${idx+1} / ${total}</span><span>${Math.round((idx/total)*100)}%</span></div>
+        <div class="qpw-track"><div class="qpw-fill" style="width:${(idx/total)*100}%"></div></div>
+      </div>
+      <div class="q-card">
+        <div class="q-label">Question ${idx+1} of ${total}</div>
+        <div class="q-text">${q.question_text}</div>
+        <div class="q-opts">
+          ${['a','b','c','d'].map(k=>`<div class="q-opt ${sel===k.toUpperCase()?'sel':''}" onclick="S.quizAnswers['${q.id}']='${k.toUpperCase()}';renderAIQuizQ(${idx},${JSON.stringify(qs).replace(/'/g,'&#39;').replace(/"/g,'&quot;')})"><span class="q-opt-k">${k.toUpperCase()}.</span><span class="q-opt-txt">${q['option_'+k]||''}</span></div>`).join('')}
+        </div>
+      </div>
+      <div class="quiz-ctrls">
+        ${idx>0?`<button class="btn btn-outline" onclick="renderAIQuizQ(${idx-1},${JSON.stringify(qs).replace(/'/g,'&#39;').replace(/"/g,'&quot;')})">← Back</button>`:''}
+        ${idx<total-1?`<button class="btn btn-gold" onclick="renderAIQuizQ(${idx+1},${JSON.stringify(qs).replace(/'/g,'&#39;').replace(/"/g,'&quot;')})">Next →</button>`:`<button class="btn btn-gold" onclick='showAIQuizResult(${JSON.stringify(qs).replace(/'/g,"&#39;")})'>Submit ✓</button>`}
+      </div>
+    </div>`;
+}
+
+function showAIQuizResult(qs) {
+  let c=0,w=0,sk=0;
+  qs.forEach(q=>{ const sel=S.quizAnswers[q.id]; if(!sel)sk++; else if(sel===q.correct_option?.toUpperCase())c++; else w++; });
+  const total=qs.length, pct=total?Math.round((c/total)*100):0;
+  const col=pct>=70?'var(--green)':pct>=50?'var(--gold)':'var(--red)';
+  document.getElementById('quizContent').innerHTML = `
+    <div style="max-width:500px;margin:0 auto">
+      <div class="result-card">
+        <div class="result-score" style="color:${col}">${pct}%</div>
+        <div class="result-grade" style="color:${col}">${pct>=70?'Great!':pct>=50?'Good Try':'Review Needed'}</div>
+        <div class="result-stats">
+          <div><div class="rs-val" style="color:var(--green)">${c}</div><div class="rs-key">Correct</div></div>
+          <div><div class="rs-val" style="color:var(--red)">${w}</div><div class="rs-key">Wrong</div></div>
+          <div><div class="rs-val" style="color:var(--text3)">${sk}</div><div class="rs-key">Skipped</div></div>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:7px;justify-content:center;flex-wrap:wrap">
+          <button class="btn btn-gold" onclick='startMiniQuiz(${JSON.stringify(qs).replace(/'/g,"&#39;")})'>🔄 Retry</button>
+          <button class="btn btn-outline" onclick="showQuizSelection()">📋 Other Subjects</button>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px;text-align:left">
+        <div class="card-ttl" style="margin-bottom:12px">📋 Review</div>
+        ${qs.map((q,i)=>`<div style="padding:9px 12px;background:var(--bg3);border-radius:8px;border-left:3px solid ${S.quizAnswers[q.id]===q.correct_option?.toUpperCase()?'var(--green)':'var(--red)'};margin-bottom:7px"><div style="font-size:12px;font-weight:600;color:var(--text1);margin-bottom:3px">Q${i+1}: ${q.question_text.substring(0,70)}…</div><div style="font-size:11px;color:var(--text3)">Your: ${S.quizAnswers[q.id]||'Skipped'} · Correct: ${q.correct_option} — ${(q.explanation||'').substring(0,80)}…</div></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+// ── ANALYTICS ──
+async function loadAnalytics() {
+  const el = document.getElementById('analyticsContent');
+  el.innerHTML=`<div class="loading"><div class="spin"></div> Loading…</div>`;
+  try {
+    const d = await fetch('/api/analytics').then(r=>r.json());
+    const ov = d.overall||{};
+    el.innerHTML = `
+      <div class="g4">
+        <div class="stat-card" data-icon="🎯"><div class="stat-card-accent" style="background:linear-gradient(90deg,var(--teal),transparent)"></div><div class="stat-lbl">Total Attempts</div><div class="stat-val">${ov.total_attempts||0}</div></div>
+        <div class="stat-card" data-icon="📊"><div class="stat-card-accent" style="background:linear-gradient(90deg,var(--gold),transparent)"></div><div class="stat-lbl">Overall Average</div><div class="stat-val">${ov.overall_avg||0}%</div></div>
+        <div class="stat-card" data-icon="✅"><div class="stat-card-accent" style="background:linear-gradient(90deg,var(--green),transparent)"></div><div class="stat-lbl">Total Correct</div><div class="stat-val">${ov.total_correct||0}</div></div>
+        <div class="stat-card" data-icon="❌"><div class="stat-card-accent" style="background:linear-gradient(90deg,var(--red),transparent)"></div><div class="stat-lbl">Total Wrong</div><div class="stat-val">${ov.total_wrong||0}</div></div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-ttl" style="margin-bottom:14px">📊 Subject Performance</div>
+          ${(d.subject_stats||[]).map(s=>{const pct=s.accuracy||0;const col=pct>=70?'var(--green)':pct>=50?'var(--gold)':'var(--red)';return `<div class="perf-row"><div class="perf-lbl">${s.icon||'📚'} ${s.name}</div><div class="perf-track"><div class="perf-fill" style="width:${pct}%;background:${col}"></div></div><div class="perf-pct">${pct}%</div></div>`;}).join('')}
+        </div>
+        <div class="card">
+          <div class="card-ttl" style="margin-bottom:12px">⚠️ Weak Areas</div>
+          ${d.weak_subjects?.length?d.weak_subjects.map(s=>`<div style="display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)"><span style="color:var(--red)">⚠️</span><div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--text1)">${s}</div><div style="font-size:10px;color:var(--text3)">Below 50% accuracy</div></div><button class="btn btn-teal btn-sm" onclick="quickGenerate('${s}')">✨ Practice</button></div>`).join(''):`<div style="padding:14px;font-size:12px;color:var(--green)">✅ No weak areas detected!</div>`}
+          ${d.strong_subjects?.length?`<div class="card-ttl" style="margin:14px 0 10px">🏆 Strong Areas</div>${d.strong_subjects.map(s=>`<div style="display:flex;align-items:center;gap:8px;padding:6px 0"><span style="color:var(--green)">✅</span><span style="font-size:12px;color:var(--text1)">${s}</span><span style="font-size:10px;color:var(--green);margin-left:auto">≥75%</span></div>`).join('')}`:''}
+        </div>
+      </div>
+      ${d.weak_questions?.length?`<div class="card"><div class="card-ttl" style="margin-bottom:12px">🔍 Frequently Missed Questions</div>${d.weak_questions.slice(0,5).map(q=>`<div style="padding:9px 12px;background:var(--bg3);border-radius:8px;border-left:3px solid var(--red);margin-bottom:7px"><div style="font-size:12px;font-weight:600;color:var(--text1);margin-bottom:2px">${q.question_text.substring(0,100)}…</div><div style="font-size:10px;color:var(--text3)">${q.subject_name} · missed ${q.wrong_count}×</div></div>`).join('')}</div>`:''}`;
+  } catch(e) { el.innerHTML=`<div class="empty"><div class="empty-icon">📊</div><div class="empty-msg">No data yet</div><div class="empty-sub">Complete some quizzes to see analytics</div></div>`; }
+}
+
+// ── HISTORY ──
+async function loadHistory() {
+  try {
+    const rows = await fetch('/api/history?limit=50').then(r=>r.json());
+    const tbody = document.getElementById('historyBody');
+    if (!rows.length) { tbody.innerHTML=`<tr><td colspan="7"><div class="empty"><div class="empty-icon">📋</div><div class="empty-msg">No attempts yet</div></div></td></tr>`; return; }
+    tbody.innerHTML=rows.map(r=>{
+      const cls=r.score_percent>=70?'s-hi':r.score_percent>=50?'s-mid':'s-lo';
+      const t=r.time_taken_seconds||0;
+      return `<tr><td>${r.icon||'📚'} ${r.subject_name||'—'}</td><td><span class="s-badge ${cls}">${r.score_percent}%</span></td><td style="color:var(--green)">${r.correct_answers||0}</td><td style="color:var(--red)">${r.wrong_answers||0}</td><td style="color:var(--text3)">${r.skipped||0}</td><td style="color:var(--text3)">${Math.floor(t/60)}m ${t%60}s</td><td style="color:var(--text3)">${new Date(r.attempted_at).toLocaleDateString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</td></tr>`;
+    }).join('');
+  } catch(e) {}
+}
+
+// ── AI TUTOR ──
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  input.value='';
+  appendBubble(msg,'user');
+  S.chatHistory.push({role:'user',content:msg});
+  appendBubble('<span class="ai-chip">RBI AI TUTOR</span><div class="loading" style="padding:4px;display:inline-flex"><div class="spin"></div></div>','ai',true);
+  try {
+    const d = await fetch('/api/ai/tutor',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:`[RBI Grade B Context] ${msg}`,history:S.chatHistory.slice(-10)})}).then(r=>r.json());
+    updateLastBubble(d.reply||'Sorry, could not get a response.');
+    S.chatHistory.push({role:'assistant',content:d.reply||''});
+  } catch(e) { updateLastBubble('Error connecting to AI. Check your connection.'); }
+}
+
+function quickChat(msg) { document.getElementById('chatInput').value=msg; sendChat(); }
+function deepDive() { const t=document.getElementById('deepTopic').value.trim(); if(t) quickChat(`Deep-dive: "${t}" for RBI Grade B exam. Cover key concepts, important facts, exam-relevant points, common exam questions and strategies.`); }
+
+function appendBubble(text,role,loading=false) {
+  const el=document.createElement('div');
+  el.className=`cbubble ${role}`; if(loading)el.id='lastAIBubble';
+  el.innerHTML=role==='ai'?`<span class="ai-chip">RBI AI TUTOR</span>${text}`:text;
+  const msgs=document.getElementById('chatMsgs');
+  msgs.appendChild(el); msgs.scrollTop=99999;
+}
+function updateLastBubble(text) {
+  const el=document.getElementById('lastAIBubble');
+  if(el){el.innerHTML=`<span class="ai-chip">RBI AI TUTOR</span>${text.replace(/\n/g,'<br>')}`;el.removeAttribute('id');}
+  else appendBubble(text,'ai');
+  document.getElementById('chatMsgs').scrollTop=99999;
+}
+
+// ── STUDY PLAN ──
+async function generateStudyPlan() {
+  const btn=document.getElementById('planBtn');
+  btn.textContent='⏳ Generating…'; btn.disabled=true;
+  document.getElementById('planContent').innerHTML=`<div class="loading"><div class="spin"></div> Generating your personalised RBI Grade B study plan…</div>`;
+  try {
+    const d = await fetch('/api/ai/study-plan',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({exam_date:'August-September 2026',hours_per_day:parseInt(document.getElementById('planHours').value),weak_subjects:document.getElementById('planWeak').value?document.getElementById('planWeak').value.split(',').map(s=>s.trim()):[],exam:'RBI Grade B',phase_focus:document.getElementById('planPhase').value})}).then(r=>r.json());
+    document.getElementById('planContent').innerHTML=`<div class="card"><div class="card-ttl" style="margin-bottom:14px">📅 Your AI-Generated Study Plan</div><div style="white-space:pre-wrap;font-size:12.5px;color:var(--text2);line-height:1.75">${d.plan}</div></div>`;
+  } catch(e) { toast('Error generating plan','err'); }
+  btn.textContent='🤖 Generate AI Study Plan'; btn.disabled=false;
+}
+
+// ── NOTES ──
+function renderNotes() {
+  const list = document.getElementById('noteList');
+  if (!S.notes.length) { list.innerHTML=`<div style="padding:12px;font-size:12px;color:var(--text3)">No notes yet. Click + New Note</div>`; return; }
+  list.innerHTML=S.notes.map(n=>`<div class="note-item ${S.activeNote===n.id?'active':''}" onclick="openNote('${n.id}')"><div class="note-ttl">${n.title||'Untitled'}</div><div class="note-meta">${n.tag||'No subject'} · ${new Date(n.updated).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div></div>`).join('');
+}
+
+function addNote() {
+  const id='note_'+Date.now();
+  S.notes.unshift({id,title:'New Note',body:'',tag:'',updated:Date.now()});
+  localStorage.setItem('rbi_notes',JSON.stringify(S.notes));
+  openNote(id); renderNotes();
+}
+
+function openNote(id) {
+  const n=S.notes.find(x=>x.id===id); if(!n) return;
+  S.activeNote=id;
+  document.getElementById('noteTitleInput').value=n.title||'';
+  document.getElementById('noteBody').value=n.body||'';
+  document.getElementById('noteTag').value=n.tag||'';
+  document.getElementById('noteEditor').style.display='';
+  document.getElementById('noteEmpty').style.display='none';
+  renderNotes();
+}
+
+function saveNote() {
+  if (!S.activeNote) return;
+  const i=S.notes.findIndex(n=>n.id===S.activeNote); if(i<0) return;
+  S.notes[i].title=document.getElementById('noteTitleInput').value||'Untitled';
+  S.notes[i].body=document.getElementById('noteBody').value;
+  S.notes[i].tag=document.getElementById('noteTag').value;
+  S.notes[i].updated=Date.now();
+  localStorage.setItem('rbi_notes',JSON.stringify(S.notes));
+  renderNotes(); toast('Note saved!','ok');
+}
+
+function deleteNote() {
+  if (!S.activeNote||!confirm('Delete this note?')) return;
+  S.notes=S.notes.filter(n=>n.id!==S.activeNote); S.activeNote=null;
+  localStorage.setItem('rbi_notes',JSON.stringify(S.notes));
+  document.getElementById('noteEditor').style.display='none';
+  document.getElementById('noteEmpty').style.display='';
+  renderNotes();
+}
+
+// ── ADD QUESTION ──
+async function loadSubjectSelects() {
+  try {
+    const subs = await fetch('/api/subjects').then(r=>r.json());
+    ['addSubjectId','addAiSubject'].forEach(id=>{
+      const el=document.getElementById(id); if(!el) return;
+      el.innerHTML='<option value="">Select subject…</option>';
+      subs.forEach(s=>el.innerHTML+=`<option value="${s.id}">${s.icon||''} ${s.name}</option>`);
+    });
+    const pyqEl=document.getElementById('pyqSubject');
+    const genEl=document.getElementById('genSubject');
+    if(pyqEl){pyqEl.innerHTML='<option value="">Select Subject</option>';[...RBI_SUBJECTS.phase1,...RBI_SUBJECTS.phase2].forEach(s=>pyqEl.innerHTML+=`<option value="${s.id}">${s.icon} ${s.name}</option>`);}
+    if(genEl){genEl.innerHTML='<option value="">Auto-detect</option>';subs.forEach(s=>genEl.innerHTML+=`<option value="${s.id}">${s.icon||''} ${s.name}</option>`);}
+  } catch(e) {}
+}
+
+async function addQuestion() {
+  const data={ subject_id:document.getElementById('addSubjectId').value, question_text:document.getElementById('addQtext').value.trim(), option_a:document.getElementById('addOa').value.trim(), option_b:document.getElementById('addOb').value.trim(), option_c:document.getElementById('addOc').value.trim(), option_d:document.getElementById('addOd').value.trim(), correct_option:document.getElementById('addCorrect').value, difficulty:document.getElementById('addDiff').value, explanation:document.getElementById('addExp').value.trim() };
+  if (!data.subject_id||!data.question_text||!data.option_a) { toast('Fill all required fields','err'); return; }
+  try {
+    const d=await fetch('/api/questions',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(r=>r.json());
+    if (d.success) { toast('Question added!','ok'); ['addQtext','addOa','addOb','addOc','addOd','addExp'].forEach(id=>document.getElementById(id).value=''); }
+    else toast(d.error||'Error','err');
+  } catch(e) { toast('Error','err'); }
+}
+
+async function aiGenerateAndSave() {
+  const topic=document.getElementById('addAiTopic').value.trim();
+  const subjectId=document.getElementById('addAiSubject').value;
+  const count=parseInt(document.getElementById('addAiCount').value)||5;
+  if (!topic||!subjectId) { toast('Enter topic and select subject','err'); return; }
+  document.getElementById('addAiResults').innerHTML=`<div class="loading"><div class="spin"></div> Generating & saving…</div>`;
+  try {
+    const d=await fetch('/api/ai/generate',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({topic:`RBI Grade B: ${topic}`,num_questions:count,subject_id:parseInt(subjectId),save:true})}).then(r=>r.json());
+    document.getElementById('addAiResults').innerHTML=`<div class="notif-banner success" style="margin:0"><span class="nb-ico">✅</span><div class="nb-body"><div class="nb-ttl">Success!</div><div class="nb-msg">Generated ${d.generated} questions, saved ${d.saved} to bank.</div></div></div>`;
+  } catch(e) { document.getElementById('addAiResults').innerHTML=`<div style="color:var(--red);font-size:12px">Error generating questions</div>`; }
+}
+
+async function importCSV() {
+  const file=document.getElementById('csvFile').files[0];
+  const subjectId=document.getElementById('addSubjectId').value;
+  if (!file||!subjectId) { toast('Select file and subject','err'); return; }
+  const form=new FormData(); form.append('file',file); form.append('subject_id',subjectId);
+  try {
+    const d=await fetch('/api/questions/import',{method:'POST',body:form}).then(r=>r.json());
+    if(d.inserted!==undefined) toast(`Imported ${d.inserted}, skipped ${d.skipped}`,'ok');
+    else toast(d.error||'Import error','err');
+  } catch(e) { toast('Import error','err'); }
+}
+
+// ── TOAST ──
+function toast(msg, type='info') {
+  const wrap=document.getElementById('toastWrap');
+  const el=document.createElement('div');
+  el.className=`toast ${type}`;
+  el.innerHTML=`<span>${type==='ok'?'✓':type==='err'?'✕':'ℹ'}</span><span>${msg}</span>`;
+  wrap.appendChild(el);
+  setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateX(10px)'; el.style.transition='all 0.25s ease'; setTimeout(()=>el.remove(),250); }, 3200);
+}
+
+// ── MOBILE TOGGLE ──
+document.getElementById('mobToggle').addEventListener('click', () => document.getElementById('sidebar').classList.toggle('open'));
+
+// ── INIT ──
+function init() {
+  updateCountdown(); setInterval(updateCountdown, 60000);
+  setNotification();
+  loadDashboard();
+  loadSubjectSelects();
+  renderSyllabus();
+  const pct = Math.round(Math.random()*30+5);
+  document.getElementById('syllabusPct').textContent = pct+'%';
+  document.getElementById('syllabusBar').style.width = pct+'%';
+  const name = localStorage.getItem('rbi_username')||'Aspirant';
+  document.getElementById('userName').textContent = name;
+  document.getElementById('userAvatar').textContent = name[0].toUpperCase();
+}
+
+init();
+</script>
+</body>
+</html>
