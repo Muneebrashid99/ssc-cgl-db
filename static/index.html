@@ -220,7 +220,7 @@ body {
 .su-dot { position: absolute; bottom: -2px; right: -2px; width: 9px; height: 9px; background: var(--green); border: 2px solid var(--bg3); border-radius: 50%; }
 .su-info { flex: 1; min-width: 0; }
 .su-name { font-size: 12.5px; font-weight: 700; color: var(--text1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.su-status { font-size: 10px; color: var(--text3); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.su-status { font-size: 10.5px; color: var(--text2); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 14px; }
 .su-actions { display: flex; gap: 5px; }
 .su-btn {
   flex: 1; padding: 5px 8px; border: 1px solid var(--border2);
@@ -2286,31 +2286,6 @@ init();
 (function() {
   'use strict';
 
-  /* FIX 2: ENHANCED STATUS LINE */
-  window.updateUserStatus = function() {
-    const now = new Date();
-    const h = now.getHours();
-    const m = now.getMinutes().toString().padStart(2, '0');
-    const h12 = h > 12 ? h - 12 : (h === 0 ? 12 : h);
-    const ampm = h >= 12 ? 'PM' : 'AM';
-    const timeStr = `${h12}:${m} ${ampm}`;
-    let emoji, label;
-    if (h >= 5  && h < 8)       { emoji = '🌅'; label = 'Early Session'; }
-    else if (h >= 8  && h < 12) { emoji = '📖'; label = 'Morning Study'; }
-    else if (h >= 12 && h < 14) { emoji = '☕'; label = 'Midday Review'; }
-    else if (h >= 14 && h < 17) { emoji = '☀️';  label = 'Afternoon Grind'; }
-    else if (h >= 17 && h < 20) { emoji = '📚'; label = 'Evening Session'; }
-    else if (h >= 20 && h < 23) { emoji = '🌙'; label = 'Night Study'; }
-    else                         { emoji = '⭐'; label = 'Late Night'; }
-    const statusText = `${emoji} ${label} · ${timeStr}`;
-    const el = document.getElementById('userStatusLine');
-    if (el) {
-      el.classList.add('updating');
-      el.textContent = statusText;
-      setTimeout(() => el.classList.remove('updating'), 450);
-    }
-  };
-
   /* FIX 1: SIDEBAR LAYOUT */
   function applyLayoutFix() {
     const sidebar = document.getElementById('sidebar');
@@ -2353,19 +2328,11 @@ init();
       e.preventDefault();
       e.stopPropagation();
       localStorage.removeItem('rbi_logged_in');
-      window.location.href = '/login';
+      window.location.href = '/logout';
     }
   }, true);
 
-  if (document.readyState !== 'loading') {
-    setTimeout(window.updateUserStatus, 100);
-  } else {
-    document.addEventListener('DOMContentLoaded', function() {
-      setTimeout(window.updateUserStatus, 100);
-    });
-  }
-
-  console.log('[PATCH v5.2] Applied: sidebar overlap fix, status line, login redirect ✓');
+  console.log('[PATCH v5.2] Applied: sidebar overlap fix, login redirect ✓');
 })();
 </script>
 </body>
