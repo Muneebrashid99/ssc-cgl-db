@@ -216,57 +216,22 @@ def health():
     return jsonify({'status': 'ok'}), 200
 
 
+# ── LOGIN / LOGOUT ──────────────────────────────────────────────────────────
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = ''
     if request.method == 'POST':
         u = request.form.get('username', '').strip()
         p = request.form.get('password', '')
         if u == LOGIN_USERNAME and p == LOGIN_PASSWORD:
             session.permanent = True
             session['auth'] = True
+            session['username'] = u
             return redirect('/')
-        error = 'Invalid credentials. Try again.'
-    err_html = f"<div class='err'>&#9888;&#65039; {error}</div>" if error else ""
-    page = """<!DOCTYPE html>
-<html>
-<head>
-<title>RBI Grade B Login</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
-<style>
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:#05070f;font-family:'DM Sans',sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;}
-.box{background:#0f1324;border:1px solid #1c2035;border-radius:20px;padding:44px;width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,0.5);}
-.logo{font-size:3rem;margin-bottom:10px;}
-h2{color:#eef0f8;font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;margin-bottom:4px;}
-p{color:#4a5270;font-size:12px;margin-bottom:32px;letter-spacing:0.5px;}
-label{display:block;text-align:left;font-size:10px;color:#4a5270;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:6px;}
-input{width:100%;background:#090c18;border:1px solid #1c2035;border-radius:10px;color:#eef0f8;font-family:'DM Sans',sans-serif;font-size:14px;padding:13px 16px;outline:none;margin-bottom:16px;transition:border-color 0.2s;}
-input:focus{border-color:rgba(245,200,66,0.6);}
-button{width:100%;background:linear-gradient(135deg,#f5c842,#e8a020);color:#000;border:none;border-radius:10px;padding:14px;font-family:'Syne',sans-serif;font-size:14px;font-weight:800;cursor:pointer;margin-top:4px;letter-spacing:0.5px;transition:opacity 0.2s;}
-button:hover{opacity:0.88;}
-.err{color:#ff5757;font-size:12px;margin-bottom:16px;background:rgba(255,87,87,0.08);padding:10px 14px;border-radius:8px;border:1px solid rgba(255,87,87,0.2);}
-.foot{margin-top:22px;font-size:11px;color:#2e3450;}
-</style>
-</head>
-<body>
-<div class="box">
-  <div class="logo">&#9889;</div>
-  <h2>RBI Grade B 2026</h2>
-  <p>Command Centre &mdash; Private Access</p>
-  """ + err_html + """
-  <form method="POST">
-    <label>Username</label>
-    <input type="text" name="username" placeholder="Enter username" required autofocus autocomplete="username">
-    <label>Password</label>
-    <input type="password" name="password" placeholder="Enter password" required autocomplete="current-password">
-    <button type="submit">Access Command Centre</button>
-  </form>
-  <div class="foot">Your personal RBI Grade B 2026 prep dashboard</div>
-</div>
-</body>
-</html>"""
-    return page
+        # Return login page with error flag so login.html JS can detect failure
+        return send_from_directory('static', 'login.html'), 401
+    # GET — serve the new login.html from static/
+    return send_from_directory('static', 'login.html')
 
 
 @app.route('/logout')
@@ -275,9 +240,11 @@ def logout():
     return redirect('/login')
 
 
+# ── AUTH GUARD ──────────────────────────────────────────────────────────────
+
 @app.before_request
 def require_login():
-    if request.endpoint in ('login', 'static', 'health'):
+    if request.endpoint in ('login', 'logout', 'static', 'health'):
         return
     if not logged_in():
         if request.path.startswith('/api/'):
@@ -289,6 +256,8 @@ def require_login():
 def index():
     return send_from_directory('static', 'index.html')
 
+
+# ── API ROUTES (unchanged) ──────────────────────────────────────────────────
 
 @app.route('/api/subjects')
 def get_subjects():
@@ -772,6 +741,7 @@ def not_found(e):
 def server_error(e):
     return jsonify({'error': 'Internal server error'}), 500
 
+
 @app.route('/api/ai/test')
 def ai_test():
     try:
@@ -779,6 +749,7 @@ def ai_test():
         return jsonify({'success': True, 'response': result})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)})
+
 
 # Init DB at module load (works with gunicorn)
 try:
