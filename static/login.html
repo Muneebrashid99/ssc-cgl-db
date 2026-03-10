@@ -310,9 +310,9 @@ body {
       <div class="divider"><span>or</span></div>
 
       <div class="fg">
-        <label class="fl" for="emailInput">Email address</label>
-        <input class="fi" type="email" id="emailInput" placeholder="you@example.com" autocomplete="email">
-        <div class="field-error" id="emailError">Please enter a valid email</div>
+        <label class="fl" for="emailInput">Username</label>
+        <input class="fi" type="text" id="emailInput" placeholder="Enter your username" autocomplete="username">
+        <div class="field-error" id="emailError">Username is required</div>
       </div>
 
       <div class="fg">
@@ -445,38 +445,41 @@ function showSignIn() {
   document.getElementById('signInView').style.display = '';
 }
 function showForgot() {
-  alert('Password reset link will be sent to your email.');
+  alert('Contact your administrator to reset your password.');
 }
 
 function socialLogin(provider) {
-  const btn = event.currentTarget;
-  showLoading();
-  setTimeout(() => completeLogin('User'), 1200);
+  showFieldError('emailError', 'Social login is not available. Please use your username and password.');
+  document.getElementById('emailInput').classList.add('error');
 }
 
-function showLoading() {
-  const btn = document.getElementById('submitBtn');
-  if (btn) btn.innerHTML = '<div class="spin"></div> Signing in…';
+function showFieldError(id, msg) {
+  const el = document.getElementById(id);
+  if (el) { el.textContent = msg; el.style.display = 'block'; }
 }
 
-function handleLogin() {
-  const email = document.getElementById('emailInput').value.trim();
-  const pass = document.getElementById('passInput').value.trim();
+function clearErrors() {
+  ['emailInput','passInput'].forEach(id => document.getElementById(id)?.classList.remove('error'));
+  ['emailError','passError'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+}
+
+async function handleLogin() {
+  clearErrors();
+  const username = document.getElementById('emailInput').value.trim();
+  const pass = document.getElementById('passInput').value;
   let valid = true;
 
-  document.getElementById('emailInput').classList.remove('error');
-  document.getElementById('passInput').classList.remove('error');
-  document.getElementById('emailError').style.display = 'none';
-  document.getElementById('passError').style.display = 'none';
-
-  if (!email || !/\S+@\S+\.\S+/.test(email)) {
+  if (!username) {
     document.getElementById('emailInput').classList.add('error');
-    document.getElementById('emailError').style.display = 'block';
+    showFieldError('emailError', 'Username is required');
     valid = false;
   }
   if (!pass) {
     document.getElementById('passInput').classList.add('error');
-    document.getElementById('passError').style.display = 'block';
+    showFieldError('passError', 'Password is required');
     valid = false;
   }
   if (!valid) return;
@@ -485,36 +488,73 @@ function handleLogin() {
   btn.innerHTML = '<div class="spin"></div> Signing in…';
   btn.classList.add('loading');
 
-  // Extract name from email for greeting
-  const name = email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g, l => l.toUpperCase());
-  setTimeout(() => completeLogin(name), 1000);
+  try {
+    // POST to Flask /login endpoint
+    const formData = new FormData();
+    formData.append('username', username);
+    formData.append('password', pass);
+
+    const resp = await fetch('/login', {
+      method: 'POST',
+      body: formData,
+      redirect: 'manual'   // we handle redirect ourselves
+    });
+
+    // Flask redirects to '/' on success, stays on /login on failure
+    if (resp.type === 'opaqueredirect' || resp.redirected || resp.status === 302 || resp.ok) {
+      // Try to detect failure by fetching the response text
+      const text = await resp.text().catch(() => '');
+      if (text.includes('Invalid credentials') || text.includes('err')) {
+        btn.innerHTML = 'Continue with Email';
+        btn.classList.remove('loading');
+        document.getElementById('passInput').classList.add('error');
+        showFieldError('passError', 'Invalid username or password');
+        return;
+      }
+      // Success — show overlay then redirect
+      completeLogin(username);
+    } else {
+      btn.innerHTML = 'Continue with Email';
+      btn.classList.remove('loading');
+      showFieldError('passError', 'Invalid username or password');
+    }
+  } catch (err) {
+    // Fallback: submit the form normally (works in all cases)
+    btn.classList.remove('loading');
+    submitFormFallback(username, pass);
+  }
+}
+
+function submitFormFallback(username, password) {
+  // Create and submit a real form so Flask session is set properly
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = '/login';
+  const u = document.createElement('input');
+  u.type = 'hidden'; u.name = 'username'; u.value = username;
+  const p = document.createElement('input');
+  p.type = 'hidden'; p.name = 'password'; p.value = password;
+  form.appendChild(u); form.appendChild(p);
+  document.body.appendChild(form);
+  form.submit();
 }
 
 function handleSignup() {
+  // Signup not supported — backend uses fixed credentials
   const name = document.getElementById('signupName').value.trim();
-  const email = document.getElementById('signupEmail').value.trim();
-  const pass = document.getElementById('signupPass').value.trim();
-  if (!name || !email || pass.length < 8) { alert('Please fill all fields. Password must be 8+ characters.'); return; }
-  const btn = document.getElementById('signupBtn');
-  btn.innerHTML = '<div class="spin"></div> Creating account…';
-  btn.disabled = true;
-  setTimeout(() => completeLogin(name), 1200);
+  alert('Account registration is not available. Please use your assigned credentials on the Sign In page.');
+  showSignIn();
 }
 
 function completeLogin(name) {
-  localStorage.setItem('rbi_username', name);
+  // Store display name locally for the greeting in index.html
+  const displayName = name.replace(/[._@]/g, ' ').replace(/\b\w/g, l => l.toUpperCase()).split(' ')[0];
+  localStorage.setItem('rbi_username', displayName);
   localStorage.setItem('rbi_logged_in', 'true');
   const overlay = document.getElementById('successOverlay');
-  overlay.querySelector('.success-msg').textContent = `Welcome, ${name.split(' ')[0]}!`;
+  overlay.querySelector('.success-msg').textContent = `Welcome back, ${displayName}!`;
   overlay.classList.add('show');
-  setTimeout(() => {
-    window.location.href = '/';
-  }, 1600);
-}
-
-// Auto-redirect if already logged in
-if (localStorage.getItem('rbi_logged_in') === 'true') {
-  window.location.href = '/';
+  setTimeout(() => { window.location.href = '/'; }, 1500);
 }
 </script>
 </body>
