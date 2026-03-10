@@ -1303,24 +1303,43 @@ function updateCountdown() {
   if (tbEl) tbEl.textContent = diff > 0 ? `${diff}d to Exam` : 'Exam Season';
 }
 
-// ── FIX 3: IMPROVED STATUS with live clock ──
+// ── STATUS LINE with live clock ──
 function updateUserStatus() {
   const now = new Date();
   const h = now.getHours();
   const m = now.getMinutes().toString().padStart(2, '0');
-  const timeStr = `${h > 12 ? h - 12 : h || 12}:${m} ${h >= 12 ? 'PM' : 'AM'}`;
+  const h12 = h % 12 || 12;
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  const timeStr = `${h12}:${m} ${ampm}`;
 
   let emoji, label;
-  if (h >= 5 && h < 9)       { emoji = '🌅'; label = 'Morning Study'; }
-  else if (h >= 9 && h < 13)  { emoji = '📖'; label = 'Morning Session'; }
-  else if (h >= 13 && h < 16) { emoji = '☀️';  label = 'Afternoon Practice'; }
-  else if (h >= 16 && h < 20) { emoji = '📚'; label = 'Evening Revision'; }
+  if      (h >= 5  && h < 8)  { emoji = '🌅'; label = 'Early Session'; }
+  else if (h >= 8  && h < 12) { emoji = '📖'; label = 'Morning Study'; }
+  else if (h >= 12 && h < 14) { emoji = '☕'; label = 'Midday Review'; }
+  else if (h >= 14 && h < 17) { emoji = '☀️';  label = 'Afternoon Grind'; }
+  else if (h >= 17 && h < 20) { emoji = '📚'; label = 'Evening Session'; }
   else if (h >= 20 && h < 23) { emoji = '🌙'; label = 'Night Study'; }
-  else                         { emoji = '⭐'; label = 'Late Session'; }
+  else                         { emoji = '⭐'; label = 'Late Night'; }
 
   const el = document.getElementById('userStatusLine');
-  if (el) el.textContent = `${emoji} ${label} · ${timeStr}`;
+  if (el) {
+    el.textContent = `${emoji} ${label} · ${timeStr}`;
+    el.style.opacity = '1';
+  }
 }
+
+// Run immediately as soon as the element exists — don't wait for init()
+(function() {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      updateUserStatus();
+      setInterval(updateUserStatus, 30000); // refresh every 30 seconds
+    });
+  } else {
+    updateUserStatus();
+    setInterval(updateUserStatus, 30000);
+  }
+})();
 
 // ── DASHBOARD ──
 function loadDashboard() {
@@ -1332,7 +1351,6 @@ function loadDashboard() {
   buildPriorityTopics();
   loadRecentActivity();
   buildDailyPlan();
-  updateUserStatus();
 
   const totalHrs = allSubjects.reduce((a,s) => a + (s.total_estimated_hours||0), 0);
   const el = document.getElementById('statStudyHours');
@@ -2247,10 +2265,6 @@ function init() {
 
   // FIX 2: Correctly show progress from localStorage
   refreshSyllabusProgress();
-
-  // FIX 3: Status updates every minute
-  updateUserStatus();
-  setInterval(updateUserStatus, 60000);
 
   // User name
   const name = localStorage.getItem('rbi_username') || 'Muneeb Rashid';
