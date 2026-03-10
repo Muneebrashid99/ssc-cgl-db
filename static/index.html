@@ -10,161 +10,68 @@
 
 <style>
 /* ═══════════════════════════════════════════════════
-   JKPSC CCE COMMAND CENTRE — v1.0
+   JKPSC CCE COMMAND CENTRE — v2.0 (Flask Backend)
    Kashmir-themed: Saffron + Chinar Red + Teal
 ═══════════════════════════════════════════════════ */
 
 [data-theme="dark"] {
-  --bg: #080810;
-  --bg2: #0d0d1a;
-  --bg3: #12121f;
-  --bg4: #181828;
-  --surface: #0f0f1e;
-  --surface2: #16162a;
-  --border: rgba(255,255,255,0.06);
-  --border2: rgba(255,255,255,0.1);
-  --border3: rgba(255,255,255,0.18);
-  --text1: #f0efe8;
-  --text2: #9896a6;
-  --text3: #4e4d60;
-  --text4: #28273a;
-  /* Saffron as primary accent (replaces gold) */
-  --accent: #e8762a;
-  --accent2: #f5943e;
-  --accent3: #fdb06a;
-  --accent-dim: rgba(232,118,42,0.1);
-  --accent-border: rgba(232,118,42,0.2);
-  --accent-glow: rgba(232,118,42,0.15);
-  --teal: #2dd4bf;
-  --teal-dim: rgba(45,212,191,0.08);
-  --teal-border: rgba(45,212,191,0.2);
-  --blue: #60a5fa;
-  --blue-dim: rgba(96,165,250,0.08);
-  --blue-border: rgba(96,165,250,0.2);
-  --purple: #a78bfa;
-  --purple-dim: rgba(167,139,250,0.08);
-  --green: #34d399;
-  --green-dim: rgba(52,211,153,0.08);
-  --green-border: rgba(52,211,153,0.2);
-  --red: #f87171;
-  --red-dim: rgba(248,113,113,0.08);
-  --red-border: rgba(248,113,113,0.2);
-  --orange: #fb923c;
-  --orange-dim: rgba(251,146,60,0.08);
-  --shadow: 0 8px 32px rgba(0,0,0,0.6);
-  --shadow-lg: 0 20px 60px rgba(0,0,0,0.8);
-  --shadow-sm: 0 2px 12px rgba(0,0,0,0.4);
+  --bg: #080810; --bg2: #0d0d1a; --bg3: #12121f; --bg4: #181828;
+  --surface: #0f0f1e; --surface2: #16162a;
+  --border: rgba(255,255,255,0.06); --border2: rgba(255,255,255,0.1); --border3: rgba(255,255,255,0.18);
+  --text1: #f0efe8; --text2: #9896a6; --text3: #4e4d60; --text4: #28273a;
+  --accent: #e8762a; --accent2: #f5943e; --accent3: #fdb06a;
+  --accent-dim: rgba(232,118,42,0.1); --accent-border: rgba(232,118,42,0.2); --accent-glow: rgba(232,118,42,0.15);
+  --teal: #2dd4bf; --teal-dim: rgba(45,212,191,0.08); --teal-border: rgba(45,212,191,0.2);
+  --blue: #60a5fa; --blue-dim: rgba(96,165,250,0.08); --blue-border: rgba(96,165,250,0.2);
+  --purple: #a78bfa; --purple-dim: rgba(167,139,250,0.08);
+  --green: #34d399; --green-dim: rgba(52,211,153,0.08); --green-border: rgba(52,211,153,0.2);
+  --red: #f87171; --red-dim: rgba(248,113,113,0.08); --red-border: rgba(248,113,113,0.2);
+  --orange: #fb923c; --orange-dim: rgba(251,146,60,0.08);
+  --shadow: 0 8px 32px rgba(0,0,0,0.6); --shadow-lg: 0 20px 60px rgba(0,0,0,0.8); --shadow-sm: 0 2px 12px rgba(0,0,0,0.4);
   --glow-accent: 0 0 0 2px rgba(232,118,42,0.25), 0 0 20px rgba(232,118,42,0.1);
-  --sidebar-w: 228px;
-  --topbar-h: 52px;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --radius-xs: 5px;
+  --sidebar-w: 228px; --topbar-h: 52px; --radius: 12px; --radius-sm: 8px; --radius-xs: 5px;
 }
-
 [data-theme="light"] {
-  --bg: #f7f4f0;
-  --bg2: #ffffff;
-  --bg3: #f0ece6;
-  --bg4: #e8e3db;
-  --surface: #ffffff;
-  --surface2: #faf8f5;
-  --border: rgba(0,0,0,0.07);
-  --border2: rgba(0,0,0,0.12);
-  --border3: rgba(0,0,0,0.2);
-  --text1: #1a1412;
-  --text2: #5a4f47;
-  --text3: #9a8f87;
-  --text4: #c8c0b8;
-  --accent: #c85a10;
-  --accent2: #e07030;
-  --accent3: #f08040;
-  --accent-dim: rgba(200,90,16,0.08);
-  --accent-border: rgba(200,90,16,0.2);
-  --accent-glow: rgba(200,90,16,0.12);
-  --teal: #0d9488;
-  --teal-dim: rgba(13,148,136,0.07);
-  --teal-border: rgba(13,148,136,0.2);
-  --blue: #2563eb;
-  --blue-dim: rgba(37,99,235,0.07);
-  --blue-border: rgba(37,99,235,0.2);
-  --purple: #7c3aed;
-  --purple-dim: rgba(124,58,237,0.07);
-  --green: #059669;
-  --green-dim: rgba(5,150,105,0.07);
-  --green-border: rgba(5,150,105,0.2);
-  --red: #dc2626;
-  --red-dim: rgba(220,38,38,0.07);
-  --red-border: rgba(220,38,38,0.2);
-  --orange: #d97706;
-  --orange-dim: rgba(217,119,6,0.07);
-  --shadow: 0 4px 16px rgba(0,0,0,0.1);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,0.15);
-  --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --bg: #f7f4f0; --bg2: #ffffff; --bg3: #f0ece6; --bg4: #e8e3db;
+  --surface: #ffffff; --surface2: #faf8f5;
+  --border: rgba(0,0,0,0.07); --border2: rgba(0,0,0,0.12); --border3: rgba(0,0,0,0.2);
+  --text1: #1a1412; --text2: #5a4f47; --text3: #9a8f87; --text4: #c8c0b8;
+  --accent: #c85a10; --accent2: #e07030; --accent3: #f08040;
+  --accent-dim: rgba(200,90,16,0.08); --accent-border: rgba(200,90,16,0.2); --accent-glow: rgba(200,90,16,0.12);
+  --teal: #0d9488; --teal-dim: rgba(13,148,136,0.07); --teal-border: rgba(13,148,136,0.2);
+  --blue: #2563eb; --blue-dim: rgba(37,99,235,0.07); --blue-border: rgba(37,99,235,0.2);
+  --purple: #7c3aed; --purple-dim: rgba(124,58,237,0.07);
+  --green: #059669; --green-dim: rgba(5,150,105,0.07); --green-border: rgba(5,150,105,0.2);
+  --red: #dc2626; --red-dim: rgba(220,38,38,0.07); --red-border: rgba(220,38,38,0.2);
+  --orange: #d97706; --orange-dim: rgba(217,119,6,0.07);
+  --shadow: 0 4px 16px rgba(0,0,0,0.1); --shadow-lg: 0 12px 40px rgba(0,0,0,0.15); --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
   --glow-accent: 0 0 0 2px rgba(200,90,16,0.2);
-  --sidebar-w: 228px;
-  --topbar-h: 52px;
-  --radius: 12px;
-  --radius-sm: 8px;
-  --radius-xs: 5px;
+  --sidebar-w: 228px; --topbar-h: 52px; --radius: 12px; --radius-sm: 8px; --radius-xs: 5px;
 }
 
 *,*::before,*::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text1);
-  font-family: 'Outfit', system-ui, sans-serif;
-  font-size: 13.5px;
-  line-height: 1.6;
-  min-height: 100vh;
-  overflow-x: hidden;
-  transition: background 0.3s ease, color 0.3s ease;
-}
+body { background: var(--bg); color: var(--text1); font-family: 'Outfit', system-ui, sans-serif; font-size: 13.5px; line-height: 1.6; min-height: 100vh; overflow-x: hidden; transition: background 0.3s ease, color 0.3s ease; }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
-/* ═══ LAYOUT ═══ */
 .app { display: flex; min-height: 100vh; background: var(--bg); isolation: isolate; }
 
-/* ═══ SIDEBAR ═══ */
-.sidebar {
-  width: var(--sidebar-w); min-width: var(--sidebar-w);
-  background: var(--bg2); border-right: 1px solid var(--border);
-  position: fixed; top: 0; left: 0; bottom: 0;
-  z-index: 200; display: flex; flex-direction: column;
-  overflow-y: auto; overflow-x: hidden;
-  transition: transform 0.22s cubic-bezier(0.4,0,0.2,1);
-}
+/* SIDEBAR */
+.sidebar { width: var(--sidebar-w); min-width: var(--sidebar-w); background: var(--bg2); border-right: 1px solid var(--border); position: fixed; top: 0; left: 0; bottom: 0; z-index: 200; display: flex; flex-direction: column; overflow-y: auto; overflow-x: hidden; transition: transform 0.22s cubic-bezier(0.4,0,0.2,1); }
 .sb-brand { padding: 16px 14px 12px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-.sb-logo {
-  width: 34px; height: 34px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  border-radius: 9px; display: flex; align-items: center; justify-content: center;
-  font-size: 16px; flex-shrink: 0; box-shadow: 0 4px 12px var(--accent-glow);
-}
+.sb-logo { width: 34px; height: 34px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; box-shadow: 0 4px 12px var(--accent-glow); }
 .sb-brand-txt { flex: 1; min-width: 0; }
 .sb-brand-name { font-size: 13.5px; font-weight: 700; color: var(--text1); letter-spacing: -0.3px; white-space: nowrap; }
 .sb-brand-name em { font-style: normal; color: var(--accent); }
 .sb-tagline { font-size: 9.5px; color: var(--text3); margin-top: 1px; letter-spacing: 0.3px; }
-
-.sb-countdown {
-  margin: 10px 10px 4px; padding: 10px 12px;
-  background: var(--accent-dim); border: 1px solid var(--accent-border);
-  border-radius: var(--radius-sm); display: flex; align-items: center; gap: 10px;
-}
+.sb-countdown { margin: 10px 10px 4px; padding: 10px 12px; background: var(--accent-dim); border: 1px solid var(--accent-border); border-radius: var(--radius-sm); display: flex; align-items: center; gap: 10px; }
 .sbc-num { font-family: 'Space Mono', monospace; font-size: 28px; font-weight: 700; color: var(--accent); line-height: 1; }
 .sbc-info { flex: 1; }
 .sbc-label { font-size: 9px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
 .sbc-sub { font-size: 10px; color: var(--text3); margin-top: 1px; }
-
 .sb-section { padding: 14px 14px 5px; font-size: 8.5px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 1.4px; }
-.nav-item {
-  display: flex; align-items: center; gap: 9px;
-  padding: 8px 10px; margin: 1px 7px; border-radius: var(--radius-sm);
-  cursor: pointer; color: var(--text2); font-size: 13px; font-weight: 500;
-  transition: all 0.15s ease; position: relative; user-select: none;
-}
+.nav-item { display: flex; align-items: center; gap: 9px; padding: 8px 10px; margin: 1px 7px; border-radius: var(--radius-sm); cursor: pointer; color: var(--text2); font-size: 13px; font-weight: 500; transition: all 0.15s ease; position: relative; user-select: none; }
 .nav-item:hover { color: var(--text1); background: var(--bg3); }
 .nav-item.active { color: var(--text1); background: var(--bg4); font-weight: 600; }
 .nav-icon { font-size: 14px; width: 19px; text-align: center; flex-shrink: 0; }
@@ -173,94 +80,44 @@ body {
 .chip-ai { background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(167,139,250,0.2); }
 .chip-live { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
 .chip-new { background: var(--teal-dim); color: var(--teal); border: 1px solid var(--teal-border); }
-
 .sb-progress { margin: 4px 10px 8px; padding: 10px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); }
 .sp-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
 .sp-label { font-size: 10px; color: var(--text3); font-weight: 500; }
 .sp-pct { font-size: 11px; font-weight: 700; color: var(--accent); font-family: 'Space Mono', monospace; }
 .sp-track { height: 3px; background: var(--bg4); border-radius: 3px; overflow: hidden; }
 .sp-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 3px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
-
 .sb-user { margin: 0 7px 10px; padding: 10px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); flex-shrink: 0; }
 .su-top { display: flex; align-items: center; gap: 9px; margin-bottom: 8px; }
-.su-avatar {
-  width: 34px; height: 34px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  border-radius: 9px; display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 800; color: #fff;
-  flex-shrink: 0; position: relative;
-}
+.su-avatar { width: 34px; height: 34px; background: linear-gradient(135deg, var(--accent), var(--accent2)); border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #fff; flex-shrink: 0; position: relative; }
 .su-dot { position: absolute; bottom: -2px; right: -2px; width: 9px; height: 9px; background: var(--green); border: 2px solid var(--bg3); border-radius: 50%; }
 .su-info { flex: 1; min-width: 0; }
 .su-name { font-size: 12.5px; font-weight: 700; color: var(--text1); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .su-status { font-size: 10.5px; color: var(--text2); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-height: 14px; }
 .su-actions { display: flex; gap: 5px; }
-.su-btn {
-  flex: 1; padding: 5px 8px; border: 1px solid var(--border2);
-  border-radius: var(--radius-xs); background: var(--surface); color: var(--text2);
-  font-size: 11px; cursor: pointer; transition: all 0.15s ease;
-  font-family: inherit; font-weight: 500;
-  display: flex; align-items: center; justify-content: center; gap: 4px;
-}
+.su-btn { flex: 1; padding: 5px 8px; border: 1px solid var(--border2); border-radius: var(--radius-xs); background: var(--surface); color: var(--text2); font-size: 11px; cursor: pointer; transition: all 0.15s ease; font-family: inherit; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 4px; }
 .su-btn:hover { background: var(--border); color: var(--text1); }
 .su-btn.danger { color: var(--red); border-color: var(--red-border); background: var(--red-dim); }
 
-/* ═══ MAIN ═══ */
-.main {
-  margin-left: var(--sidebar-w); flex: 1;
-  display: flex; flex-direction: column; min-height: 100vh;
-  min-width: 0; overflow-x: hidden;
-  width: calc(100% - var(--sidebar-w));
-  background: var(--bg);
-}
-
-/* ── TOPBAR ── */
-.topbar {
-  height: var(--topbar-h); border-bottom: 1px solid var(--border);
-  background: var(--bg2); display: flex; align-items: center; justify-content: space-between;
-  padding: 0 20px; position: sticky; top: 0; z-index: 100;
-}
+/* MAIN */
+.main { margin-left: var(--sidebar-w); flex: 1; display: flex; flex-direction: column; min-height: 100vh; min-width: 0; overflow-x: hidden; width: calc(100% - var(--sidebar-w)); background: var(--bg); }
+.topbar { height: var(--topbar-h); border-bottom: 1px solid var(--border); background: var(--bg2); display: flex; align-items: center; justify-content: space-between; padding: 0 20px; position: sticky; top: 0; z-index: 100; }
 .tb-left { display: flex; align-items: center; gap: 10px; }
 .tb-title { font-size: 15px; font-weight: 700; color: var(--text1); letter-spacing: -0.3px; }
 .tb-right { display: flex; align-items: center; gap: 8px; }
-.tb-search {
-  display: flex; align-items: center; gap: 7px;
-  background: var(--bg3); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); padding: 5px 12px; color: var(--text3); min-width: 190px;
-}
+.tb-search { display: flex; align-items: center; gap: 7px; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 5px 12px; color: var(--text3); min-width: 190px; }
 .tb-search:focus-within { border-color: var(--accent-border); }
 .tb-search input { background: transparent; border: none; outline: none; color: var(--text1); font-size: 12.5px; font-family: inherit; width: 100%; }
 .tb-pill { font-size: 11px; font-weight: 600; padding: 4px 11px; background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-border); border-radius: 20px; font-family: 'Space Mono', monospace; white-space: nowrap; }
-.theme-toggle {
-  width: 52px; height: 26px; background: var(--bg3); border: 1px solid var(--border2);
-  border-radius: 14px; position: relative; cursor: pointer;
-  display: flex; align-items: center; overflow: hidden;
-}
+.theme-toggle { width: 52px; height: 26px; background: var(--bg3); border: 1px solid var(--border2); border-radius: 14px; position: relative; cursor: pointer; display: flex; align-items: center; overflow: hidden; }
 .tt-icons { display: flex; width: 100%; justify-content: space-between; padding: 0 5px; font-size: 11px; }
-.tt-knob {
-  position: absolute; width: 20px; height: 20px; background: var(--bg2);
-  border-radius: 50%; top: 2px; left: 2px;
-  transition: all 0.22s cubic-bezier(0.4,0,0.2,1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; box-shadow: var(--shadow-sm); z-index: 1;
-}
+.tt-knob { position: absolute; width: 20px; height: 20px; background: var(--bg2); border-radius: 50%; top: 2px; left: 2px; transition: all 0.22s cubic-bezier(0.4,0,0.2,1); display: flex; align-items: center; justify-content: center; font-size: 11px; box-shadow: var(--shadow-sm); z-index: 1; }
 [data-theme="dark"] .tt-knob { left: 28px; }
-.tb-action-btn {
-  display: flex; align-items: center; gap: 6px; padding: 6px 14px;
-  background: var(--accent); color: #fff; border: none;
-  border-radius: var(--radius-sm); font-size: 12.5px; font-weight: 700;
-  cursor: pointer; font-family: inherit; transition: all 0.15s ease;
-}
+.tb-action-btn { display: flex; align-items: center; gap: 6px; padding: 6px 14px; background: var(--accent); color: #fff; border: none; border-radius: var(--radius-sm); font-size: 12.5px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.15s ease; }
 .tb-action-btn:hover { opacity: 0.88; transform: translateY(-1px); }
-.mob-toggle {
-  display: none; position: fixed; top: 10px; left: 10px; z-index: 300;
-  background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px;
-  width: 34px; height: 34px; font-size: 15px; cursor: pointer; color: var(--text1);
-  align-items: center; justify-content: center;
-}
+.mob-toggle { display: none; position: fixed; top: 10px; left: 10px; z-index: 300; background: var(--bg2); border: 1px solid var(--border2); border-radius: 8px; width: 34px; height: 34px; font-size: 15px; cursor: pointer; color: var(--text1); align-items: center; justify-content: center; }
 .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 199; }
 
-/* ═══ PAGE STRUCTURE ═══ */
+/* PAGE */
 .page-content { padding: 22px 24px; flex: 1; max-width: 100%; overflow-x: hidden; }
 .page { display: none; }
 .page.active { display: block; animation: pageIn 0.2s ease; }
@@ -271,19 +128,16 @@ body {
 .pg-title em { font-style: italic; color: var(--accent); }
 .pg-sub { font-size: 13px; color: var(--text2); margin-top: 5px; line-height: 1.5; }
 
-/* ═══ STAT CARDS ═══ */
+/* STAT CARDS */
 .stat-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; margin-bottom: 22px; }
-.stat-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 14px 16px; transition: all 0.2s ease; position: relative; overflow: hidden;
-}
+.stat-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 16px; transition: all 0.2s ease; position: relative; overflow: hidden; }
 .stat-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--_color, var(--accent)); opacity: 0.7; }
 .stat-card:hover { border-color: var(--border2); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
 .stat-icon { font-size: 18px; margin-bottom: 10px; display: block; }
 .stat-val { font-size: 24px; font-weight: 800; color: var(--text1); line-height: 1; letter-spacing: -1px; font-family: 'Space Mono', monospace; }
 .stat-label { font-size: 11px; color: var(--text3); margin-top: 4px; font-weight: 500; }
 
-/* ═══ CARDS ═══ */
+/* CARDS */
 .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; transition: border-color 0.15s ease; }
 .card:hover { border-color: var(--border2); }
 .card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
@@ -291,19 +145,15 @@ body {
 .card-link { font-size: 11px; color: var(--accent); cursor: pointer; font-weight: 600; }
 .card-link:hover { text-decoration: underline; }
 
-/* ── GRIDS ── */
+/* GRIDS */
 .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
 .g3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
 .g4 { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
 .g-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 12px; }
 .dash-grid { display: grid; grid-template-columns: minmax(0, 1fr) 280px; gap: 14px; align-items: start; }
 
-/* ── BUTTONS ── */
-.btn {
-  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-  padding: 8px 16px; border-radius: var(--radius-sm); font-size: 12.5px; font-weight: 600;
-  cursor: pointer; border: none; transition: all 0.15s ease; font-family: inherit; line-height: 1;
-}
+/* BUTTONS */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 8px 16px; border-radius: var(--radius-sm); font-size: 12.5px; font-weight: 600; cursor: pointer; border: none; transition: all 0.15s ease; font-family: inherit; line-height: 1; }
 .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
 .btn-accent { background: var(--accent); color: #fff; }
 .btn-teal { background: var(--teal); color: #0d0d1a; }
@@ -315,18 +165,15 @@ body {
 .btn-full { width: 100%; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-/* ── FORMS ── */
+/* FORMS */
 .fg { margin-bottom: 12px; }
 .fl { display: block; font-size: 10.5px; font-weight: 600; color: var(--text2); margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.5px; }
-.fi, .fs, .fta {
-  width: 100%; padding: 8px 12px; background: var(--bg3); border: 1px solid var(--border);
-  border-radius: var(--radius-sm); color: var(--text1); font-size: 13px; font-family: inherit; outline: none; transition: all 0.15s ease;
-}
+.fi, .fs, .fta { width: 100%; padding: 8px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text1); font-size: 13px; font-family: inherit; outline: none; transition: all 0.15s ease; }
 .fi:focus, .fs:focus, .fta:focus { border-color: var(--accent-border); background: var(--surface); box-shadow: var(--glow-accent); }
 .fta { resize: vertical; min-height: 80px; }
 .frow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 
-/* ── LOADING ── */
+/* LOADING */
 .loading { padding: 28px; text-align: center; font-size: 12.5px; color: var(--text3); display: flex; align-items: center; justify-content: center; gap: 8px; }
 .spin { width: 16px; height: 16px; border: 2px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
 @keyframes spin { to { transform: rotate(360deg); } }
@@ -335,31 +182,25 @@ body {
 .empty-msg { font-size: 14px; font-weight: 600; color: var(--text2); margin-bottom: 4px; }
 .empty-sub { font-size: 12px; color: var(--text3); margin-bottom: 14px; }
 
-/* ── BADGES ── */
+/* BADGES */
 .badge { display: inline-flex; align-items: center; padding: 2px 7px; border-radius: 4px; font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
 .badge-p1 { background: rgba(96,165,250,0.12); color: var(--blue); border: 1px solid var(--blue-border); }
 .badge-p2 { background: rgba(52,211,153,0.12); color: var(--green); border: 1px solid var(--green-border); }
 .badge-p3 { background: rgba(232,118,42,0.12); color: var(--accent); border: 1px solid var(--accent-border); }
 .badge-hp { background: rgba(248,113,113,0.12); color: var(--red); border: 1px solid var(--red-border); }
-.badge-mock { background: rgba(232,118,42,0.12); color: var(--accent); border: 1px solid var(--accent-border); }
 .badge-easy { background: var(--green-dim); color: var(--green); border: 1px solid var(--green-border); }
 .badge-medium { background: var(--accent-dim); color: var(--accent); border: 1px solid var(--accent-border); }
 .badge-hard { background: var(--red-dim); color: var(--red); border: 1px solid var(--red-border); }
 
-/* ── TOAST ── */
+/* TOAST */
 .toast-wrap { position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 8px; }
-.toast {
-  padding: 10px 16px; border-radius: var(--radius-sm); font-size: 12.5px; font-weight: 600;
-  background: var(--text1); color: var(--bg); box-shadow: var(--shadow);
-  animation: toastIn 0.22s ease; max-width: 290px;
-  display: flex; align-items: center; gap: 8px; border: 1px solid transparent;
-}
+.toast { padding: 10px 16px; border-radius: var(--radius-sm); font-size: 12.5px; font-weight: 600; background: var(--text1); color: var(--bg); box-shadow: var(--shadow); animation: toastIn 0.22s ease; max-width: 290px; display: flex; align-items: center; gap: 8px; border: 1px solid transparent; }
 .toast.success { background: var(--green); color: #0d0d1a; }
 .toast.error { background: var(--red); color: #fff; }
 .toast.info { background: var(--surface); color: var(--text1); border-color: var(--border2); }
 @keyframes toastIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
 
-/* ── PERFORMANCE BARS ── */
+/* PERF BARS */
 .perf-bar-item { margin-bottom: 10px; }
 .pb-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
 .pb-name { font-size: 12px; font-weight: 600; color: var(--text1); }
@@ -367,7 +208,7 @@ body {
 .pb-track { height: 5px; background: var(--bg3); border-radius: 5px; overflow: hidden; }
 .pb-fill { height: 100%; border-radius: 5px; transition: width 0.8s cubic-bezier(0.4,0,0.2,1); }
 
-/* ── KANBAN ── */
+/* KANBAN */
 .kanban-board { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap: 14px; margin-bottom: 22px; }
 .kanban-col { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .kanban-head { display: flex; align-items: center; justify-content: space-between; padding: 11px 14px; border-bottom: 1px solid var(--border); background: var(--surface); }
@@ -385,28 +226,20 @@ body {
 .kc-date { font-size: 10px; color: var(--text3); }
 .k-card.featured .kc-date { color: rgba(255,255,255,0.6); }
 
-/* Subject cards */
-.subj-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 16px 14px; cursor: pointer; transition: all 0.18s ease;
-  border-top: 3px solid var(--_color, var(--accent));
-}
+/* SUBJECT CARDS */
+.subj-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 14px; cursor: pointer; transition: all 0.18s ease; border-top: 3px solid var(--_color, var(--accent)); }
 .subj-card:hover { border-color: var(--_color, var(--accent)); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 .subj-icon { font-size: 24px; display: block; margin-bottom: 8px; }
 .subj-name { font-size: 13px; font-weight: 700; color: var(--text1); margin-bottom: 4px; }
 .subj-meta { display: flex; gap: 5px; margin-bottom: 5px; }
 .subj-stats { font-size: 10.5px; color: var(--text3); }
 
-/* Quiz */
+/* QUIZ */
 .q-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 14px; }
 .q-num { font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
 .q-text { font-size: 14px; font-weight: 500; color: var(--text1); line-height: 1.65; margin-bottom: 14px; }
 .q-opts { display: flex; flex-direction: column; gap: 8px; }
-.q-opt {
-  display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px;
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
-  cursor: pointer; transition: all 0.15s ease; font-size: 13px; color: var(--text1);
-}
+.q-opt { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); cursor: pointer; transition: all 0.15s ease; font-size: 13px; color: var(--text1); }
 .q-opt:hover { border-color: var(--accent-border); background: var(--accent-dim); }
 .q-opt.sel { border-color: var(--blue-border); background: var(--blue-dim); }
 .q-opt.correct { border-color: var(--green-border); background: var(--green-dim); color: var(--green); }
@@ -419,7 +252,7 @@ body {
 .qpw-fill { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.4s ease; }
 .quiz-ctrls { display: flex; gap: 8px; margin-top: 14px; }
 
-/* AI Chat */
+/* CHAT */
 .chat-wrap { display: flex; flex-direction: column; height: calc(100vh - 200px); min-height: 500px; }
 .chat-msgs { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; }
 .cbubble { max-width: 80%; padding: 10px 14px; border-radius: var(--radius); font-size: 13px; line-height: 1.6; word-break: break-word; }
@@ -435,7 +268,7 @@ body {
 .cq-btn { padding: 5px 12px; border: 1px solid var(--border2); border-radius: 20px; background: var(--surface); color: var(--text2); font-size: 11.5px; cursor: pointer; transition: all 0.15s ease; font-family: inherit; }
 .cq-btn:hover { border-color: var(--accent-border); color: var(--accent); background: var(--accent-dim); }
 
-/* Topic table */
+/* TOPIC TABLE */
 .topic-table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 12px; overflow: hidden; }
 .topic-table-head { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg3); }
 .tth-icon { font-size: 20px; }
@@ -455,7 +288,7 @@ body {
 .pyq-2 { background: var(--bg3); color: var(--text3); border: 1px solid var(--border); }
 .pyq-1 { background: var(--bg3); color: var(--text4); border: 1px solid var(--border); }
 
-/* Topic Drawer */
+/* TOPIC DRAWER */
 .topic-drawer { position: fixed; top: 0; right: -480px; width: 460px; height: 100vh; background: var(--bg2); border-left: 1px solid var(--border); z-index: 500; display: flex; flex-direction: column; transition: right 0.3s cubic-bezier(0.4,0,0.2,1); overflow: hidden; box-shadow: -8px 0 40px rgba(0,0,0,0.5); }
 .topic-drawer.open { right: 0; }
 .drawer-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
@@ -478,7 +311,7 @@ body {
 .pyq-dot { width: 18px; height: 6px; border-radius: 3px; background: var(--border); }
 .pyq-dot.filled { background: var(--accent); }
 
-/* Planner */
+/* PLANNER */
 .phase-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; margin-bottom: 12px; border-left: 3px solid var(--_color, var(--accent)); }
 .phase-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 6px; }
 .phase-name { font-size: 14px; font-weight: 800; color: var(--text1); }
@@ -489,7 +322,6 @@ body {
 .pf-item::before { content: '→'; color: var(--_color, var(--accent)); font-weight: 700; flex-shrink: 0; }
 .phase-footer { display: flex; gap: 8px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 11px; color: var(--text3); flex-wrap: wrap; }
 .pf-pill { padding: 3px 9px; border-radius: 20px; background: var(--bg3); border: 1px solid var(--border); }
-
 .week-grid { display: grid; grid-template-columns: repeat(7,1fr); gap: 8px; margin-bottom: 18px; }
 .day-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 10px 8px; text-align: center; }
 .day-card.today { border-color: var(--accent-border); background: var(--accent-dim); }
@@ -498,12 +330,14 @@ body {
 .day-tasks { display: flex; flex-direction: column; gap: 3px; margin-top: 5px; }
 .day-task { font-size: 9.5px; color: var(--text2); text-align: left; line-height: 1.3; padding: 3px 5px; background: var(--bg3); border-radius: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
+/* TABLES */
 .data-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .data-table th { padding: 8px 12px; text-align: left; font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.7px; border-bottom: 1px solid var(--border); }
 .data-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text1); }
 .data-table tr:last-child td { border-bottom: none; }
 .data-table tr:hover td { background: var(--bg3); }
 
+/* NOTES */
 .notes-layout { display: grid; grid-template-columns: 210px 1fr; gap: 14px; }
 .note-item { padding: 9px 12px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--surface); cursor: pointer; transition: all 0.15s ease; margin-bottom: 5px; }
 .note-item.active { border-color: var(--accent-border); background: var(--accent-dim); }
@@ -515,15 +349,17 @@ body {
 .ne-btn { padding: 4px 10px; border: 1px solid var(--border); border-radius: var(--radius-xs); background: var(--bg3); color: var(--text1); font-size: 11px; cursor: pointer; font-family: inherit; }
 .ne-body { flex: 1; padding: 14px; border: none; background: transparent; color: var(--text1); font-size: 13.5px; font-family: inherit; outline: none; resize: none; line-height: 1.7; }
 
+/* BANNERS */
 .notif-banner { display: flex; align-items: flex-start; gap: 11px; padding: 11px 14px; border-radius: var(--radius-sm); border: 1px solid; margin-bottom: 14px; font-size: 12px; line-height: 1.5; }
-.notif-banner.warning { background: var(--accent-dim); border-color: var(--accent-border); color: var(--text1); }
-.notif-banner.success { background: var(--green-dim); border-color: var(--green-border); color: var(--text1); }
-.notif-banner.info { background: var(--blue-dim); border-color: var(--blue-border); color: var(--text1); }
-.notif-banner.error { background: var(--red-dim); border-color: var(--red-border); color: var(--text1); }
+.notif-banner.warning { background: var(--accent-dim); border-color: var(--accent-border); }
+.notif-banner.success { background: var(--green-dim); border-color: var(--green-border); }
+.notif-banner.info { background: var(--blue-dim); border-color: var(--blue-border); }
+.notif-banner.error { background: var(--red-dim); border-color: var(--red-border); }
 .nb-ico { font-size: 16px; flex-shrink: 0; }
 .nb-ttl { font-weight: 700; margin-bottom: 2px; color: var(--text1); }
 .nb-msg { color: var(--text2); }
 
+/* AI PANEL */
 .ai-panel { background: linear-gradient(135deg, var(--bg3), var(--surface)); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; margin-bottom: 18px; position: relative; overflow: hidden; }
 .ai-panel::before { content: ''; position: absolute; top: -40px; right: -40px; width: 120px; height: 120px; background: var(--accent-dim); border-radius: 50%; pointer-events: none; }
 .ai-panel-ttl { font-size: 16px; font-weight: 800; color: var(--text1); margin-bottom: 3px; }
@@ -534,19 +370,15 @@ body {
 .ai-inp, .ai-sel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 8px 12px; color: var(--text1); font-size: 13px; font-family: inherit; outline: none; }
 .ai-inp:focus, .ai-sel:focus { border-color: var(--accent-border); }
 
+/* EXAM PATTERN */
 .ep-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
 .ep-table th { padding: 8px 12px; text-align: left; font-size: 10px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.7px; border-bottom: 1px solid var(--border); }
 .ep-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); color: var(--text2); }
 .ep-table tr:last-child td { border-bottom: none; }
 .ep-table tr:hover td { background: var(--bg3); }
 
-/* ── DASHBOARD HERO ── */
-.dash-hero {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-  padding: 20px 22px; margin-bottom: 20px;
-  display: flex; align-items: center; justify-content: space-between; gap: 20px;
-  position: relative; overflow: hidden;
-}
+/* DASH HERO */
+.dash-hero { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px 22px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 20px; position: relative; overflow: hidden; }
 .dash-hero::before { content: ''; position: absolute; top: -30px; right: -30px; width: 160px; height: 160px; background: var(--accent-dim); border-radius: 50%; pointer-events: none; }
 .hero-greeting { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 700; color: var(--text1); letter-spacing: -0.3px; margin-bottom: 4px; }
 .hero-greeting span { color: var(--accent); font-style: italic; }
@@ -562,7 +394,12 @@ body {
 .cs-pct { font-family: 'Space Mono', monospace; font-size: 15px; font-weight: 700; color: var(--text1); line-height: 1; }
 .cs-lbl { font-size: 8.5px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; }
 
-/* Responsive */
+/* DB STATUS INDICATOR */
+.db-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+.db-dot.online { background: var(--green); }
+.db-dot.offline { background: var(--red); }
+
+/* RESPONSIVE */
 @media(max-width: 1100px) { .dash-grid { grid-template-columns: 1fr; } }
 @media(max-width: 900px) {
   .sidebar { transform: translateX(-100%); }
@@ -587,10 +424,9 @@ body {
 <body>
 
 <button class="mob-toggle" id="mobToggle">☰</button>
-
 <div class="app">
 
-<!-- ═══ SIDEBAR ═══ -->
+<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
   <div class="sb-brand">
     <div class="sb-logo">🏔️</div>
@@ -599,7 +435,6 @@ body {
       <div class="sb-tagline">CCE 2026 Prep Platform</div>
     </div>
   </div>
-
   <div class="sb-countdown">
     <div class="sbc-num" id="sbDays">—</div>
     <div class="sbc-info">
@@ -607,45 +442,36 @@ body {
       <div class="sbc-sub">JKPSC CCE Prelims 2026</div>
     </div>
   </div>
-
   <div class="sb-section">Main</div>
   <div class="nav-item active" onclick="nav('dashboard')"><span class="nav-icon">⬡</span><span class="nav-label">Dashboard</span></div>
   <div class="nav-item" onclick="nav('syllabus')"><span class="nav-icon">📚</span><span class="nav-label">Syllabus & Topics</span><span class="nav-chip chip-new">DB</span></div>
   <div class="nav-item" onclick="nav('quiz')"><span class="nav-icon">⚡</span><span class="nav-label">Mock Tests</span><span class="nav-chip chip-live">LIVE</span></div>
   <div class="nav-item" onclick="nav('pyq')"><span class="nav-icon">🗂️</span><span class="nav-label">PYQ Generator</span><span class="nav-chip chip-ai">AI</span></div>
   <div class="nav-item" onclick="nav('generate')"><span class="nav-icon">✨</span><span class="nav-label">AI Practice Gen</span><span class="nav-chip chip-ai">AI</span></div>
-
   <div class="sb-section">Analysis</div>
   <div class="nav-item" onclick="nav('analytics')"><span class="nav-icon">📈</span><span class="nav-label">Performance</span></div>
   <div class="nav-item" onclick="nav('planner')"><span class="nav-icon">📅</span><span class="nav-label">9-Month Planner</span><span class="nav-chip chip-new">NEW</span></div>
   <div class="nav-item" onclick="nav('history')"><span class="nav-icon">🕐</span><span class="nav-label">Quiz History</span></div>
-
   <div class="sb-section">Tools</div>
   <div class="nav-item" onclick="nav('ai')"><span class="nav-icon">🤖</span><span class="nav-label">AI Tutor</span><span class="nav-chip chip-ai">AI</span></div>
   <div class="nav-item" onclick="nav('notes')"><span class="nav-icon">📝</span><span class="nav-label">My Notes</span></div>
   <div class="nav-item" onclick="nav('add')"><span class="nav-icon">➕</span><span class="nav-label">Add Question</span></div>
   <div class="nav-item" onclick="nav('pattern')"><span class="nav-icon">📋</span><span class="nav-label">Exam Pattern</span></div>
-
   <div style="flex:1"></div>
-
   <div class="sb-progress">
     <div class="sp-row"><span class="sp-label">Syllabus Progress</span><span class="sp-pct" id="syllabusPct">0%</span></div>
     <div class="sp-track"><div class="sp-fill" id="syllabusBar" style="width:0%"></div></div>
   </div>
-
   <div class="sb-user">
     <div class="su-top">
-      <div class="su-avatar" id="userAvatar">
-        AS
-        <div class="su-dot"></div>
-      </div>
+      <div class="su-avatar" id="userAvatar">AS<div class="su-dot"></div></div>
       <div class="su-info">
         <div class="su-name" id="userName">Aspirant</div>
         <div class="su-status" id="userStatusLine">📖 Loading…</div>
       </div>
     </div>
     <div class="su-actions">
-      <button class="su-btn" onclick="toggleTheme()" id="themeToggleSidebar">🌙 Theme</button>
+      <button class="su-btn" onclick="toggleTheme()">🌙 Theme</button>
       <button class="su-btn" onclick="promptName()">✏️ Name</button>
     </div>
   </div>
@@ -653,11 +479,14 @@ body {
 
 <div class="overlay" onclick="closeSidebar()" id="overlay"></div>
 
-<!-- ═══ MAIN ═══ -->
+<!-- MAIN -->
 <div class="main">
   <div class="topbar">
     <div class="tb-left">
       <div class="tb-title" id="tbTitle">Dashboard</div>
+      <div style="font-size:10px;color:var(--text3);display:flex;align-items:center">
+        <span class="db-dot" id="dbDot"></span><span id="dbStatus">connecting…</span>
+      </div>
     </div>
     <div class="tb-right">
       <div class="tb-search">
@@ -667,7 +496,7 @@ body {
       <div class="tb-pill" id="tbCountdown">Loading…</div>
       <div class="theme-toggle" onclick="toggleTheme()">
         <div class="tt-icons"><span>🌙</span><span>☀️</span></div>
-        <div class="tt-knob" id="themeKnob"><span id="themeKnobIcon">🌙</span></div>
+        <div class="tt-knob"><span id="themeKnobIcon">🌙</span></div>
       </div>
       <button class="tb-action-btn" onclick="nav('generate')">✨ AI Practice</button>
     </div>
@@ -675,17 +504,16 @@ body {
 
   <div class="page-content">
 
-  <!-- ═══ DASHBOARD ═══ -->
+  <!-- DASHBOARD -->
   <div class="page active" id="page-dashboard">
     <div class="notif-banner warning" id="appNotifBanner">
       <span class="nb-ico">📢</span>
       <div style="flex:1">
         <div class="nb-ttl">JKPSC CCE 2026 — Prelims Expected November/December 2026</div>
-        <div class="nb-msg" id="appNotifMsg">Notification expected around August 2026. You have ~8–9 months — start today!</div>
+        <div class="nb-msg">Notification expected around August 2026. ~8–9 months to go — start today!</div>
       </div>
       <button onclick="this.closest('.notif-banner').remove()" style="background:none;border:none;cursor:pointer;color:var(--text3);font-size:16px;padding:0;margin-left:8px;flex-shrink:0">✕</button>
     </div>
-
     <div class="dash-hero">
       <div>
         <div class="hero-greeting">Welcome back, <span id="userName2">Aspirant</span> 👋</div>
@@ -716,16 +544,14 @@ body {
         </div>
       </div>
     </div>
-
     <div class="stat-row">
       <div class="stat-card" style="--_color:var(--teal)"><span class="stat-icon">⚡</span><div class="stat-val" id="statAttempts">0</div><div class="stat-label">Total Attempts</div></div>
       <div class="stat-card" style="--_color:var(--accent)"><span class="stat-icon">🎯</span><div class="stat-val" id="statAvg">0%</div><div class="stat-label">Avg Score</div></div>
       <div class="stat-card" style="--_color:var(--green)"><span class="stat-icon">🏆</span><div class="stat-val" id="statBest">0%</div><div class="stat-label">Best Score</div></div>
       <div class="stat-card" style="--_color:var(--purple)"><span class="stat-icon">📦</span><div class="stat-val">80</div><div class="stat-label">Topics in DB</div></div>
       <div class="stat-card" style="--_color:var(--blue)"><span class="stat-icon">📚</span><div class="stat-val">6</div><div class="stat-label">Subjects</div></div>
-      <div class="stat-card" style="--_color:var(--orange)"><span class="stat-icon">⏰</span><div class="stat-val" id="statStudyHours">—</div><div class="stat-label">Est. Study Hours</div></div>
+      <div class="stat-card" style="--_color:var(--orange)"><span class="stat-icon">⏰</span><div class="stat-val" id="statStudyHours">320h</div><div class="stat-label">Est. Study Hours</div></div>
     </div>
-
     <div class="dash-grid">
       <div>
         <div class="kanban-board">
@@ -734,7 +560,7 @@ body {
             <div class="kanban-items" id="dashPrelimsCards"></div>
           </div>
           <div class="kanban-col">
-            <div class="kanban-head"><span class="kanban-ttl">📗 Mains</span><span class="kanban-count">3</span></div>
+            <div class="kanban-head"><span class="kanban-ttl">📗 Mains</span><span class="kanban-count">1</span></div>
             <div class="kanban-items" id="dashMainsCards"></div>
           </div>
           <div class="kanban-col">
@@ -759,13 +585,13 @@ body {
         </div>
         <div class="card">
           <div class="card-head"><div class="card-ttl">🕐 Recent Activity</div></div>
-          <div id="recentContent"><div style="padding:14px;font-size:12px;color:var(--text3)">Start practising to see activity</div></div>
+          <div id="recentContent"><div style="padding:14px;font-size:12px;color:var(--text3)">Loading…</div></div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ SYLLABUS ═══ -->
+  <!-- SYLLABUS -->
   <div class="page" id="page-syllabus">
     <div class="pg-head">
       <div class="pg-eyebrow">JKPSC CCE · SYLLABUS DATABASE</div>
@@ -779,7 +605,7 @@ body {
     <div id="syllabusContent"><div class="loading"><div class="spin"></div> Building syllabus…</div></div>
   </div>
 
-  <!-- ═══ PLANNER ═══ -->
+  <!-- PLANNER -->
   <div class="page" id="page-planner">
     <div class="pg-head">
       <div class="pg-eyebrow">9-MONTH STUDY ROADMAP</div>
@@ -789,9 +615,9 @@ body {
     <div id="plannerContent"></div>
   </div>
 
-  <!-- ═══ PYQ GENERATOR ═══ -->
+  <!-- PYQ GENERATOR -->
   <div class="page" id="page-pyq">
-    <div class="pg-head"><div class="pg-eyebrow">AI POWERED</div><div class="pg-title">PYQ <em>Style</em> Generator</div><div class="pg-sub">JKPSC CCE previous-year pattern questions with detailed explanations</div></div>
+    <div class="pg-head"><div class="pg-eyebrow">AI POWERED · GROQ</div><div class="pg-title">PYQ <em>Style</em> Generator</div><div class="pg-sub">JKPSC CCE previous-year pattern questions with detailed explanations — powered by Groq via backend</div></div>
     <div class="g2" style="margin-bottom:18px">
       <div class="card">
         <div class="card-head"><div class="card-ttl">🎯 Configure Generator</div></div>
@@ -805,18 +631,18 @@ body {
     <div id="pyqResults"></div>
   </div>
 
-  <!-- ═══ MOCK TESTS ═══ -->
+  <!-- MOCK TESTS -->
   <div class="page" id="page-quiz">
-    <div class="pg-head"><div class="pg-eyebrow">MOCK TESTS</div><div class="pg-title">Live <em>Mock</em> Tests</div><div class="pg-sub">Timed subject tests with instant AI explanations — JKPSC CCE pattern</div></div>
+    <div class="pg-head"><div class="pg-eyebrow">MOCK TESTS · AI POWERED</div><div class="pg-title">Live <em>Mock</em> Tests</div><div class="pg-sub">AI-generated timed tests · Results saved to database · JKPSC CCE pattern</div></div>
     <div id="quizContent"></div>
   </div>
 
-  <!-- ═══ AI PRACTICE GEN ═══ -->
+  <!-- AI PRACTICE GEN -->
   <div class="page" id="page-generate">
-    <div class="pg-head"><div class="pg-eyebrow">AI POWERED</div><div class="pg-title">AI <em>Practice</em> Generator</div><div class="pg-sub">Instantly generate JKPSC-level questions on any topic</div></div>
+    <div class="pg-head"><div class="pg-eyebrow">AI POWERED · GROQ BACKEND</div><div class="pg-title">AI <em>Practice</em> Generator</div><div class="pg-sub">Groq-powered question generation via Flask backend · JKPSC CCE level</div></div>
     <div class="ai-panel">
       <div class="ai-panel-ttl">✨ Smart Question Generator</div>
-      <div class="ai-panel-sub">Powered by AI · Generates concept checks, J&K GK, and JKPSC-style questions</div>
+      <div class="ai-panel-sub">Powered by Groq via Flask backend · J&K GK, Polity, History, Economy</div>
       <div class="ai-row">
         <div class="ai-field" style="flex:2"><label class="ai-lbl">Topic or Concept</label><input class="ai-inp" id="genTopic" placeholder="e.g. J&K History, Polity, Indian Economy…" onkeydown="if(event.key==='Enter')generatePractice()"/></div>
         <div class="ai-field"><label class="ai-lbl">Type</label><select class="ai-sel" id="genType"><option value="mixed">Mixed</option><option value="concept">Concept</option><option value="jkgk">J&K GK</option><option value="pyq">PYQ Style</option></select></div>
@@ -828,21 +654,21 @@ body {
     <div id="genResults"></div>
   </div>
 
-  <!-- ═══ ANALYTICS ═══ -->
+  <!-- ANALYTICS -->
   <div class="page" id="page-analytics">
     <div class="pg-head"><div class="pg-eyebrow">YOUR PROGRESS</div><div class="pg-title">Performance <em>Analytics</em></div></div>
     <div id="analyticsContent"><div class="loading"><div class="spin"></div> Loading…</div></div>
   </div>
 
-  <!-- ═══ HISTORY ═══ -->
+  <!-- HISTORY -->
   <div class="page" id="page-history">
     <div class="pg-head"><div class="pg-eyebrow">PERFORMANCE LOG</div><div class="pg-title">Quiz <em>History</em></div></div>
-    <div class="card"><div style="overflow-x:auto"><table class="data-table"><thead><tr><th>Subject</th><th>Score</th><th>Correct</th><th>Wrong</th><th>Date</th></tr></thead><tbody id="historyBody"><tr><td colspan="5" style="text-align:center;padding:20px;color:var(--text3)">No attempts yet — start a mock test!</td></tr></tbody></table></div></div>
+    <div class="card"><div style="overflow-x:auto"><table class="data-table"><thead><tr><th>Subject</th><th>Score</th><th>Correct</th><th>Wrong</th><th>Date</th><th>Source</th></tr></thead><tbody id="historyBody"><tr><td colspan="6" style="text-align:center;padding:20px;color:var(--text3)">Loading…</td></tr></tbody></table></div></div>
   </div>
 
-  <!-- ═══ AI TUTOR ═══ -->
+  <!-- AI TUTOR -->
   <div class="page" id="page-ai">
-    <div class="pg-head"><div class="pg-eyebrow">AI POWERED</div><div class="pg-title">AI <em>Tutor</em> Chat</div><div class="pg-sub">Your personal JKPSC CCE coach — ask anything about GS, J&K affairs, optional subjects</div></div>
+    <div class="pg-head"><div class="pg-eyebrow">AI POWERED · CLAUDE + GROQ</div><div class="pg-title">AI <em>Tutor</em> Chat</div><div class="pg-sub">Your personal JKPSC CCE coach — Claude (primary) or Groq (fallback) via Flask backend</div></div>
     <div class="chat-quick" id="chatQuickBtns">
       <button class="cq-btn" onclick="quickChat('Explain the history of Jammu and Kashmir from Dogra rule to Article 370 abrogation')">🏔️ J&K History</button>
       <button class="cq-btn" onclick="quickChat('Explain Indian Polity — Constitutional Articles most important for JKPSC CCE')">🏛️ Indian Polity</button>
@@ -853,7 +679,7 @@ body {
     </div>
     <div class="chat-wrap">
       <div class="chat-msgs" id="chatMsgs">
-        <div class="cbubble ai"><span class="ai-chip">JKPSC AI TUTOR</span><br>Assalamu Alaikum! I'm your JKPSC CCE 2026 AI Tutor. I specialise in General Studies, J&K History & Geography, Indian Polity, Economy, Environment, and all CCE subjects.<br><br>Ask me anything — doubts, concepts, study strategy, or J&K-specific current affairs! 🏔️</div>
+        <div class="cbubble ai"><span class="ai-chip">JKPSC AI TUTOR</span><br>Assalamu Alaikum! I'm your JKPSC CCE 2026 AI Tutor. I specialise in J&K History, Indian Polity, Geography, Economy, Environment, and all CCE subjects.<br><br>Ask me anything — doubts, concepts, study strategy, or J&K-specific current affairs! 🏔️</div>
       </div>
       <div>
         <div class="chat-input-row">
@@ -864,7 +690,7 @@ body {
     </div>
   </div>
 
-  <!-- ═══ NOTES ═══ -->
+  <!-- NOTES -->
   <div class="page" id="page-notes">
     <div class="pg-head"><div class="pg-eyebrow">MY NOTES</div><div class="pg-title">Study <em>Notes</em></div></div>
     <div style="display:flex;gap:8px;margin-bottom:14px">
@@ -882,13 +708,9 @@ body {
             <input class="ne-title" id="noteTitleInput" placeholder="Note title…">
             <select class="fi" id="noteTag" style="width:auto;padding:4px 8px;font-size:11px">
               <option value="">No subject</option>
-              <option>General Studies I</option>
-              <option>General Studies II</option>
-              <option>General Studies III</option>
-              <option>General Studies IV</option>
-              <option>J&K GK & Current Affairs</option>
-              <option>Optional Subject</option>
-              <option>CSAT</option>
+              <option>General Studies I</option><option>General Studies II</option>
+              <option>General Studies III</option><option>General Studies IV</option>
+              <option>J&K GK & Current Affairs</option><option>Optional Subject</option><option>CSAT</option>
             </select>
             <button class="ne-btn" onclick="saveNote()">💾 Save</button>
             <button class="ne-btn" onclick="deleteNote()" style="color:var(--red)">🗑 Delete</button>
@@ -899,12 +721,12 @@ body {
     </div>
   </div>
 
-  <!-- ═══ ADD QUESTION ═══ -->
+  <!-- ADD QUESTION -->
   <div class="page" id="page-add">
     <div class="pg-head"><div class="pg-eyebrow">QUESTION BANK</div><div class="pg-title">Add <em>Questions</em></div></div>
     <div class="g2">
       <div class="card">
-        <div class="card-ttl" style="margin-bottom:14px">✍️ Manual Entry</div>
+        <div class="card-ttl" style="margin-bottom:14px">✍️ Manual Entry → Saved to PostgreSQL</div>
         <div class="fg"><label class="fl">Subject *</label><select class="fs" id="addSubjectId"><option value="">Select subject…</option></select></div>
         <div class="fg"><label class="fl">Question *</label><textarea class="fta" id="addQtext" rows="3" placeholder="Enter question text…"></textarea></div>
         <div class="frow">
@@ -920,21 +742,21 @@ body {
           <div class="fg"><label class="fl">Difficulty</label><select class="fs" id="addDiff"><option value="easy">Easy</option><option value="medium" selected>Medium</option><option value="hard">Hard</option></select></div>
         </div>
         <div class="fg"><label class="fl">Explanation</label><textarea class="fta" id="addExp" rows="2" placeholder="Optional explanation…"></textarea></div>
-        <button class="btn btn-accent btn-full" onclick="addQuestion()">➕ Add Question</button>
+        <button class="btn btn-accent btn-full" onclick="addQuestion()">➕ Add to Database</button>
         <div id="addMsg" style="margin-top:8px;font-size:12px;"></div>
       </div>
       <div class="card">
-        <div class="card-ttl" style="margin-bottom:14px">✨ AI Batch Generate</div>
+        <div class="card-ttl" style="margin-bottom:14px">✨ AI Batch Generate → Save to PostgreSQL</div>
         <div class="fg"><label class="fl">Topic *</label><input class="fi" id="addAiTopic" placeholder="e.g. J&K History, Polity, Indian Economy…"></div>
         <div class="fg"><label class="fl">Subject *</label><select class="fs" id="addAiSubject"><option value="">Select subject…</option></select></div>
         <div class="fg"><label class="fl">Count (max 10)</label><input class="fi" type="number" id="addAiCount" value="5" min="1" max="10"></div>
-        <button class="btn btn-teal btn-full" onclick="aiGenerateAndSave()">🤖 Generate & Save to Bank</button>
+        <button class="btn btn-teal btn-full" onclick="aiGenerateAndSave()">🤖 Generate & Save to DB</button>
         <div id="addAiResults" style="margin-top:12px"></div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ EXAM PATTERN ═══ -->
+  <!-- EXAM PATTERN -->
   <div class="page" id="page-pattern">
     <div class="pg-head"><div class="pg-eyebrow">EXAM STRUCTURE</div><div class="pg-title">JKPSC CCE <em>Exam Pattern</em> 2026</div></div>
     <div class="g2">
@@ -971,14 +793,10 @@ body {
     <div class="card" style="margin-top:14px">
       <div class="card-ttl" style="margin-bottom:12px">🎖️ Stage 3 — Personality Test (Interview)</div>
       <div class="g3" style="gap:10px">
-        <div style="padding:12px;background:var(--bg3);border-radius:var(--radius-sm);border:1px solid var(--border)"><div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px">INTERVIEW MARKS</div><div style="font-size:12px;color:var(--text2)">150 marks — tests personality, awareness, decision-making & communication.</div></div>
+        <div style="padding:12px;background:var(--bg3);border-radius:var(--radius-sm);border:1px solid var(--border)"><div style="font-size:11px;font-weight:700;color:var(--accent);margin-bottom:4px">INTERVIEW MARKS</div><div style="font-size:12px;color:var(--text2)">150 marks — personality, awareness, decision-making & communication.</div></div>
         <div style="padding:12px;background:var(--bg3);border-radius:var(--radius-sm);border:1px solid var(--border)"><div style="font-size:11px;font-weight:700;color:var(--teal);margin-bottom:4px">FINAL MERIT</div><div style="font-size:12px;color:var(--text2)">GS Mains (600) + Optional (300) + Interview (150) = 1050 total marks.</div></div>
-        <div style="padding:12px;background:var(--bg3);border-radius:var(--radius-sm);border:1px solid var(--border)"><div style="font-size:11px;font-weight:700;color:var(--purple);margin-bottom:4px">TOP POST</div><div style="font-size:12px;color:var(--text2)">KAS Officer — SDM, Tehsildar, BDO. Most respected administrative post in J&K.</div></div>
+        <div style="padding:12px;background:var(--bg3);border-radius:var(--radius-sm);border:1px solid var(--border)"><div style="font-size:11px;font-weight:700;color:var(--purple);margin-bottom:4px">TOP POST</div><div style="font-size:12px;color:var(--text2)">KAS Officer — SDM, Tehsildar, BDO. Most respected post in J&K.</div></div>
       </div>
-    </div>
-    <div class="card" style="margin-top:14px">
-      <div class="card-ttl" style="margin-bottom:12px">📚 Optional Subjects Available</div>
-      <div style="font-size:12px;color:var(--text2);line-height:2">Agriculture, Animal Husbandry, Botany, Chemistry, Civil Engineering, Commerce & Accountancy, Economics, Education, Electrical Engineering, Geography, Geology, History, Law, Management, Mathematics, Mechanical Engineering, Medical Science, Philosophy, Physics, Political Science, Psychology, Public Administration, Sociology, Statistics, Urdu, Zoology</div>
     </div>
   </div>
 
@@ -986,7 +804,7 @@ body {
 </div><!-- main -->
 </div><!-- app -->
 
-<!-- ═══ TOPIC DRAWER ═══ -->
+<!-- TOPIC DRAWER -->
 <div class="topic-drawer" id="topicDrawer">
   <div class="drawer-header">
     <div class="drawer-ttl" id="drawerTitle">Topic Detail</div>
@@ -995,15 +813,14 @@ body {
   <div class="drawer-body" id="drawerBody"></div>
 </div>
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
-
-<!-- ═══ TOAST ═══ -->
 <div class="toast-wrap" id="toastWrap"></div>
 
 <script>
-/* ══════════════════════════════════════════
-   JKPSC CCE COMMAND CENTRE — JS
-   Uses Anthropic API for AI features
-══════════════════════════════════════════ */
+/* ══════════════════════════════════════════════════════
+   JKPSC CCE COMMAND CENTRE v2.0 — Flask-backed JS
+   All AI calls → Flask backend (/api/ai/*)
+   Quiz history → PostgreSQL + localStorage fallback
+══════════════════════════════════════════════════════ */
 
 // ── THEME ──
 (function(){
@@ -1018,171 +835,136 @@ function toggleTheme() {
   document.documentElement.setAttribute('data-theme', n);
   localStorage.setItem('jkpsc_theme', n);
   updateThemeUI(n);
-  setTimeout(() => {
-    const main = document.querySelector('.main');
-    if (main) {
-      main.style.background = 'var(--bg)';
-      main.style.marginLeft = window.innerWidth > 900 ? 'var(--sidebar-w)' : '0';
-    }
-  }, 30);
 }
-
 function updateThemeUI(t) {
   const icon = t === 'dark' ? '🌙' : '☀️';
   const k = document.getElementById('themeKnobIcon');
-  const sb = document.getElementById('themeToggleSidebar');
   if (k) k.textContent = icon;
-  if (sb) sb.textContent = icon + ' Theme';
 }
 
-// ── SYLLABUS DATA ──
+// ── SYLLABUS DATA (static, no backend needed) ──
 const SYLLABUS_DB = {
   subjects: [
-    {
-      subject_id: 1, subject: "General Studies — History, Geography & Culture",
-      phase: "Prelims", icon: "🏛️", color: "#e8762a",
-      total_estimated_hours: 60,
-      exam_strategy: "J&K History is highest-priority in Prelims GS. Dogra period, Article 370, ancient temples, geography of Kashmir Valley.",
-      topics: [
-        { topic_id:"GS1_01", topic:"History of J&K — Ancient & Medieval", subtopic:["Karkota Dynasty","Shah Mir to Mughals","Kashmir Shaivism","Lalded & Nund Rishi"], difficulty_level:"medium", recommended_study_order:1, estimated_hours:5, pyq_frequency:5, high_priority:true, tags:["JK","history","critical"] },
-        { topic_id:"GS1_02", topic:"History of J&K — Sikh & Dogra Rule", subtopic:["Ranjit Singh & Kashmir","Gulab Singh Treaty","Dogra Dynasty","Maharaja Hari Singh"], difficulty_level:"medium", recommended_study_order:2, estimated_hours:4, pyq_frequency:5, high_priority:true, tags:["JK","history","critical"] },
-        { topic_id:"GS1_03", topic:"Accession & Post-Independence J&K", subtopic:["Instrument of Accession 1947","Article 370 & 35A","Reorganisation Act 2019","UT Status"], difficulty_level:"medium", recommended_study_order:3, estimated_hours:4, pyq_frequency:5, high_priority:true, tags:["JK","history","polity","critical"] },
-        { topic_id:"GS1_04", topic:"Modern Indian History", subtopic:["1857 Revolt","Freedom Struggle","Gandhi & INC","Constitutional Acts 1909–1947"], difficulty_level:"medium", recommended_study_order:4, estimated_hours:5, pyq_frequency:4, high_priority:true, tags:["history","modern","India"] },
-        { topic_id:"GS1_05", topic:"Indian Culture & Heritage", subtopic:["Classical Dance & Music","Kashmiri Handicrafts","UNESCO Heritage Sites","Important Temples & Shrines"], difficulty_level:"easy", recommended_study_order:5, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["culture","heritage","JK"] },
-        { topic_id:"GS1_06", topic:"Geography of J&K", subtopic:["Valleys & Rivers","Himalayan Ranges","Climate Zones","Important Passes","Lakes — Dal, Wular, Manasbal"], difficulty_level:"easy", recommended_study_order:6, estimated_hours:4, pyq_frequency:5, high_priority:true, tags:["JK","geography","critical"] },
-        { topic_id:"GS1_07", topic:"Indian & World Geography", subtopic:["Physical Features India","Monsoon & Climate","World Political Map","Important Rivers & Mountains"], difficulty_level:"medium", recommended_study_order:7, estimated_hours:5, pyq_frequency:3, high_priority:false, tags:["geography","India"] },
-        { topic_id:"GS1_08", topic:"Indian Society & Social Issues", subtopic:["Diversity & Pluralism","Social Movements","Tribal Issues","Women & Empowerment","Urbanisation"], difficulty_level:"medium", recommended_study_order:8, estimated_hours:4, pyq_frequency:3, high_priority:false, tags:["society","social"] },
-      ]
-    },
-    {
-      subject_id: 2, subject: "General Studies — Polity & Governance",
-      phase: "Prelims", icon: "🏛️", color: "#60a5fa",
-      total_estimated_hours: 55,
-      exam_strategy: "Indian Constitution + J&K administration is most important. Focus on Fundamental Rights, Parliament structure, local self-governance.",
-      topics: [
-        { topic_id:"GS2_01", topic:"Indian Constitution — Framework", subtopic:["Preamble","Fundamental Rights","DPSP","Fundamental Duties","Constitutional Amendments"], difficulty_level:"medium", recommended_study_order:1, estimated_hours:5, pyq_frequency:5, high_priority:true, tags:["polity","constitution","critical"] },
-        { topic_id:"GS2_02", topic:"Union & State Legislature", subtopic:["Parliament Structure","Lok Sabha & Rajya Sabha","State Legislature","Law-Making Process","Money Bill vs Ordinary Bill"], difficulty_level:"medium", recommended_study_order:2, estimated_hours:4, pyq_frequency:4, high_priority:true, tags:["polity","legislature"] },
-        { topic_id:"GS2_03", topic:"Executive & Judiciary", subtopic:["President & Governor","PM & Council of Ministers","Supreme Court","High Courts","PIL & Writs"], difficulty_level:"medium", recommended_study_order:3, estimated_hours:4, pyq_frequency:4, high_priority:true, tags:["polity","executive","judiciary"] },
-        { topic_id:"GS2_04", topic:"J&K Administration & Governance", subtopic:["Lt. Governor System","Divisional Structure","Revenue Administration","Tehsil & Block System","JKPSC & Services"], difficulty_level:"medium", recommended_study_order:4, estimated_hours:5, pyq_frequency:5, high_priority:true, tags:["JK","governance","critical"] },
-        { topic_id:"GS2_05", topic:"Panchayati Raj & Local Governance", subtopic:["73rd & 74th Amendment","3-tier PRIs","Functions & Powers","NITI Aayog"], difficulty_level:"easy", recommended_study_order:5, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["governance","panchayati-raj"] },
-        { topic_id:"GS2_06", topic:"Government Policies & Welfare Schemes", subtopic:["Central Schemes in J&K","PM-KISAN, PMAY","MGNREGA in J&K","Women & Child Schemes"], difficulty_level:"easy", recommended_study_order:6, estimated_hours:4, pyq_frequency:4, high_priority:true, tags:["schemes","governance","JK"] },
-        { topic_id:"GS2_07", topic:"International Relations", subtopic:["India's Neighbourhood Policy","India-Pakistan Relations","India-China","India-US Relations","International Organisations"], difficulty_level:"medium", recommended_study_order:7, estimated_hours:4, pyq_frequency:3, high_priority:false, tags:["IR","international"] },
-      ]
-    },
-    {
-      subject_id: 3, subject: "General Studies — Economy, Sci & Environment",
-      phase: "Prelims", icon: "📊", color: "#34d399",
-      total_estimated_hours: 50,
-      exam_strategy: "Indian economy basics + J&K economic development. Environment & ecology is high-scoring and factual. Science for everyday understanding.",
-      topics: [
-        { topic_id:"GS3_01", topic:"Indian Economy — Basics", subtopic:["GDP / GNP / GVA","Monetary Policy & RBI","Fiscal Policy & Budget","Inflation — CPI/WPI","Five Year Plans & NITI Aayog"], difficulty_level:"medium", recommended_study_order:1, estimated_hours:5, pyq_frequency:4, high_priority:true, tags:["economy","macro","critical"] },
-        { topic_id:"GS3_02", topic:"J&K Economy & Development", subtopic:["Agriculture — Apple, Saffron, Rice","Horticulture & Floriculture","Tourism & Handicrafts","Industrial Development","Hydropower Projects"], difficulty_level:"easy", recommended_study_order:2, estimated_hours:4, pyq_frequency:5, high_priority:true, tags:["JK","economy","critical"] },
-        { topic_id:"GS3_03", topic:"Agriculture & Rural Development", subtopic:["Green Revolution","Agricultural Credit & MSP","Irrigation in J&K","PMFBY Crop Insurance","FCI & Food Security"], difficulty_level:"easy", recommended_study_order:3, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["agriculture","rural"] },
-        { topic_id:"GS3_04", topic:"Environment & Ecology", subtopic:["Biodiversity & Conservation","National Parks of J&K","Climate Change & IPCC","Environmental Laws","Wetlands & Wildlife"], difficulty_level:"medium", recommended_study_order:4, estimated_hours:5, pyq_frequency:4, high_priority:true, tags:["environment","ecology","JK"] },
-        { topic_id:"GS3_05", topic:"General Science & Technology", subtopic:["Physics Basics","Chemistry in Daily Life","Biology & Health","Space — ISRO","IT & Digital India"], difficulty_level:"easy", recommended_study_order:5, estimated_hours:4, pyq_frequency:3, high_priority:false, tags:["science","technology"] },
-        { topic_id:"GS3_06", topic:"Disaster Management", subtopic:["Types of Disasters","NDMA Framework","Floods & Earthquakes in J&K","SDRF & NDRF","Early Warning Systems"], difficulty_level:"easy", recommended_study_order:6, estimated_hours:2, pyq_frequency:2, high_priority:false, tags:["disaster","management","JK"] },
-        { topic_id:"GS3_07", topic:"Internal Security & Defence", subtopic:["Internal Security Challenges","Counter-Terrorism","LWE & NE Insurgency","India's Nuclear Doctrine","AFSPA"], difficulty_level:"medium", recommended_study_order:7, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["security","defence","JK"] },
-      ]
-    },
-    {
-      subject_id: 4, subject: "J&K GK & Current Affairs",
-      phase: "Prelims", icon: "🏔️", color: "#a78bfa",
-      total_estimated_hours: 45,
-      exam_strategy: "Highest J&K-specific scoring area. Read Rising Kashmir or Kashmir Monitor daily. Focus on personalities, appointments, schemes, events.",
-      topics: [
-        { topic_id:"JKCA_01", topic:"J&K Current Affairs (Last 12 months)", subtopic:["Government Schemes & Policies","New Appointments in J&K","Sports & Awards","Important Events","Developmental Projects"], difficulty_level:"easy", recommended_study_order:1, estimated_hours:10, pyq_frequency:5, high_priority:true, tags:["JK","current-affairs","critical"] },
-        { topic_id:"JKCA_02", topic:"National Current Affairs", subtopic:["Economy & Budget","Political Events","Science & Space","Sports — Cricket, Olympics","Awards & Honours"], difficulty_level:"easy", recommended_study_order:2, estimated_hours:8, pyq_frequency:4, high_priority:true, tags:["current-affairs","national"] },
-        { topic_id:"JKCA_03", topic:"J&K Flora, Fauna & Natural Heritage", subtopic:["State Symbols — Bird, Animal, Flower","Dachigam National Park","Hemis National Park","Salim Ali NP","Kashmir Stag (Hangul)"], difficulty_level:"easy", recommended_study_order:3, estimated_hours:3, pyq_frequency:4, high_priority:true, tags:["JK","nature","GK"] },
-        { topic_id:"JKCA_04", topic:"J&K Famous Personalities", subtopic:["Sheikh Abdullah & Farooq Abdullah","Mufti Mohammad Sayeed","Writers & Poets","Freedom Fighters from J&K","Sportspersons from J&K"], difficulty_level:"easy", recommended_study_order:4, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["JK","personalities","GK"] },
-        { topic_id:"JKCA_05", topic:"Miscellaneous GK", subtopic:["Important Days & Dates","Awards & Recognitions","Books & Authors","Inventions & Discoveries","Countries & Capitals"], difficulty_level:"easy", recommended_study_order:5, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["GK","misc"] },
-      ]
-    },
-    {
-      subject_id: 5, subject: "CSAT — Aptitude & Reasoning",
-      phase: "Prelims", icon: "🧮", color: "#f87171",
-      total_estimated_hours: 30,
-      exam_strategy: "CSAT is qualifying — you only need 33% (33/100). Focus on easy topics and basic comprehension. Don't spend more than 20% of time here.",
-      topics: [
-        { topic_id:"CSAT_01", topic:"Reading Comprehension", subtopic:["Main Idea & Theme","Inference Questions","Vocabulary in Context","Tone & Attitude"], difficulty_level:"easy", recommended_study_order:1, estimated_hours:5, pyq_frequency:5, high_priority:true, tags:["CSAT","english","comprehension"] },
-        { topic_id:"CSAT_02", topic:"Basic Numeracy & Arithmetic", subtopic:["Percentage","Ratio & Proportion","Average","Profit & Loss","Simple Interest"], difficulty_level:"easy", recommended_study_order:2, estimated_hours:5, pyq_frequency:4, high_priority:true, tags:["CSAT","math","arithmetic"] },
-        { topic_id:"CSAT_03", topic:"Data Interpretation", subtopic:["Tables","Bar Charts","Pie Charts","Line Graphs"], difficulty_level:"medium", recommended_study_order:3, estimated_hours:4, pyq_frequency:3, high_priority:false, tags:["CSAT","DI"] },
-        { topic_id:"CSAT_04", topic:"Logical & Analytical Reasoning", subtopic:["Series Completion","Analogies","Odd One Out","Seating Arrangement","Syllogisms"], difficulty_level:"medium", recommended_study_order:4, estimated_hours:5, pyq_frequency:4, high_priority:true, tags:["CSAT","reasoning"] },
-        { topic_id:"CSAT_05", topic:"Decision Making & Problem Solving", subtopic:["Administrative Situation Analysis","Ethical Dilemmas","Best Course of Action","Policy Evaluation"], difficulty_level:"medium", recommended_study_order:5, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["CSAT","decision-making"] },
-      ]
-    },
-    {
-      subject_id: 6, subject: "Mains — GS & Ethics (Overview)",
-      phase: "Mains", icon: "📖", color: "#fb923c",
-      total_estimated_hours: 80,
-      exam_strategy: "Mains is descriptive. Master GS I–IV in depth plus Optional. Ethics (GS IV) needs case study practice. Write at least 1 answer daily from Day 100.",
-      topics: [
-        { topic_id:"MAINS_01", topic:"GS I — Heritage, History & Geography (Mains)", subtopic:["World History","Post-Independence India","Art & Culture","Salient Features of Society","Urbanisation"], difficulty_level:"hard", recommended_study_order:1, estimated_hours:15, pyq_frequency:5, high_priority:true, tags:["Mains","GS1","history","geography"] },
-        { topic_id:"MAINS_02", topic:"GS II — Governance, Polity & IR (Mains)", subtopic:["Constitutional Governance","Role of Civil Services","Social Justice","International Relations","Bilateral Issues"], difficulty_level:"hard", recommended_study_order:2, estimated_hours:15, pyq_frequency:5, high_priority:true, tags:["Mains","GS2","polity","governance"] },
-        { topic_id:"MAINS_03", topic:"GS III — Economy, Technology & Security (Mains)", subtopic:["Economic Development","Agriculture","Science & Technology","Environment","Disaster Management","Internal Security"], difficulty_level:"hard", recommended_study_order:3, estimated_hours:15, pyq_frequency:5, high_priority:true, tags:["Mains","GS3","economy","security"] },
-        { topic_id:"MAINS_04", topic:"GS IV — Ethics, Integrity & Aptitude", subtopic:["Moral Philosophy","Ethics in Administration","Emotional Intelligence","Case Studies","Attitude & Values","Probity in Governance"], difficulty_level:"hard", recommended_study_order:4, estimated_hours:12, pyq_frequency:5, high_priority:true, tags:["Mains","GS4","ethics","critical"] },
-        { topic_id:"MAINS_05", topic:"Answer Writing Practice", subtopic:["Introduction-Body-Conclusion Format","200-word answers","Maps & Diagrams","Time Management in Mains","Practicing Previous Year Questions"], difficulty_level:"hard", recommended_study_order:5, estimated_hours:15, pyq_frequency:5, high_priority:true, tags:["Mains","writing","critical"] },
-        { topic_id:"MAINS_06", topic:"Optional Subject Strategy", subtopic:["Choosing the Right Optional","BCom-friendly Optionals: Economics, Commerce, Public Admin","Sociology","Political Science","Geography as Optional"], difficulty_level:"medium", recommended_study_order:6, estimated_hours:8, pyq_frequency:4, high_priority:true, tags:["Mains","optional","BCom"] },
-      ]
-    }
+    { subject_id:1, subject:"General Studies — History, Geography & Culture", phase:"Prelims", icon:"🏛️", color:"#e8762a", total_estimated_hours:60, exam_strategy:"J&K History is highest-priority. Dogra period, Article 370, ancient temples, geography of Kashmir Valley.", topics:[
+      { topic_id:"GS1_01", topic:"History of J&K — Ancient & Medieval", subtopic:["Karkota Dynasty","Shah Mir to Mughals","Kashmir Shaivism","Lalded & Nund Rishi"], difficulty_level:"medium", recommended_study_order:1, estimated_hours:5, pyq_frequency:5, high_priority:true, tags:["JK","history","critical"] },
+      { topic_id:"GS1_02", topic:"History of J&K — Sikh & Dogra Rule", subtopic:["Ranjit Singh & Kashmir","Gulab Singh Treaty","Dogra Dynasty","Maharaja Hari Singh"], difficulty_level:"medium", recommended_study_order:2, estimated_hours:4, pyq_frequency:5, high_priority:true, tags:["JK","history","critical"] },
+      { topic_id:"GS1_03", topic:"Accession & Post-Independence J&K", subtopic:["Instrument of Accession 1947","Article 370 & 35A","Reorganisation Act 2019","UT Status"], difficulty_level:"medium", recommended_study_order:3, estimated_hours:4, pyq_frequency:5, high_priority:true, tags:["JK","history","polity","critical"] },
+      { topic_id:"GS1_04", topic:"Modern Indian History", subtopic:["1857 Revolt","Freedom Struggle","Gandhi & INC","Constitutional Acts 1909–1947"], difficulty_level:"medium", recommended_study_order:4, estimated_hours:5, pyq_frequency:4, high_priority:true, tags:["history","modern","India"] },
+      { topic_id:"GS1_05", topic:"Indian Culture & Heritage", subtopic:["Classical Dance & Music","Kashmiri Handicrafts","UNESCO Heritage Sites","Important Temples & Shrines"], difficulty_level:"easy", recommended_study_order:5, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["culture","heritage","JK"] },
+      { topic_id:"GS1_06", topic:"Geography of J&K", subtopic:["Valleys & Rivers","Himalayan Ranges","Climate Zones","Important Passes","Lakes — Dal, Wular, Manasbal"], difficulty_level:"easy", recommended_study_order:6, estimated_hours:4, pyq_frequency:5, high_priority:true, tags:["JK","geography","critical"] },
+      { topic_id:"GS1_07", topic:"Indian & World Geography", subtopic:["Physical Features India","Monsoon & Climate","World Political Map","Important Rivers & Mountains"], difficulty_level:"medium", recommended_study_order:7, estimated_hours:5, pyq_frequency:3, high_priority:false, tags:["geography","India"] },
+      { topic_id:"GS1_08", topic:"Indian Society & Social Issues", subtopic:["Diversity & Pluralism","Social Movements","Tribal Issues","Women & Empowerment","Urbanisation"], difficulty_level:"medium", recommended_study_order:8, estimated_hours:4, pyq_frequency:3, high_priority:false, tags:["society","social"] }
+    ]},
+    { subject_id:2, subject:"General Studies — Polity & Governance", phase:"Prelims", icon:"⚖️", color:"#60a5fa", total_estimated_hours:55, exam_strategy:"Indian Constitution + J&K administration is most important. Focus on Fundamental Rights, Parliament, local self-governance.", topics:[
+      { topic_id:"GS2_01", topic:"Indian Constitution — Framework", subtopic:["Preamble","Fundamental Rights","DPSP","Fundamental Duties","Constitutional Amendments"], difficulty_level:"medium", recommended_study_order:1, estimated_hours:5, pyq_frequency:5, high_priority:true, tags:["polity","constitution","critical"] },
+      { topic_id:"GS2_02", topic:"Union & State Legislature", subtopic:["Parliament Structure","Lok Sabha & Rajya Sabha","State Legislature","Law-Making Process","Money Bill vs Ordinary Bill"], difficulty_level:"medium", recommended_study_order:2, estimated_hours:4, pyq_frequency:4, high_priority:true, tags:["polity","legislature"] },
+      { topic_id:"GS2_03", topic:"Executive & Judiciary", subtopic:["President & Governor","PM & Council of Ministers","Supreme Court","High Courts","PIL & Writs"], difficulty_level:"medium", recommended_study_order:3, estimated_hours:4, pyq_frequency:4, high_priority:true, tags:["polity","executive","judiciary"] },
+      { topic_id:"GS2_04", topic:"J&K Administration & Governance", subtopic:["Lt. Governor System","Divisional Structure","Revenue Administration","Tehsil & Block System","JKPSC & Services"], difficulty_level:"medium", recommended_study_order:4, estimated_hours:5, pyq_frequency:5, high_priority:true, tags:["JK","governance","critical"] },
+      { topic_id:"GS2_05", topic:"Panchayati Raj & Local Governance", subtopic:["73rd & 74th Amendment","3-tier PRIs","Functions & Powers","NITI Aayog"], difficulty_level:"easy", recommended_study_order:5, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["governance","panchayati-raj"] },
+      { topic_id:"GS2_06", topic:"Government Policies & Welfare Schemes", subtopic:["Central Schemes in J&K","PM-KISAN, PMAY","MGNREGA in J&K","Women & Child Schemes"], difficulty_level:"easy", recommended_study_order:6, estimated_hours:4, pyq_frequency:4, high_priority:true, tags:["schemes","governance","JK"] },
+      { topic_id:"GS2_07", topic:"International Relations", subtopic:["India's Neighbourhood Policy","India-Pakistan Relations","India-China","India-US Relations","International Organisations"], difficulty_level:"medium", recommended_study_order:7, estimated_hours:4, pyq_frequency:3, high_priority:false, tags:["IR","international"] }
+    ]},
+    { subject_id:3, subject:"General Studies — Economy, Sci & Environment", phase:"Prelims", icon:"📊", color:"#34d399", total_estimated_hours:50, exam_strategy:"Indian economy basics + J&K economic development. Environment & ecology is high-scoring and factual.", topics:[
+      { topic_id:"GS3_01", topic:"Indian Economy — Basics", subtopic:["GDP / GNP / GVA","Monetary Policy & RBI","Fiscal Policy & Budget","Inflation — CPI/WPI","Five Year Plans & NITI Aayog"], difficulty_level:"medium", recommended_study_order:1, estimated_hours:5, pyq_frequency:4, high_priority:true, tags:["economy","macro","critical"] },
+      { topic_id:"GS3_02", topic:"J&K Economy & Development", subtopic:["Agriculture — Apple, Saffron, Rice","Horticulture & Floriculture","Tourism & Handicrafts","Industrial Development","Hydropower Projects"], difficulty_level:"easy", recommended_study_order:2, estimated_hours:4, pyq_frequency:5, high_priority:true, tags:["JK","economy","critical"] },
+      { topic_id:"GS3_03", topic:"Agriculture & Rural Development", subtopic:["Green Revolution","Agricultural Credit & MSP","Irrigation in J&K","PMFBY Crop Insurance","FCI & Food Security"], difficulty_level:"easy", recommended_study_order:3, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["agriculture","rural"] },
+      { topic_id:"GS3_04", topic:"Environment & Ecology", subtopic:["Biodiversity & Conservation","National Parks of J&K","Climate Change & IPCC","Environmental Laws","Wetlands & Wildlife"], difficulty_level:"medium", recommended_study_order:4, estimated_hours:5, pyq_frequency:4, high_priority:true, tags:["environment","ecology","JK"] },
+      { topic_id:"GS3_05", topic:"General Science & Technology", subtopic:["Physics Basics","Chemistry in Daily Life","Biology & Health","Space — ISRO","IT & Digital India"], difficulty_level:"easy", recommended_study_order:5, estimated_hours:4, pyq_frequency:3, high_priority:false, tags:["science","technology"] },
+      { topic_id:"GS3_06", topic:"Disaster Management", subtopic:["Types of Disasters","NDMA Framework","Floods & Earthquakes in J&K","SDRF & NDRF","Early Warning Systems"], difficulty_level:"easy", recommended_study_order:6, estimated_hours:2, pyq_frequency:2, high_priority:false, tags:["disaster","management","JK"] },
+      { topic_id:"GS3_07", topic:"Internal Security & Defence", subtopic:["Internal Security Challenges","Counter-Terrorism","LWE & NE Insurgency","India's Nuclear Doctrine","AFSPA"], difficulty_level:"medium", recommended_study_order:7, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["security","defence","JK"] }
+    ]},
+    { subject_id:4, subject:"J&K GK & Current Affairs", phase:"Prelims", icon:"🏔️", color:"#a78bfa", total_estimated_hours:45, exam_strategy:"Highest J&K-specific scoring area. Read Rising Kashmir daily. Focus on personalities, appointments, schemes, events.", topics:[
+      { topic_id:"JKCA_01", topic:"J&K Current Affairs (Last 12 months)", subtopic:["Government Schemes & Policies","New Appointments in J&K","Sports & Awards","Important Events","Developmental Projects"], difficulty_level:"easy", recommended_study_order:1, estimated_hours:10, pyq_frequency:5, high_priority:true, tags:["JK","current-affairs","critical"] },
+      { topic_id:"JKCA_02", topic:"National Current Affairs", subtopic:["Economy & Budget","Political Events","Science & Space","Sports — Cricket, Olympics","Awards & Honours"], difficulty_level:"easy", recommended_study_order:2, estimated_hours:8, pyq_frequency:4, high_priority:true, tags:["current-affairs","national"] },
+      { topic_id:"JKCA_03", topic:"J&K Flora, Fauna & Natural Heritage", subtopic:["State Symbols — Bird, Animal, Flower","Dachigam National Park","Hemis National Park","Salim Ali NP","Kashmir Stag (Hangul)"], difficulty_level:"easy", recommended_study_order:3, estimated_hours:3, pyq_frequency:4, high_priority:true, tags:["JK","nature","GK"] },
+      { topic_id:"JKCA_04", topic:"J&K Famous Personalities", subtopic:["Sheikh Abdullah & Farooq Abdullah","Mufti Mohammad Sayeed","Writers & Poets","Freedom Fighters from J&K","Sportspersons from J&K"], difficulty_level:"easy", recommended_study_order:4, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["JK","personalities","GK"] },
+      { topic_id:"JKCA_05", topic:"Miscellaneous GK", subtopic:["Important Days & Dates","Awards & Recognitions","Books & Authors","Inventions & Discoveries","Countries & Capitals"], difficulty_level:"easy", recommended_study_order:5, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["GK","misc"] }
+    ]},
+    { subject_id:5, subject:"CSAT — Aptitude & Reasoning", phase:"Prelims", icon:"🧮", color:"#f87171", total_estimated_hours:30, exam_strategy:"CSAT is qualifying — you only need 33% (33/100). Focus on easy topics and basic comprehension.", topics:[
+      { topic_id:"CSAT_01", topic:"Reading Comprehension", subtopic:["Main Idea & Theme","Inference Questions","Vocabulary in Context","Tone & Attitude"], difficulty_level:"easy", recommended_study_order:1, estimated_hours:5, pyq_frequency:5, high_priority:true, tags:["CSAT","english","comprehension"] },
+      { topic_id:"CSAT_02", topic:"Basic Numeracy & Arithmetic", subtopic:["Percentage","Ratio & Proportion","Average","Profit & Loss","Simple Interest"], difficulty_level:"easy", recommended_study_order:2, estimated_hours:5, pyq_frequency:4, high_priority:true, tags:["CSAT","math","arithmetic"] },
+      { topic_id:"CSAT_03", topic:"Data Interpretation", subtopic:["Tables","Bar Charts","Pie Charts","Line Graphs"], difficulty_level:"medium", recommended_study_order:3, estimated_hours:4, pyq_frequency:3, high_priority:false, tags:["CSAT","DI"] },
+      { topic_id:"CSAT_04", topic:"Logical & Analytical Reasoning", subtopic:["Series Completion","Analogies","Odd One Out","Seating Arrangement","Syllogisms"], difficulty_level:"medium", recommended_study_order:4, estimated_hours:5, pyq_frequency:4, high_priority:true, tags:["CSAT","reasoning"] },
+      { topic_id:"CSAT_05", topic:"Decision Making & Problem Solving", subtopic:["Administrative Situation Analysis","Ethical Dilemmas","Best Course of Action","Policy Evaluation"], difficulty_level:"medium", recommended_study_order:5, estimated_hours:3, pyq_frequency:3, high_priority:false, tags:["CSAT","decision-making"] }
+    ]},
+    { subject_id:6, subject:"Mains — GS & Ethics (Overview)", phase:"Mains", icon:"📖", color:"#fb923c", total_estimated_hours:80, exam_strategy:"Mains is descriptive. Master GS I–IV in depth plus Optional. Ethics (GS IV) needs case study practice.", topics:[
+      { topic_id:"MAINS_01", topic:"GS I — Heritage, History & Geography (Mains)", subtopic:["World History","Post-Independence India","Art & Culture","Salient Features of Society","Urbanisation"], difficulty_level:"hard", recommended_study_order:1, estimated_hours:15, pyq_frequency:5, high_priority:true, tags:["Mains","GS1","history","geography"] },
+      { topic_id:"MAINS_02", topic:"GS II — Governance, Polity & IR (Mains)", subtopic:["Constitutional Governance","Role of Civil Services","Social Justice","International Relations","Bilateral Issues"], difficulty_level:"hard", recommended_study_order:2, estimated_hours:15, pyq_frequency:5, high_priority:true, tags:["Mains","GS2","polity","governance"] },
+      { topic_id:"MAINS_03", topic:"GS III — Economy, Technology & Security (Mains)", subtopic:["Economic Development","Agriculture","Science & Technology","Environment","Disaster Management","Internal Security"], difficulty_level:"hard", recommended_study_order:3, estimated_hours:15, pyq_frequency:5, high_priority:true, tags:["Mains","GS3","economy","security"] },
+      { topic_id:"MAINS_04", topic:"GS IV — Ethics, Integrity & Aptitude", subtopic:["Moral Philosophy","Ethics in Administration","Emotional Intelligence","Case Studies","Attitude & Values","Probity in Governance"], difficulty_level:"hard", recommended_study_order:4, estimated_hours:12, pyq_frequency:5, high_priority:true, tags:["Mains","GS4","ethics","critical"] },
+      { topic_id:"MAINS_05", topic:"Answer Writing Practice", subtopic:["Introduction-Body-Conclusion Format","200-word answers","Maps & Diagrams","Time Management in Mains","Practicing Previous Year Questions"], difficulty_level:"hard", recommended_study_order:5, estimated_hours:15, pyq_frequency:5, high_priority:true, tags:["Mains","writing","critical"] },
+      { topic_id:"MAINS_06", topic:"Optional Subject Strategy", subtopic:["Choosing the Right Optional","BCom-friendly Optionals: Economics, Commerce, Public Admin","Sociology","Political Science","Geography as Optional"], difficulty_level:"medium", recommended_study_order:6, estimated_hours:8, pyq_frequency:4, high_priority:true, tags:["Mains","optional","BCom"] }
+    ]}
   ],
   study_plans: {
-    nine_month_plan: {
-      phases: [
-        { phase:"Phase 1 — Foundation", days:"March – April 2026", target:"Build base in History, Geography, Polity & Economy", color:"#60a5fa",
-          focus:["J&K History (Ancient → Dogra Period) — NCERTs + Bamzai's History of Kashmir","Indian Polity — M. Laxmikanth Chapters 1–20","Indian Geography — NCERT Class 11 + GC Leong","Current Affairs — Start reading Rising Kashmir daily","CSAT basics — Reading Comprehension daily"], daily_hours:4, mock_tests:"1 CSAT test per week" },
-        { phase:"Phase 2 — Core Build", days:"May – June 2026", target:"Master GS I, II, III completely for Prelims", color:"#e8762a",
-          focus:["Indian Constitution — Fundamental Rights, DPSP, Parliament, Judiciary","J&K Governance — Revenue system, Lt. Governor, Administrative structure","Indian Economy — GDP, Inflation, Budget, Five Year Plans","Environment & Ecology — Biodiversity, National Parks, Climate Change","J&K GK — Flora, Fauna, Personalities, State Symbols"], daily_hours:5, mock_tests:"2 sectional tests per week" },
-        { phase:"Phase 3 — Current Affairs Sprint", days:"July – August 2026", target:"Master last 12 months current affairs + J&K specific", color:"#34d399",
-          focus:["J&K Current Affairs (2025–2026) — All major events, schemes, appointments","National Current Affairs — Economy, Politics, Science, Sports","Monthly Current Affairs revision (AffairsCloud / Vision IAS capsules)","J&K Notification expected around August — apply immediately","Full syllabus quick revision"], daily_hours:5, mock_tests:"3 sectional tests per week" },
-        { phase:"Phase 4 — Mock Test Blitz", days:"September – October 2026", target:"Exam speed, accuracy, time management", color:"#a78bfa",
-          focus:["Full Prelims mock test every alternate day (2 hours + analysis)","Detailed mistake analysis after every mock","Target 100+ questions in 120 minutes","Revise all J&K-specific static GK","Daily current affairs 30-min capsule"], daily_hours:6, mock_tests:"15 full Prelims mocks" },
-        { phase:"Phase 5 — Final Revision", days:"November 2026 (Exam)", target:"Consolidate, reduce errors, build confidence", color:"#f87171",
-          focus:["Revise all high-priority topics only","Quick current affairs last 3 months","5 full mock tests in exam conditions","Revision of J&K History & Geography (biggest scoring area)","Rest, sleep, confidence — paper is crackable!"], daily_hours:5, mock_tests:"5 full mocks" }
-      ]
-    },
-    weekly_plan: {
-      days: [
-        { day:"Monday", badge:"History", badge_color:"#e8762a", focus_1:"J&K History — 1 topic deep study", focus_2:"Indian Modern History — 1 chapter", focus_3:"Current Affairs — morning newspaper", evening:"Revise 2 previous topics", hours:5 },
-        { day:"Tuesday", badge:"Polity", badge_color:"#60a5fa", focus_1:"Indian Constitution — 1 chapter (Laxmikanth)", focus_2:"J&K Governance & Administration", focus_3:"Current Affairs — Rising Kashmir", evening:"Practice 10 Polity MCQs", hours:5 },
-        { day:"Wednesday", badge:"Economy", badge_color:"#34d399", focus_1:"Indian Economy — 1 topic (GDP / Inflation / Budget)", focus_2:"J&K Economy — Agriculture, Tourism, Hydro", focus_3:"Government Schemes update", evening:"Economy MCQ practice", hours:5 },
-        { day:"Thursday", badge:"Geography", badge_color:"#a78bfa", focus_1:"J&K Geography — Rivers, Passes, Lakes", focus_2:"Indian Physical Geography", focus_3:"Environment & Ecology", evening:"Revise maps — J&K + India", hours:5 },
-        { day:"Friday", badge:"GK & CA", badge_color:"#fb923c", focus_1:"J&K Current Affairs — Weekly review", focus_2:"National Current Affairs", focus_3:"Miscellaneous GK + Static", evening:"CSAT Reading Comprehension practice", hours:5 },
-        { day:"Saturday", badge:"Mock Day", badge_color:"#e8762a", focus_1:"FULL PRELIMS MOCK TEST (2 hours — exam conditions)", focus_2:"Detailed error analysis — mark each wrong answer", focus_3:"Targeted revision of weak topics from mock", evening:"Current affairs capsule + J&K GK revision", hours:6 },
-        { day:"Sunday", badge:"Revision", badge_color:"#34d399", focus_1:"Weekly consolidation — all 5 subjects", focus_2:"CSAT practice — 30 questions timed", focus_3:"Plan next week's topics", evening:"Relax + motivational reading", hours:4 }
-      ]
-    }
+    nine_month_plan: { phases: [
+      { phase:"Phase 1 — Foundation", days:"March – April 2026", target:"Build base in History, Geography, Polity & Economy", color:"#60a5fa", focus:["J&K History (Ancient → Dogra Period) — NCERTs + Bamzai's History of Kashmir","Indian Polity — M. Laxmikanth Chapters 1–20","Indian Geography — NCERT Class 11 + GC Leong","Current Affairs — Start reading Rising Kashmir daily","CSAT basics — Reading Comprehension daily"], daily_hours:4, mock_tests:"1 CSAT test per week" },
+      { phase:"Phase 2 — Core Build", days:"May – June 2026", target:"Master GS I, II, III completely for Prelims", color:"#e8762a", focus:["Indian Constitution — Fundamental Rights, DPSP, Parliament, Judiciary","J&K Governance — Revenue system, Lt. Governor, Administrative structure","Indian Economy — GDP, Inflation, Budget, Five Year Plans","Environment & Ecology — Biodiversity, National Parks, Climate Change","J&K GK — Flora, Fauna, Personalities, State Symbols"], daily_hours:5, mock_tests:"2 sectional tests per week" },
+      { phase:"Phase 3 — Current Affairs Sprint", days:"July – August 2026", target:"Master last 12 months current affairs + J&K specific", color:"#34d399", focus:["J&K Current Affairs (2025–2026) — All major events, schemes, appointments","National Current Affairs","Monthly Current Affairs revision (AffairsCloud / Vision IAS capsules)","J&K Notification expected around August — apply immediately","Full syllabus quick revision"], daily_hours:5, mock_tests:"3 sectional tests per week" },
+      { phase:"Phase 4 — Mock Test Blitz", days:"September – October 2026", target:"Exam speed, accuracy, time management", color:"#a78bfa", focus:["Full Prelims mock test every alternate day (2 hours + analysis)","Detailed mistake analysis after every mock","Target 100+ questions in 120 minutes","Revise all J&K-specific static GK","Daily current affairs 30-min capsule"], daily_hours:6, mock_tests:"15 full Prelims mocks" },
+      { phase:"Phase 5 — Final Revision", days:"November 2026 (Exam)", target:"Consolidate, reduce errors, build confidence", color:"#f87171", focus:["Revise all high-priority topics only","Quick current affairs last 3 months","5 full mock tests in exam conditions","Revision of J&K History & Geography","Rest, sleep, confidence — paper is crackable!"], daily_hours:5, mock_tests:"5 full mocks" }
+    ]},
+    weekly_plan: { days: [
+      { day:"Monday", badge:"History", badge_color:"#e8762a", focus_1:"J&K History — 1 topic deep study", focus_2:"Indian Modern History — 1 chapter", focus_3:"Current Affairs — morning newspaper", evening:"Revise 2 previous topics", hours:5 },
+      { day:"Tuesday", badge:"Polity", badge_color:"#60a5fa", focus_1:"Indian Constitution — 1 chapter (Laxmikanth)", focus_2:"J&K Governance & Administration", focus_3:"Current Affairs — Rising Kashmir", evening:"Practice 10 Polity MCQs", hours:5 },
+      { day:"Wednesday", badge:"Economy", badge_color:"#34d399", focus_1:"Indian Economy — 1 topic (GDP / Inflation / Budget)", focus_2:"J&K Economy — Agriculture, Tourism, Hydro", focus_3:"Government Schemes update", evening:"Economy MCQ practice", hours:5 },
+      { day:"Thursday", badge:"Geography", badge_color:"#a78bfa", focus_1:"J&K Geography — Rivers, Passes, Lakes", focus_2:"Indian Physical Geography", focus_3:"Environment & Ecology", evening:"Revise maps — J&K + India", hours:5 },
+      { day:"Friday", badge:"GK & CA", badge_color:"#fb923c", focus_1:"J&K Current Affairs — Weekly review", focus_2:"National Current Affairs", focus_3:"Miscellaneous GK + Static", evening:"CSAT Reading Comprehension practice", hours:5 },
+      { day:"Saturday", badge:"Mock Day", badge_color:"#e8762a", focus_1:"FULL PRELIMS MOCK TEST (2 hours — exam conditions)", focus_2:"Detailed error analysis — mark each wrong answer", focus_3:"Targeted revision of weak topics from mock", evening:"Current affairs capsule + J&K GK revision", hours:6 },
+      { day:"Sunday", badge:"Revision", badge_color:"#34d399", focus_1:"Weekly consolidation — all 5 subjects", focus_2:"CSAT practice — 30 questions timed", focus_3:"Plan next week's topics", evening:"Relax + motivational reading", hours:4 }
+    ]}
   }
 };
 
-// ── INIT ──
 const allSubjects = SYLLABUS_DB.subjects;
-const allTopics = allSubjects.flatMap(s => s.topics.map(t => ({...t, subject_obj: s, subject: t.subject || s.subject})));
+const allTopics = allSubjects.flatMap(s => s.topics.map(t => ({...t, subject_obj: s})));
 const prelimsSubjects = allSubjects.filter(s => s.phase === 'Prelims');
 const mainsSubjects = allSubjects.filter(s => s.phase === 'Mains');
 
-// State
+// ── STATE ──
 const S = {
   page: 'dashboard',
-  quizQs: [], quizAnswers: {}, quizSubjectId: null, quizStart: null,
+  quizQs: [], quizAnswers: {}, quizSubjectId: null, quizStart: null, quizSubjectName: '',
   chatHistory: [],
   notes: JSON.parse(localStorage.getItem('jkpsc_notes') || '[]'),
   activeNote: null,
-  quizHistory: JSON.parse(localStorage.getItem('jkpsc_quiz_history') || '[]')
+  dbOnline: false
 };
 
-// ── THEME INIT ──
-function updateThemeUI(t) {
-  const icon = t === 'dark' ? '🌙' : '☀️';
-  const k = document.getElementById('themeKnobIcon');
-  const sb = document.getElementById('themeToggleSidebar');
-  if (k) k.textContent = icon;
-  if (sb) sb.textContent = icon + ' Theme';
+// ── API HELPERS ──
+async function apiGet(path) {
+  const r = await fetch(path);
+  if (!r.ok) throw new Error(`HTTP ${r.status}`);
+  return r.json();
+}
+async function apiPost(path, body) {
+  const r = await fetch(path, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body)
+  });
+  if (!r.ok) {
+    const e = await r.json().catch(() => ({}));
+    throw new Error(e.error || `HTTP ${r.status}`);
+  }
+  return r.json();
+}
+
+// ── DB STATUS ──
+async function checkDbStatus() {
+  try {
+    const data = await apiGet('/health');
+    S.dbOnline = data.status === 'ok';
+  } catch { S.dbOnline = false; }
+  const dot = document.getElementById('dbDot');
+  const lbl = document.getElementById('dbStatus');
+  if (dot) dot.className = 'db-dot ' + (S.dbOnline ? 'online' : 'offline');
+  if (lbl) lbl.textContent = S.dbOnline ? 'DB connected' : 'DB offline (localStorage)';
 }
 
 // ── COUNTDOWN ──
 function updateCountdown() {
-  const exam = new Date('2026-11-25'); // approximate prelims date
-  const diff = Math.floor((exam - new Date()) / 86400000);
+  const diff = Math.floor((new Date('2026-11-25') - new Date()) / 86400000);
   const d = diff > 0 ? diff : '—';
   const sbEl = document.getElementById('sbDays');
   const heroEl = document.getElementById('heroCountdown');
@@ -1194,12 +976,9 @@ function updateCountdown() {
 
 // ── STATUS LINE ──
 function updateUserStatus() {
-  const now = new Date();
-  const h = now.getHours();
-  const m = now.getMinutes().toString().padStart(2,'0');
-  const h12 = h % 12 || 12;
-  const ampm = h >= 12 ? 'PM' : 'AM';
-  const timeStr = `${h12}:${m} ${ampm}`;
+  const h = new Date().getHours();
+  const m = new Date().getMinutes().toString().padStart(2,'0');
+  const h12 = h % 12 || 12, ampm = h >= 12 ? 'PM' : 'AM';
   let emoji, label;
   if (h >= 5 && h < 8) { emoji='🌅'; label='Early Session'; }
   else if (h >= 8 && h < 12) { emoji='📖'; label='Morning Study'; }
@@ -1209,7 +988,7 @@ function updateUserStatus() {
   else if (h >= 20 && h < 23) { emoji='🌙'; label='Night Study'; }
   else { emoji='⭐'; label='Late Night'; }
   const el = document.getElementById('userStatusLine');
-  if (el) el.textContent = `${emoji} ${label} · ${timeStr}`;
+  if (el) el.textContent = `${emoji} ${label} · ${h12}:${m} ${ampm}`;
 }
 
 // ── NAV ──
@@ -1249,7 +1028,6 @@ function getSyllabusProgress() {
   const pct = total > 0 ? Math.round((visited.length / total) * 100) : 0;
   return { visited: visited.length, total, pct };
 }
-
 function refreshSyllabusProgress() {
   const { pct } = getSyllabusProgress();
   const pctEl = document.getElementById('syllabusPct');
@@ -1259,48 +1037,74 @@ function refreshSyllabusProgress() {
 }
 
 // ── DASHBOARD ──
-function loadDashboard() {
-  const todayEl = document.getElementById('todayDate');
-  if (todayEl) todayEl.textContent = new Date().toLocaleDateString('en-IN', {weekday:'short', day:'numeric', month:'short'});
-
-  // Stats from local history
-  const hist = S.quizHistory;
-  const attempts = hist.length;
-  const avg = attempts ? Math.round(hist.reduce((a,r) => a + r.score_percent, 0) / attempts) : 0;
-  const best = attempts ? Math.max(...hist.map(r => r.score_percent)) : 0;
-  document.getElementById('statAttempts').textContent = attempts;
-  document.getElementById('statAvg').textContent = avg + '%';
-  document.getElementById('statBest').textContent = best + '%';
-  document.getElementById('avgScorePct').textContent = avg + '%';
-  document.getElementById('statStudyHours').textContent = allSubjects.reduce((a,s) => a + (s.total_estimated_hours||0), 0) + 'h';
-  const circle = document.getElementById('scoreCircle');
-  if (circle) circle.setAttribute('stroke-dashoffset', 201 - (201 * avg / 100));
-
+async function loadDashboard() {
+  document.getElementById('todayDate').textContent = new Date().toLocaleDateString('en-IN', {weekday:'short', day:'numeric', month:'short'});
   buildDashKanban();
   loadSubjectPerf();
   buildPriorityTopics();
   buildDailyPlan();
+
+  // Load stats from backend, fallback to localStorage
+  try {
+    const stats = await apiGet('/api/stats');
+    document.getElementById('statAttempts').textContent = stats.total_attempts || 0;
+    document.getElementById('statAvg').textContent = (stats.avg_score || 0) + '%';
+    document.getElementById('statBest').textContent = (stats.best_score || 0) + '%';
+    document.getElementById('avgScorePct').textContent = (stats.avg_score || 0) + '%';
+    const circle = document.getElementById('scoreCircle');
+    if (circle) circle.setAttribute('stroke-dashoffset', 201 - (201 * (stats.avg_score || 0) / 100));
+  } catch {
+    // fallback localStorage
+    const hist = getLocalHistory();
+    const attempts = hist.length;
+    const avg = attempts ? Math.round(hist.reduce((a,r) => a + r.score_percent, 0) / attempts) : 0;
+    const best = attempts ? Math.max(...hist.map(r => r.score_percent)) : 0;
+    document.getElementById('statAttempts').textContent = attempts;
+    document.getElementById('statAvg').textContent = avg + '%';
+    document.getElementById('statBest').textContent = best + '%';
+    document.getElementById('avgScorePct').textContent = avg + '%';
+  }
+
+  // Recent activity
+  try {
+    const hist = await apiGet('/api/history?limit=5');
+    renderRecentActivity(hist);
+  } catch {
+    renderRecentActivity(getLocalHistory().slice(-5).reverse());
+  }
+}
+
+function renderRecentActivity(hist) {
+  const el = document.getElementById('recentContent');
+  if (!el) return;
+  if (!hist.length) { el.innerHTML = `<div style="padding:14px;font-size:12px;color:var(--text3)">Start practising to see activity</div>`; return; }
+  el.innerHTML = hist.map(r => {
+    const pct = parseFloat(r.score_percent || 0);
+    const col = pct >= 70 ? 'var(--green)' : pct >= 50 ? 'var(--accent)' : 'var(--red)';
+    const name = r.subject_name || r.subject || 'Unknown';
+    const dateStr = r.attempted_at ? new Date(r.attempted_at).toLocaleDateString('en-IN',{day:'numeric',month:'short'}) : '';
+    return `<div style="display:flex;align-items:center;gap:9px;padding:7px 0;border-bottom:1px solid var(--border)">
+      <div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--text1)">${name}</div><div style="font-size:10px;color:var(--text3)">${dateStr}</div></div>
+      <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:${col}">${pct}%</span>
+    </div>`;
+  }).join('');
 }
 
 function buildDashKanban() {
   const p1El = document.getElementById('dashPrelimsCards');
   const p2El = document.getElementById('dashMainsCards');
-  if (p1El) {
-    p1El.innerHTML = prelimsSubjects.slice(0,3).map(s => `
-      <div class="k-card" onclick="nav('syllabus')">
-        <div class="kc-name">${s.icon} ${s.subject.split('—')[1]?.trim() || s.subject}</div>
-        <div class="kc-desc">${s.exam_strategy.substring(0,60)}…</div>
-        <div class="kc-meta"><span class="kc-date">${s.topics.length} topics</span><span style="font-size:10px;color:var(--text3)">${s.total_estimated_hours}h</span></div>
-      </div>`).join('');
-  }
-  if (p2El) {
-    p2El.innerHTML = mainsSubjects.slice(0,3).map((s,i) => `
-      <div class="k-card ${i===0?'featured':''}" onclick="nav('syllabus')">
-        <div class="kc-name">${s.icon} ${s.subject.split('—')[1]?.trim() || s.subject}</div>
-        <div class="kc-desc">${s.exam_strategy.substring(0,60)}…</div>
-        <div class="kc-meta"><span class="kc-date">${s.topics.length} topics</span></div>
-      </div>`).join('');
-  }
+  if (p1El) p1El.innerHTML = prelimsSubjects.slice(0,3).map(s => `
+    <div class="k-card" onclick="nav('syllabus')">
+      <div class="kc-name">${s.icon} ${s.subject.split('—')[1]?.trim() || s.subject}</div>
+      <div class="kc-desc">${s.exam_strategy.substring(0,60)}…</div>
+      <div class="kc-meta"><span class="kc-date">${s.topics.length} topics</span><span style="font-size:10px;color:var(--text3)">${s.total_estimated_hours}h</span></div>
+    </div>`).join('');
+  if (p2El) p2El.innerHTML = mainsSubjects.slice(0,2).map((s,i) => `
+    <div class="k-card ${i===0?'featured':''}" onclick="nav('syllabus')">
+      <div class="kc-name">${s.icon} ${s.subject.split('—')[1]?.trim() || s.subject}</div>
+      <div class="kc-desc">${s.exam_strategy.substring(0,60)}…</div>
+      <div class="kc-meta"><span class="kc-date">${s.topics.length} topics</span></div>
+    </div>`).join('');
 }
 
 function loadSubjectPerf() {
@@ -1308,13 +1112,12 @@ function loadSubjectPerf() {
   if (!el) return;
   el.innerHTML = allSubjects.map(s => {
     const hp = s.topics.filter(t => t.high_priority).length;
-    const total = s.topics.length;
-    const pct = Math.round((hp / total) * 100);
+    const pct = Math.round((hp / s.topics.length) * 100);
     const col = s.color || 'var(--accent)';
     return `<div class="perf-bar-item">
       <div class="pb-head">
         <div class="pb-name">${s.icon} ${s.subject.length > 35 ? s.subject.substring(0,35)+'…' : s.subject}</div>
-        <div class="pb-pct" style="color:${col}">${hp}/${total} HP</div>
+        <div class="pb-pct" style="color:${col}">${hp}/${s.topics.length} HP</div>
       </div>
       <div class="pb-track"><div class="pb-fill" style="width:${pct}%;background:${col}"></div></div>
     </div>`;
@@ -1328,10 +1131,7 @@ function buildPriorityTopics() {
   el.innerHTML = hp.map(t => `
     <div style="display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer" onclick="openTopicDrawer('${t.topic_id}')">
       <span>${t.subject_obj.icon}</span>
-      <div style="flex:1">
-        <div style="font-size:12.5px;font-weight:600;color:var(--text1)">${t.topic}</div>
-        <div style="font-size:10px;color:var(--text3)">${t.subject_obj.subject.split('—')[1]?.trim() || t.subject_obj.subject}</div>
-      </div>
+      <div style="flex:1"><div style="font-size:12.5px;font-weight:600;color:var(--text1)">${t.topic}</div><div style="font-size:10px;color:var(--text3)">${t.subject_obj.subject.split('—')[1]?.trim() || t.subject_obj.subject}</div></div>
       <span class="pyq-badge pyq-5">★★★★★</span>
     </div>`).join('');
 }
@@ -1345,7 +1145,7 @@ function buildDailyPlan() {
   let done = JSON.parse(localStorage.getItem(key) || '[]');
   el.innerHTML = `
     <div style="font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;background:${plan.badge_color};color:#fff;display:inline-block;margin-bottom:8px">${plan.badge} Day</div>
-    ${[plan.focus_1, plan.focus_2, plan.focus_3].map((f, i) => `
+    ${[plan.focus_1, plan.focus_2, plan.focus_3].map((f,i) => `
     <div style="display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid var(--border)">
       <div onclick="toggleDailyTask(${i},this)" style="width:18px;height:18px;border-radius:5px;border:1.5px solid ${done.includes(i)?'var(--green)':'var(--border2)'};background:${done.includes(i)?'var(--green)':'transparent'};cursor:pointer;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:#0d0d1a;transition:all 0.15s ease">${done.includes(i)?'✓':''}</div>
       <div style="font-size:11.5px;color:var(--text2);flex:1;line-height:1.4">${f}</div>
@@ -1374,7 +1174,6 @@ function renderSyllabus() {
     <button class="btn btn-outline btn-sm" onclick="filterSyllabus('hp',this)">🔴 High Priority</button>
     <div style="margin-left:auto;font-size:11px;color:var(--text3)" id="syllabusProgressLabel"></div>
   </div><div id="syllabusSubjectList">`;
-
   allSubjects.forEach(s => {
     const totalHP = s.topics.filter(t => t.high_priority).length;
     html += `<div class="topic-table-wrap" data-phase="${s.phase}" data-id="${s.subject_id}">
@@ -1391,8 +1190,7 @@ function renderSyllabus() {
     s.topics.forEach(t => {
       const visited = JSON.parse(localStorage.getItem('jkpsc_visited_topics') || '[]');
       const isVisited = visited.includes(t.topic_id);
-      const hpFlag = t.high_priority ? ' style="border-left:2px solid var(--red)"' : '';
-      html += `<div class="topic-row"${hpFlag} onclick="openTopicDrawer('${t.topic_id}')" id="tr_${t.topic_id}">
+      html += `<div class="topic-row" ${t.high_priority?'style="border-left:2px solid var(--red)"':''} onclick="openTopicDrawer('${t.topic_id}')" id="tr_${t.topic_id}">
         <div class="tr-order" style="${t.high_priority?'border-color:var(--red);color:var(--red)':''}">${t.recommended_study_order}</div>
         <div class="tr-name">${t.topic}</div>
         <div class="tr-badges">
@@ -1419,8 +1217,7 @@ function filterSyllabus(filter, btn) {
   document.querySelectorAll('#syllabusContent .btn').forEach(b => b.className = 'btn btn-outline btn-sm');
   if (btn) btn.className = 'btn btn-dark btn-sm';
   document.querySelectorAll('[data-phase]').forEach(el => {
-    if (filter === 'all' || filter === 'hp') el.style.display = '';
-    else el.style.display = el.dataset.phase === filter ? '' : 'none';
+    el.style.display = (filter === 'all' || filter === 'hp') ? '' : (el.dataset.phase === filter ? '' : 'none');
   });
 }
 
@@ -1467,7 +1264,6 @@ function openTopicDrawer(topicId) {
   document.getElementById('topicDrawer').classList.add('open');
   document.getElementById('drawerOverlay').classList.add('open');
 }
-
 function closeDrawer() {
   document.getElementById('topicDrawer').classList.remove('open');
   document.getElementById('drawerOverlay').classList.remove('open');
@@ -1479,31 +1275,17 @@ function renderPlanner() {
   if (!el) return;
   const plan = SYLLABUS_DB.study_plans.nine_month_plan;
   const weekly = SYLLABUS_DB.study_plans.weekly_plan;
-
-  let html = `<div class="notif-banner info" style="margin-bottom:18px">
-    <span class="nb-ico">📅</span>
-    <div><div class="nb-ttl">9-Month Roadmap — Active</div><div class="nb-msg">March 2026 → November/December 2026 Prelims. Stay consistent — 4–5 hours daily is enough to crack it.</div></div>
-  </div>
+  let html = `<div class="notif-banner info" style="margin-bottom:18px"><span class="nb-ico">📅</span><div><div class="nb-ttl">9-Month Roadmap — Active</div><div class="nb-msg">March 2026 → November/December 2026 Prelims. Stay consistent — 4–5 hours daily is enough to crack it.</div></div></div>
   <h3 style="font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--text1);margin-bottom:12px">🗓️ 5-Phase Study Roadmap</h3>`;
-
   plan.phases.forEach(p => {
     html += `<div class="phase-card" style="--_color:${p.color}">
-      <div class="phase-header">
-        <div class="phase-name">${p.phase}</div>
-        <div class="phase-days" style="background:${p.color}">${p.days}</div>
-      </div>
+      <div class="phase-header"><div class="phase-name">${p.phase}</div><div class="phase-days" style="background:${p.color}">${p.days}</div></div>
       <div class="phase-target">🎯 ${p.target}</div>
       <div class="phase-focus">${p.focus.map(f=>`<div class="pf-item" style="--_color:${p.color}">${f}</div>`).join('')}</div>
-      <div class="phase-footer">
-        <span class="pf-pill">⏰ ${p.daily_hours}h/day</span>
-        <span class="pf-pill">📝 ${p.mock_tests}</span>
-      </div>
+      <div class="phase-footer"><span class="pf-pill">⏰ ${p.daily_hours}h/day</span><span class="pf-pill">📝 ${p.mock_tests}</span></div>
     </div>`;
   });
-
-  html += `<h3 style="font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--text1);margin:20px 0 12px">📆 Weekly Schedule</h3>
-    <div class="week-grid">`;
-
+  html += `<h3 style="font-family:'Fraunces',serif;font-size:18px;font-weight:700;color:var(--text1);margin:20px 0 12px">📆 Weekly Schedule</h3><div class="week-grid">`;
   weekly.days.forEach((d, i) => {
     const todayDay = new Date().getDay();
     const isToday = (todayDay === 0 ? 6 : todayDay - 1) === i;
@@ -1519,27 +1301,6 @@ function renderPlanner() {
     </div>`;
   });
   html += `</div>`;
-
-  html += `<div class="g2" style="margin-top:16px">
-    <div class="card">
-      <div class="card-ttl" style="margin-bottom:10px">⭐ Must-Do Topics for Prelims</div>
-      ${["J&K History (Dogra Period + Accession 1947 + Article 370)","J&K Geography (Rivers, Passes, Lakes, Valleys)","Indian Polity (Fundamental Rights, Parliament, J&K governance)","J&K Current Affairs (last 12 months)","Indian Economy (GDP, Inflation, Budget basics)","Environment & Ecology (National Parks of J&K)","CSAT Reading Comprehension (33% qualifying)","Government Schemes in J&K","J&K Flora & Fauna (Hangul, State symbols)"].map(t=>`<div style="display:flex;gap:7px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--accent);flex-shrink:0">★</span><div style="font-size:12px;color:var(--text1)">${t}</div></div>`).join('')}
-    </div>
-    <div class="card">
-      <div class="card-ttl" style="margin-bottom:10px">📚 Recommended Books</div>
-      ${[
-        "J&K History: Bamzai's History of Kashmir + NCERT",
-        "Indian Polity: M. Laxmikanth (Essential)",
-        "Geography: NCERT Class 11–12 + GC Leong",
-        "Indian Economy: Ramesh Singh + Economic Survey",
-        "Environment: Shankar IAS Environment PDF (Free)",
-        "Current Affairs: Rising Kashmir + AffairsCloud Monthly",
-        "CSAT: RS Aggarwal Verbal & Non-Verbal Reasoning",
-        "Previous Year Papers: JKPSC Official PYQs"
-      ].map(t=>`<div style="display:flex;gap:7px;align-items:flex-start;padding:6px 0;border-bottom:1px solid var(--border)"><span style="color:var(--teal);flex-shrink:0">📘</span><div style="font-size:12px;color:var(--text2)">${t}</div></div>`).join('')}
-    </div>
-  </div>`;
-
   el.innerHTML = html;
 }
 
@@ -1549,7 +1310,6 @@ function loadPYQSubjects() {
   if (!el || el.children.length > 1) return;
   allSubjects.forEach(s => { el.innerHTML += `<option value="${s.subject_id}">${s.icon} ${s.subject}</option>`; });
 }
-
 function updatePyqTopics() {
   const sid = document.getElementById('pyqSubject').value;
   const topicEl = document.getElementById('pyqTopic');
@@ -1559,7 +1319,6 @@ function updatePyqTopics() {
   if (!subj) return;
   subj.topics.forEach(t => topicEl.innerHTML += `<option value="${t.topic}">${t.topic}</option>`);
 }
-
 function renderPYQInsights() {
   const el = document.getElementById('pyqInsights');
   if (!el) return;
@@ -1583,8 +1342,8 @@ async function generatePYQ() {
   btn.textContent = '⏳ Generating…'; btn.disabled = true;
   document.getElementById('pyqResults').innerHTML = `<div class="loading"><div class="spin"></div> Generating JKPSC style questions on "${topicStr}"…</div>`;
   try {
-    const questions = await callAI(`JKPSC CCE Prelims style: ${topicStr}`, count);
-    if (questions?.length) renderGenQs(questions, `JKPSC Style: ${topicStr}`, 'pyqResults');
+    const data = await apiPost('/api/ai/generate', { topic: `JKPSC CCE Prelims style: ${topicStr}`, num_questions: count, subject_id: subjectId, save: false });
+    if (data.questions?.length) renderGenQs(data.questions, `JKPSC Style: ${topicStr}`, 'pyqResults');
     else document.getElementById('pyqResults').innerHTML = `<div class="empty"><div class="empty-icon">❌</div><div class="empty-msg">Generation failed. Try a different topic.</div></div>`;
   } catch(e) { document.getElementById('pyqResults').innerHTML = `<div class="empty"><div class="empty-icon">❌</div><div class="empty-msg">Error: ${e.message}</div></div>`; }
   btn.textContent = '🤖 Generate JKPSC Style Questions'; btn.disabled = false;
@@ -1610,12 +1369,12 @@ async function generatePractice() {
   if (!topic) { toast('Enter a topic first', 'error'); return; }
   const btn = document.getElementById('genBtn');
   btn.textContent = '⏳…'; btn.disabled = true;
-  document.getElementById('genResults').innerHTML = `<div class="loading"><div class="spin"></div> Generating on "${topic}"…</div>`;
+  document.getElementById('genResults').innerHTML = `<div class="loading"><div class="spin"></div> Generating on "${topic}" via Groq…</div>`;
   try {
-    const questions = await callAI(`JKPSC CCE level: ${topic}`, Math.min(count, 10));
-    if (questions?.length) renderGenQs(questions, topic, 'genResults');
+    const data = await apiPost('/api/ai/generate', { topic: `JKPSC CCE level: ${topic}`, num_questions: Math.min(count, 10), save: false });
+    if (data.questions?.length) renderGenQs(data.questions, topic, 'genResults');
     else document.getElementById('genResults').innerHTML = `<div class="empty"><div class="empty-icon">⚠️</div><div class="empty-msg">No questions generated. Try rephrasing.</div></div>`;
-  } catch(e) { toast('Error: ' + e.message, 'error'); }
+  } catch(e) { toast('Error: ' + e.message, 'error'); document.getElementById('genResults').innerHTML = ''; }
   btn.textContent = '✨ Generate'; btn.disabled = false;
 }
 
@@ -1623,58 +1382,6 @@ function quickGenerate(topic) {
   document.getElementById('genTopic').value = topic;
   nav('generate');
   setTimeout(generatePractice, 100);
-}
-
-// ── ANTHROPIC AI ──
-async function callAI(topic, numQuestions) {
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      messages: [{
-        role: "user",
-        content: `You are an expert JKPSC CCE exam question creator. Generate ${numQuestions} multiple-choice questions for the JKPSC CCE Prelims exam on the topic: "${topic}".
-
-IMPORTANT: Return ONLY a valid JSON array, no other text. Each object must have exactly:
-- question_text (string)
-- option_a (string)
-- option_b (string)  
-- option_c (string)
-- option_d (string)
-- correct_option (one of: A, B, C, or D)
-- explanation (string, 1-2 sentences)
-- difficulty (one of: easy, medium, hard)
-
-Focus on J&K specific knowledge, Indian polity, history, geography, and general awareness relevant to the JKPSC CCE exam. Make questions factually accurate.`
-      }]
-    })
-  });
-  const data = await response.json();
-  const text = data.content?.map(i => i.text || "").join("") || "";
-  const clean = text.replace(/```json|```/g, "").trim();
-  const startIdx = clean.indexOf('[');
-  if (startIdx === -1) throw new Error('No JSON array in response');
-  const parsed = JSON.parse(clean.substring(startIdx));
-  return parsed.filter(q => q.question_text && q.option_a && q.correct_option && ['A','B','C','D'].includes(q.correct_option.toUpperCase()));
-}
-
-async function callAITutor(message, history) {
-  const messages = history.slice(-10).filter(h => h.role && h.content);
-  messages.push({ role: "user", content: `[JKPSC CCE 2026] ${message}` });
-  const response = await fetch("https://api.anthropic.com/v1/messages", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      model: "claude-sonnet-4-20250514",
-      max_tokens: 1000,
-      system: "You are an expert JKPSC CCE 2026 exam tutor based in Jammu & Kashmir. You specialise in J&K History, Indian Polity (M. Laxmikanth), Geography, Indian Economy, Environment & Ecology, and JKPSC exam strategy. The student is from Kashmir, has done BCom, wants to become a KAS Officer, and is preparing for Prelims in November/December 2026. Give clear, encouraging, exam-focused answers. Include J&K-specific examples where relevant.",
-      messages
-    })
-  });
-  const data = await response.json();
-  return data.content?.map(i => i.text || "").join("") || "Sorry, could not get a response.";
 }
 
 // ── RENDER QUESTIONS ──
@@ -1703,7 +1410,6 @@ function toggleExp(uid) {
   const el = document.getElementById(uid + '_exp');
   if (el) el.style.display = el.style.display !== 'none' ? 'none' : 'block';
 }
-
 function revealQ(uid, sel, correct) {
   document.querySelectorAll(`#${uid}_opts .q-opt`).forEach((opt, i) => {
     const k = ['A','B','C','D'][i];
@@ -1713,7 +1419,6 @@ function revealQ(uid, sel, correct) {
   const expEl = document.getElementById(uid + '_exp');
   if (expEl) expEl.style.display = 'block';
 }
-
 function renderGenQs(qs, title, containerId) {
   const el = document.getElementById(containerId);
   if (!el) return;
@@ -1722,7 +1427,7 @@ function renderGenQs(qs, title, containerId) {
     ${qs.map((q,i) => genQHTML(q,i)).join('')}
     <div style="margin-top:14px;display:flex;gap:7px;flex-wrap:wrap">
       <button class="btn btn-teal btn-sm" onclick='startMiniQuiz(${JSON.stringify(qs).replace(/'/g,"&#39;")})'>⚡ Take as Quiz</button>
-      <button class="btn btn-outline btn-sm" onclick="quickGenerate('${title.substring(0,40)}')">✨ More Like This</button>
+      <button class="btn btn-outline btn-sm" onclick="quickGenerate('${title.substring(0,40).replace(/'/g,'')}')">✨ More Like This</button>
     </div>
   </div>`;
 }
@@ -1730,17 +1435,23 @@ function renderGenQs(qs, title, containerId) {
 // ── QUIZ ──
 async function startSubjectQuiz(subjectId, subjectName) {
   nav('quiz');
-  document.getElementById('quizContent').innerHTML = `<div class="loading"><div class="spin"></div> Generating questions for ${subjectName}…</div>`;
+  document.getElementById('quizContent').innerHTML = `<div class="loading"><div class="spin"></div> Generating questions for ${subjectName} via Groq…</div>`;
   try {
     const subj = allSubjects.find(s => s.subject_id == subjectId);
     const topic = subj ? subj.subject : subjectName;
-    const qs = await callAI(`JKPSC CCE Prelims questions on ${topic}`, 10);
-    const questions = qs.map((q, i) => ({...q, id: `q_${subjectId}_${i}`, correct_option: q.correct_option.toUpperCase()}));
-    S.quizQs = questions; S.quizAnswers = {}; S.quizSubjectId = subjectId; S.quizStart = Date.now();
-    S.quizSubjectName = subjectName;
+    const data = await apiPost('/api/ai/generate', {
+      topic: `JKPSC CCE Prelims questions on ${topic}`,
+      num_questions: 10, subject_id: subjectId, save: false
+    });
+    const questions = (data.questions || []).map((q, i) => ({
+      ...q, id: `ai_${subjectId}_${i}`, correct_option: q.correct_option.toUpperCase()
+    }));
+    if (!questions.length) throw new Error('No questions returned');
+    S.quizQs = questions; S.quizAnswers = {}; S.quizSubjectId = subjectId;
+    S.quizStart = Date.now(); S.quizSubjectName = subjectName;
     renderQuizQ(0);
   } catch(e) {
-    document.getElementById('quizContent').innerHTML = `<div class="empty"><div class="empty-icon">❌</div><div class="empty-msg">Error generating quiz: ${e.message}</div><button class="btn btn-accent" onclick="showQuizSelection()">← Back</button></div>`;
+    document.getElementById('quizContent').innerHTML = `<div class="empty"><div class="empty-icon">❌</div><div class="empty-msg">Error: ${e.message}</div><button class="btn btn-accent" onclick="showQuizSelection()">← Back</button></div>`;
   }
 }
 
@@ -1778,20 +1489,35 @@ function renderQuizQ(idx) {
 
 function pickAnswer(qid, opt, idx) { S.quizAnswers[qid] = opt; renderQuizQ(idx); }
 
-function submitQuiz() {
+async function submitQuiz() {
   const time = Math.floor((Date.now() - S.quizStart) / 1000);
   let correct = 0, wrong = 0, skipped = 0;
+  const answers = {};
   S.quizQs.forEach(q => {
     const sel = S.quizAnswers[q.id];
+    answers[q.id] = sel || null;
     if (!sel) skipped++;
     else if (sel === q.correct_option) correct++;
     else wrong++;
   });
   const total = correct + wrong + skipped;
   const pct = total > 0 ? Math.round(correct / total * 100) : 0;
-  // Save to history
-  S.quizHistory.push({ subject: S.quizSubjectName || 'Unknown', score_percent: pct, correct, wrong, skipped, time, date: new Date().toISOString() });
-  localStorage.setItem('jkpsc_quiz_history', JSON.stringify(S.quizHistory));
+
+  // Save to DB (with inline questions for AI-generated ones)
+  try {
+    await apiPost('/api/quiz/submit', {
+      subject_id: S.quizSubjectId,
+      answers,
+      time_taken_seconds: time,
+      questions: S.quizQs  // send full questions so backend can grade AI-generated ones
+    });
+    toast('Result saved to database! 💾', 'success');
+  } catch {
+    // fallback: save to localStorage
+    saveLocalHistory({ subject: S.quizSubjectName, score_percent: pct, correct, wrong, skipped, time, date: new Date().toISOString() });
+    toast('Saved locally (DB offline)', 'info');
+  }
+
   showQuizResult({ score_percent: pct, correct, wrong, skipped, time_taken_seconds: time });
 }
 
@@ -1822,7 +1548,7 @@ function showQuizResult(d) {
 
 function showQuizSelection() {
   document.getElementById('quizContent').innerHTML = `
-    <div style="margin-bottom:16px;font-size:9.5px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px">Select a subject — AI will generate 10 JKPSC-level questions</div>
+    <div style="margin-bottom:16px;font-size:9.5px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:1.5px">Select a subject — AI will generate 10 JKPSC-level questions via Groq</div>
     <div class="g-auto">
       ${allSubjects.map(s => `
         <div class="subj-card" style="--_color:${s.color||'var(--accent)'}" onclick="startSubjectQuiz(${s.subject_id},'${s.subject.replace(/'/g,"\\'")}')">
@@ -1836,12 +1562,12 @@ function showQuizSelection() {
 
 function startMiniQuiz(questions) {
   nav('quiz');
-  const qs = questions.map((q, i) => ({...q, id: 'ai_'+i, correct_option: (q.correct_option||'A').toUpperCase()}));
+  const qs = questions.map((q, i) => ({...q, id: 'ai_mini_'+i, correct_option: (q.correct_option||'A').toUpperCase()}));
   S.quizQs = qs; S.quizAnswers = {}; S.quizSubjectId = 0; S.quizStart = Date.now(); S.quizSubjectName = 'AI Practice';
   renderQuizQ(0);
 }
 
-// ── AI TUTOR ──
+// ── AI TUTOR (via Flask backend) ──
 async function sendChat() {
   const input = document.getElementById('chatInput');
   const msg = input.value.trim();
@@ -1852,14 +1578,12 @@ async function sendChat() {
   const loadId = 'ai_loading_' + Date.now();
   appendBubble('<div class="loading" style="padding:4px;display:inline-flex;gap:6px"><div class="spin"></div> Thinking…</div>', 'ai', loadId);
   try {
-    const reply = await callAITutor(msg, S.chatHistory.slice(-10));
-    updateBubble(loadId, reply);
-    S.chatHistory.push({role: 'assistant', content: reply});
+    const data = await apiPost('/api/ai/tutor', { message: msg, history: S.chatHistory.slice(-10) });
+    updateBubble(loadId, data.reply || 'No response.');
+    S.chatHistory.push({role: 'assistant', content: data.reply});
   } catch(e) { updateBubble(loadId, 'Error: ' + e.message + '. Please try again.'); }
 }
-
 function quickChat(msg) { document.getElementById('chatInput').value = msg; sendChat(); }
-
 function appendBubble(text, role, id = null) {
   const el = document.createElement('div');
   el.className = `cbubble ${role}`;
@@ -1869,7 +1593,6 @@ function appendBubble(text, role, id = null) {
   msgs.appendChild(el);
   msgs.scrollTop = 99999;
 }
-
 function updateBubble(id, text) {
   const el = document.getElementById(id);
   if (el) { el.innerHTML = `<span class="ai-chip">JKPSC AI TUTOR</span><br>${text.replace(/\n/g,'<br>')}`; el.removeAttribute('id'); }
@@ -1878,51 +1601,95 @@ function updateBubble(id, text) {
 }
 
 // ── ANALYTICS ──
-function loadAnalytics() {
+async function loadAnalytics() {
   const el = document.getElementById('analyticsContent');
-  const hist = S.quizHistory;
-  if (!hist.length) {
-    el.innerHTML = `<div class="empty"><div class="empty-icon">📊</div><div class="empty-msg">No attempts yet</div><div class="empty-sub">Complete mock tests to see analytics</div><button class="btn btn-accent" onclick="nav('quiz')">⚡ Start Mock Test</button></div>`;
-    return;
+  try {
+    const data = await apiGet('/api/analytics');
+    const o = data.overall || {};
+    const total = o.total_attempts || 0;
+    el.innerHTML = `
+      <div class="stat-row">
+        <div class="stat-card" style="--_color:var(--teal)"><span class="stat-icon">🎯</span><div class="stat-val">${total}</div><div class="stat-label">Total Attempts</div></div>
+        <div class="stat-card" style="--_color:var(--accent)"><span class="stat-icon">📊</span><div class="stat-val">${o.overall_avg||0}%</div><div class="stat-label">Average Score</div></div>
+        <div class="stat-card" style="--_color:var(--green)"><span class="stat-icon">✅</span><div class="stat-val">${o.total_correct||0}</div><div class="stat-label">Total Correct</div></div>
+        <div class="stat-card" style="--_color:var(--red)"><span class="stat-icon">❌</span><div class="stat-val">${o.total_wrong||0}</div><div class="stat-label">Total Wrong</div></div>
+      </div>
+      <div class="card">
+        <div class="card-ttl" style="margin-bottom:14px">📊 Performance by Subject</div>
+        ${(data.subject_stats||[]).filter(s => s.attempts > 0).map(s => {
+          const col = s.accuracy >= 70 ? 'var(--green)' : s.accuracy >= 50 ? 'var(--accent)' : 'var(--red)';
+          return `<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)">
+            <div style="flex:1"><div style="font-size:12.5px;font-weight:600;color:var(--text1)">${s.name}</div><div style="font-size:10px;color:var(--text3)">${s.attempts} attempts · Best: ${s.best_score}%</div></div>
+            <div class="pb-track" style="width:120px;height:6px"><div class="pb-fill" style="width:${s.accuracy}%;background:${col}"></div></div>
+            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:${col};width:44px;text-align:right">${s.accuracy}%</span>
+          </div>`;
+        }).join('') || '<div style="padding:14px;font-size:12px;color:var(--text3)">No subject data yet</div>'}
+      </div>
+      ${data.score_trend?.length ? `<div class="card" style="margin-top:14px">
+        <div class="card-ttl" style="margin-bottom:14px">📈 Recent Score Trend</div>
+        ${data.score_trend.slice(-10).map(r => {
+          const pct = parseFloat(r.score_percent||0);
+          const col = pct >= 70 ? 'var(--green)' : pct >= 50 ? 'var(--accent)' : 'var(--red)';
+          return `<div style="display:flex;align-items:center;gap:12px;padding:7px 0;border-bottom:1px solid var(--border)">
+            <div style="flex:1"><div style="font-size:12px;font-weight:600;color:var(--text1)">${r.subject_name||'Unknown'}</div><div style="font-size:10px;color:var(--text3)">${r.attempted_at?.split('T')[0]||''}</div></div>
+            <div class="pb-track" style="width:120px;height:6px"><div class="pb-fill" style="width:${pct}%;background:${col}"></div></div>
+            <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:${col};width:40px;text-align:right">${pct}%</span>
+          </div>`;
+        }).join('')}
+      </div>` : ''}`;
+  } catch {
+    // fallback to localStorage
+    const hist = getLocalHistory();
+    if (!hist.length) {
+      el.innerHTML = `<div class="empty"><div class="empty-icon">📊</div><div class="empty-msg">No attempts yet</div><div class="empty-sub">Complete mock tests to see analytics</div><button class="btn btn-accent" onclick="nav('quiz')">⚡ Start Mock Test</button></div>`;
+      return;
+    }
+    const avg = Math.round(hist.reduce((a,r) => a + r.score_percent, 0) / hist.length);
+    const best = Math.max(...hist.map(r => r.score_percent));
+    el.innerHTML = `
+      <div class="notif-banner info"><span class="nb-ico">ℹ️</span><div><div class="nb-ttl">Showing local data</div><div class="nb-msg">Database offline — showing localStorage history.</div></div></div>
+      <div class="stat-row">
+        <div class="stat-card" style="--_color:var(--teal)"><span class="stat-icon">🎯</span><div class="stat-val">${hist.length}</div><div class="stat-label">Total Attempts</div></div>
+        <div class="stat-card" style="--_color:var(--accent)"><span class="stat-icon">📊</span><div class="stat-val">${avg}%</div><div class="stat-label">Average Score</div></div>
+        <div class="stat-card" style="--_color:var(--green)"><span class="stat-icon">🏆</span><div class="stat-val">${best}%</div><div class="stat-label">Best Score</div></div>
+      </div>`;
   }
-  const total = hist.length;
-  const avg = Math.round(hist.reduce((a,r) => a + r.score_percent, 0) / total);
-  const best = Math.max(...hist.map(r => r.score_percent));
-  const totalCorrect = hist.reduce((a,r) => a + r.correct, 0);
-  el.innerHTML = `
-    <div class="stat-row">
-      <div class="stat-card" style="--_color:var(--teal)"><span class="stat-icon">🎯</span><div class="stat-val">${total}</div><div class="stat-label">Total Attempts</div></div>
-      <div class="stat-card" style="--_color:var(--accent)"><span class="stat-icon">📊</span><div class="stat-val">${avg}%</div><div class="stat-label">Average Score</div></div>
-      <div class="stat-card" style="--_color:var(--green)"><span class="stat-icon">✅</span><div class="stat-val">${best}%</div><div class="stat-label">Best Score</div></div>
-      <div class="stat-card" style="--_color:var(--purple)"><span class="stat-icon">✓</span><div class="stat-val">${totalCorrect}</div><div class="stat-label">Total Correct</div></div>
-    </div>
-    <div class="card">
-      <div class="card-ttl" style="margin-bottom:14px">📈 Recent Performance</div>
-      ${hist.slice(-10).reverse().map(r => {
-        const col = r.score_percent >= 70 ? 'var(--green)' : r.score_percent >= 50 ? 'var(--accent)' : 'var(--red)';
-        return `<div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid var(--border)">
-          <div style="flex:1"><div style="font-size:12.5px;font-weight:600;color:var(--text1)">${r.subject}</div><div style="font-size:10px;color:var(--text3)">${new Date(r.date).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div></div>
-          <div class="pb-track" style="width:120px;height:6px"><div class="pb-fill" style="width:${r.score_percent}%;background:${col}"></div></div>
-          <span style="font-family:'Space Mono',monospace;font-size:12px;font-weight:700;color:${col};width:40px;text-align:right">${r.score_percent}%</span>
-        </div>`;
-      }).join('')}
-    </div>`;
 }
 
 // ── HISTORY ──
-function loadHistory() {
+async function loadHistory() {
   const tbody = document.getElementById('historyBody');
-  if (!S.quizHistory.length) { tbody.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:20px;color:var(--text3)">No attempts yet</td></tr>`; return; }
-  tbody.innerHTML = S.quizHistory.slice().reverse().map(r => {
-    const col = r.score_percent >= 70 ? 'var(--green)' : r.score_percent >= 50 ? 'var(--accent)' : 'var(--red)';
-    return `<tr>
-      <td>📚 ${r.subject}</td>
-      <td><span style="font-weight:700;color:${col};font-family:'Space Mono',monospace">${r.score_percent}%</span></td>
-      <td style="color:var(--green)">${r.correct}</td>
-      <td style="color:var(--red)">${r.wrong}</td>
-      <td style="color:var(--text3)">${new Date(r.date).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</td>
-    </tr>`;
-  }).join('');
+  try {
+    const hist = await apiGet('/api/history?limit=30');
+    if (!hist.length) { tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--text3)">No attempts yet</td></tr>`; return; }
+    tbody.innerHTML = hist.map(r => {
+      const pct = parseFloat(r.score_percent||0);
+      const col = pct >= 70 ? 'var(--green)' : pct >= 50 ? 'var(--accent)' : 'var(--red)';
+      return `<tr>
+        <td>${r.icon||'📚'} ${r.subject_name||'Unknown'}</td>
+        <td><span style="font-weight:700;color:${col};font-family:'Space Mono',monospace">${pct}%</span></td>
+        <td style="color:var(--green)">${r.correct_answers||0}</td>
+        <td style="color:var(--red)">${r.wrong_answers||0}</td>
+        <td style="color:var(--text3)">${(r.attempted_at||'').split('T')[0] || r.attempted_at?.split(' ')[0] || ''}</td>
+        <td><span style="font-size:10px;color:var(--text3)">🗄️ DB</span></td>
+      </tr>`;
+    }).join('');
+  } catch {
+    // fallback localStorage
+    const hist = getLocalHistory();
+    if (!hist.length) { tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--text3)">No attempts yet</td></tr>`; return; }
+    tbody.innerHTML = hist.slice().reverse().map(r => {
+      const col = r.score_percent >= 70 ? 'var(--green)' : r.score_percent >= 50 ? 'var(--accent)' : 'var(--red)';
+      return `<tr>
+        <td>📚 ${r.subject}</td>
+        <td><span style="font-weight:700;color:${col};font-family:'Space Mono',monospace">${r.score_percent}%</span></td>
+        <td style="color:var(--green)">${r.correct}</td>
+        <td style="color:var(--red)">${r.wrong}</td>
+        <td style="color:var(--text3)">${new Date(r.date).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</td>
+        <td><span style="font-size:10px;color:var(--orange)">📱 Local</span></td>
+      </tr>`;
+    }).join('');
+  }
 }
 
 // ── NOTES ──
@@ -1936,14 +1703,12 @@ function renderNotes() {
       <div class="ni-tag">${n.tag||'No subject'} · ${new Date(n.updated).toLocaleDateString('en-IN',{day:'numeric',month:'short'})}</div>
     </div>`).join('');
 }
-
 function addNote() {
   const id = 'note_' + Date.now();
   S.notes.unshift({id, title:'New Note', body:'', tag:'', updated: Date.now()});
   localStorage.setItem('jkpsc_notes', JSON.stringify(S.notes));
   openNote(id); renderNotes();
 }
-
 function openNote(id) {
   const n = S.notes.find(x => x.id === id);
   if (!n) return;
@@ -1955,7 +1720,6 @@ function openNote(id) {
   document.getElementById('noteEmpty').style.display = 'none';
   renderNotes();
 }
-
 function saveNote() {
   if (!S.activeNote) return;
   const i = S.notes.findIndex(n => n.id === S.activeNote);
@@ -1967,7 +1731,6 @@ function saveNote() {
   localStorage.setItem('jkpsc_notes', JSON.stringify(S.notes));
   renderNotes(); toast('Note saved!', 'success');
 }
-
 function deleteNote() {
   if (!S.activeNote || !confirm('Delete this note?')) return;
   S.notes = S.notes.filter(n => n.id !== S.activeNote);
@@ -1978,7 +1741,7 @@ function deleteNote() {
   renderNotes();
 }
 
-// ── ADD QUESTION (local bank) ──
+// ── ADD QUESTION (POST to backend) ──
 function loadSubjectSelects() {
   ['addSubjectId','addAiSubject'].forEach(id => {
     const el = document.getElementById(id);
@@ -1986,43 +1749,49 @@ function loadSubjectSelects() {
     allSubjects.forEach(s => el.innerHTML += `<option value="${s.subject_id}">${s.icon} ${s.subject}</option>`);
   });
 }
-
-function addQuestion() {
-  const subject_id = document.getElementById('addSubjectId').value;
-  const question_text = document.getElementById('addQtext').value.trim();
-  const option_a = document.getElementById('addOa').value.trim();
-  const option_b = document.getElementById('addOb').value.trim();
-  const option_c = document.getElementById('addOc').value.trim();
-  const option_d = document.getElementById('addOd').value.trim();
-  const correct_option = document.getElementById('addCorrect').value;
-  const difficulty = document.getElementById('addDiff').value;
-  const explanation = document.getElementById('addExp').value.trim();
-  if (!subject_id || !question_text || !option_a || !option_b) { toast('Fill required fields', 'error'); return; }
-  const bank = JSON.parse(localStorage.getItem('jkpsc_question_bank') || '[]');
-  bank.push({ id: 'q_' + Date.now(), subject_id, question_text, option_a, option_b, option_c, option_d, correct_option, difficulty, explanation });
-  localStorage.setItem('jkpsc_question_bank', JSON.stringify(bank));
-  ['addQtext','addOa','addOb','addOc','addOd','addExp'].forEach(id => document.getElementById(id).value = '');
-  const msg = document.getElementById('addMsg');
-  if (msg) { msg.style.color = 'var(--green)'; msg.textContent = '✓ Question added to local bank!'; setTimeout(() => msg.textContent = '', 3000); }
-  toast('Question added!', 'success');
+async function addQuestion() {
+  const body = {
+    subject_id: document.getElementById('addSubjectId').value,
+    question_text: document.getElementById('addQtext').value.trim(),
+    option_a: document.getElementById('addOa').value.trim(),
+    option_b: document.getElementById('addOb').value.trim(),
+    option_c: document.getElementById('addOc').value.trim(),
+    option_d: document.getElementById('addOd').value.trim(),
+    correct_option: document.getElementById('addCorrect').value,
+    difficulty: document.getElementById('addDiff').value,
+    explanation: document.getElementById('addExp').value.trim()
+  };
+  if (!body.subject_id || !body.question_text || !body.option_a) { toast('Fill required fields', 'error'); return; }
+  try {
+    const data = await apiPost('/api/questions', body);
+    ['addQtext','addOa','addOb','addOc','addOd','addExp'].forEach(id => document.getElementById(id).value = '');
+    const msg = document.getElementById('addMsg');
+    if (msg) { msg.style.color = 'var(--green)'; msg.textContent = `✓ Question #${data.id} added to database!`; setTimeout(() => msg.textContent = '', 3000); }
+    toast('Question saved to DB!', 'success');
+  } catch(e) { toast('Error: ' + e.message, 'error'); }
 }
-
 async function aiGenerateAndSave() {
   const topic = document.getElementById('addAiTopic').value.trim();
+  const subject_id = document.getElementById('addAiSubject').value;
   const count = parseInt(document.getElementById('addAiCount').value) || 5;
-  if (!topic) { toast('Enter a topic', 'error'); return; }
-  document.getElementById('addAiResults').innerHTML = `<div class="loading"><div class="spin"></div> Generating…</div>`;
+  if (!topic || !subject_id) { toast('Enter topic and select subject', 'error'); return; }
+  document.getElementById('addAiResults').innerHTML = `<div class="loading"><div class="spin"></div> Generating via Groq…</div>`;
   try {
-    const qs = await callAI(`JKPSC CCE: ${topic}`, count);
-    const bank = JSON.parse(localStorage.getItem('jkpsc_question_bank') || '[]');
-    qs.forEach(q => bank.push({...q, id: 'q_' + Date.now() + Math.random(), correct_option: q.correct_option.toUpperCase()}));
-    localStorage.setItem('jkpsc_question_bank', JSON.stringify(bank));
-    document.getElementById('addAiResults').innerHTML = `<div class="notif-banner success"><span class="nb-ico">✅</span><div><div class="nb-ttl">Done!</div><div class="nb-msg">Generated & saved ${qs.length} questions to local bank.</div></div></div>`;
-    toast(`Saved ${qs.length} questions!`, 'success');
+    const data = await apiPost('/api/ai/generate', { topic: `JKPSC CCE: ${topic}`, num_questions: count, subject_id, save: true });
+    document.getElementById('addAiResults').innerHTML = `<div class="notif-banner success"><span class="nb-ico">✅</span><div><div class="nb-ttl">Done!</div><div class="nb-msg">Generated ${data.generated} questions, saved ${data.saved} to database.</div></div></div>`;
+    toast(`Saved ${data.saved} questions to DB!`, 'success');
   } catch(e) { document.getElementById('addAiResults').innerHTML = `<div class="notif-banner error"><span class="nb-ico">❌</span><div><div class="nb-ttl">Error</div><div class="nb-msg">${e.message}</div></div></div>`; }
 }
 
-// ── NAME PROMPT ──
+// ── LOCAL HISTORY HELPERS ──
+function getLocalHistory() { return JSON.parse(localStorage.getItem('jkpsc_quiz_history') || '[]'); }
+function saveLocalHistory(entry) {
+  const hist = getLocalHistory();
+  hist.push(entry);
+  localStorage.setItem('jkpsc_quiz_history', JSON.stringify(hist));
+}
+
+// ── NAME ──
 function promptName() {
   const n = prompt('Enter your name:', localStorage.getItem('jkpsc_username') || '');
   if (n && n.trim()) {
@@ -2050,7 +1819,7 @@ function toast(msg, type = 'info') {
 document.getElementById('tbSearchInput').addEventListener('input', function() {
   const q = this.value.toLowerCase().trim();
   if (!q) return;
-  const match = allTopics.find(t => t.topic.toLowerCase().includes(q) || (t.subject||'').toLowerCase().includes(q));
+  const match = allTopics.find(t => t.topic.toLowerCase().includes(q));
   if (match) { nav('syllabus'); setTimeout(() => openTopicDrawer(match.topic_id), 300); }
 });
 
@@ -2069,23 +1838,18 @@ function init() {
   updateUserStatus();
   setInterval(updateUserStatus, 30000);
   refreshSyllabusProgress();
+  checkDbStatus();
+  setInterval(checkDbStatus, 30000);
 
-  // User name
   const name = localStorage.getItem('jkpsc_username') || 'Aspirant';
-  const nameEl = document.getElementById('userName');
-  const name2El = document.getElementById('userName2');
-  const avatarEl = document.getElementById('userAvatar');
-  if (nameEl) nameEl.textContent = name;
-  if (name2El) name2El.textContent = name.split(' ')[0];
-  if (avatarEl) {
-    const initials = name.split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase();
-    avatarEl.innerHTML = initials + '<div class="su-dot"></div>';
-  }
+  document.getElementById('userName').textContent = name;
+  document.getElementById('userName2').textContent = name.split(' ')[0];
+  const initials = name.split(' ').map(w => w[0]).slice(0,2).join('').toUpperCase();
+  document.getElementById('userAvatar').innerHTML = initials + '<div class="su-dot"></div>';
 
   loadDashboard();
   buildQuickTopicsGrid();
 
-  // Layout fix
   const main = document.querySelector('.main');
   if (main && window.innerWidth > 900) {
     main.style.marginLeft = 'var(--sidebar-w)';
@@ -2096,13 +1860,8 @@ function init() {
 window.addEventListener('resize', () => {
   const main = document.querySelector('.main');
   if (!main) return;
-  if (window.innerWidth > 900) {
-    main.style.marginLeft = 'var(--sidebar-w)';
-    main.style.width = 'calc(100% - var(--sidebar-w))';
-  } else {
-    main.style.marginLeft = '0';
-    main.style.width = '100%';
-  }
+  if (window.innerWidth > 900) { main.style.marginLeft = 'var(--sidebar-w)'; main.style.width = 'calc(100% - var(--sidebar-w))'; }
+  else { main.style.marginLeft = '0'; main.style.width = '100%'; }
 });
 
 init();
