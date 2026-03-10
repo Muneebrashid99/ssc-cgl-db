@@ -653,6 +653,105 @@ body {
   .tb-pill { display: none; }
 }
 </style>
+
+<style id="patch-v52-styles">
+
+/* ─────────────────────────────────────────────────
+   FIX 1: SIDEBAR OVERLAP IN LIGHT MODE
+───────────────────────────────────────────────── */
+.app {
+  background: var(--bg) !important;
+  isolation: isolate;
+}
+.main {
+  background: var(--bg) !important;
+  position: relative !important;
+  transform: translateZ(0);
+  width: calc(100% - var(--sidebar-w)) !important;
+  max-width: calc(100% - var(--sidebar-w)) !important;
+}
+.topbar {
+  background: var(--bg2) !important;
+  z-index: 101 !important;
+}
+.sidebar {
+  z-index: 200 !important;
+  background: var(--bg2) !important;
+}
+.page-content {
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+}
+.dash-grid {
+  grid-template-columns: minmax(0, 1fr) 280px !important;
+  max-width: 100% !important;
+}
+@media (max-width: 900px) {
+  .main {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+}
+
+/* ─────────────────────────────────────────────────
+   FIX 2: STATUS LINE — better visibility
+───────────────────────────────────────────────── */
+.su-status {
+  font-size: 10.5px !important;
+  color: var(--text2) !important;
+  margin-top: 2px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  min-height: 14px !important;
+  transition: opacity 0.3s ease !important;
+}
+[data-theme="light"] .su-status {
+  color: var(--text2) !important;
+}
+@keyframes statusPulse {
+  0%   { opacity: 1; }
+  40%  { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+.su-status.updating {
+  animation: statusPulse 0.4s ease;
+}
+
+/* ─────────────────────────────────────────────────
+   FIX: Light mode card surfaces
+───────────────────────────────────────────────── */
+[data-theme="light"] .card,
+[data-theme="light"] .stat-card,
+[data-theme="light"] .k-card,
+[data-theme="light"] .subj-card,
+[data-theme="light"] .kanban-col,
+[data-theme="light"] .phase-card,
+[data-theme="light"] .topic-table-wrap,
+[data-theme="light"] .note-editor,
+[data-theme="light"] .chat-msgs {
+  background: #ffffff !important;
+}
+[data-theme="light"] .surface,
+[data-theme="light"] [class*="surface"] {
+  background: #ffffff !important;
+}
+[data-theme="light"] .kanban-head {
+  background: #f8f8f4 !important;
+}
+
+/* ─────────────────────────────────────────────────
+   FIX: Login redirect — danger button styling
+───────────────────────────────────────────────── */
+[data-theme="light"] .su-btn.danger {
+  background: rgba(220, 38, 38, 0.07) !important;
+  color: #dc2626 !important;
+  border-color: rgba(220, 38, 38, 0.2) !important;
+}
+
+</style>
+
 </head>
 <body>
 
@@ -2181,6 +2280,93 @@ function init() {
 }
 
 init();
+</script>
+
+<script id="patch-v52-scripts">
+(function() {
+  'use strict';
+
+  /* FIX 2: ENHANCED STATUS LINE */
+  window.updateUserStatus = function() {
+    const now = new Date();
+    const h = now.getHours();
+    const m = now.getMinutes().toString().padStart(2, '0');
+    const h12 = h > 12 ? h - 12 : (h === 0 ? 12 : h);
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const timeStr = `${h12}:${m} ${ampm}`;
+    let emoji, label;
+    if (h >= 5  && h < 8)       { emoji = '🌅'; label = 'Early Session'; }
+    else if (h >= 8  && h < 12) { emoji = '📖'; label = 'Morning Study'; }
+    else if (h >= 12 && h < 14) { emoji = '☕'; label = 'Midday Review'; }
+    else if (h >= 14 && h < 17) { emoji = '☀️';  label = 'Afternoon Grind'; }
+    else if (h >= 17 && h < 20) { emoji = '📚'; label = 'Evening Session'; }
+    else if (h >= 20 && h < 23) { emoji = '🌙'; label = 'Night Study'; }
+    else                         { emoji = '⭐'; label = 'Late Night'; }
+    const statusText = `${emoji} ${label} · ${timeStr}`;
+    const el = document.getElementById('userStatusLine');
+    if (el) {
+      el.classList.add('updating');
+      el.textContent = statusText;
+      setTimeout(() => el.classList.remove('updating'), 450);
+    }
+  };
+
+  /* FIX 1: SIDEBAR LAYOUT */
+  function applyLayoutFix() {
+    const sidebar = document.getElementById('sidebar');
+    const main = document.querySelector('.main');
+    const app = document.querySelector('.app');
+    if (!sidebar || !main) return;
+    const sidebarW = getComputedStyle(document.documentElement)
+      .getPropertyValue('--sidebar-w').trim() || '228px';
+    if (window.innerWidth > 900) {
+      main.style.marginLeft = sidebarW;
+      main.style.width = 'calc(100% - ' + sidebarW + ')';
+      main.style.maxWidth = 'calc(100% - ' + sidebarW + ')';
+      main.style.background = 'var(--bg)';
+    } else {
+      main.style.marginLeft = '0';
+      main.style.width = '100%';
+      main.style.maxWidth = '100%';
+    }
+    if (app) app.style.background = 'var(--bg)';
+  }
+
+  window.addEventListener('load', applyLayoutFix);
+  window.addEventListener('resize', applyLayoutFix);
+
+  const origToggle = window.toggleTheme;
+  if (origToggle) {
+    window.toggleTheme = function() { origToggle(); setTimeout(applyLayoutFix, 50); };
+  }
+
+  if (document.readyState !== 'loading') {
+    applyLayoutFix();
+  } else {
+    document.addEventListener('DOMContentLoaded', applyLayoutFix);
+  }
+
+  /* FIX 3: LOGIN REDIRECT on Exit button */
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('.su-btn.danger');
+    if (btn) {
+      e.preventDefault();
+      e.stopPropagation();
+      localStorage.removeItem('rbi_logged_in');
+      window.location.href = '/login';
+    }
+  }, true);
+
+  if (document.readyState !== 'loading') {
+    setTimeout(window.updateUserStatus, 100);
+  } else {
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(window.updateUserStatus, 100);
+    });
+  }
+
+  console.log('[PATCH v5.2] Applied: sidebar overlap fix, status line, login redirect ✓');
+})();
 </script>
 </body>
 </html>
