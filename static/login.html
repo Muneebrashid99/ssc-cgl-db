@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RBI Grade B Command — Sign In</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --gold: #c9a84c;
+  --gold2: #e8c46b;
+  --gold-dim: rgba(201,168,76,0.1);
+  --gold-border: rgba(201,168,76,0.3);
+  --text1: #1a1825;
+  --text2: #5a5870;
+  --text3: #9a98b0;
+  --border: rgba(0,0,0,0.09);
+  --border2: rgba(0,0,0,0.15);
+  --bg: #f5f4f0;
+  --surface: #ffffff;
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ── ILLUSTRATED BACKGROUND ── */
+.bg-illustration {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 55vh;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Parliament/RBI building illustration via SVG */
+.bg-illustration svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── TOP BAR ── */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 52px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  z-index: 10;
+  background: rgba(245,244,240,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.tb-brand {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 14.5px; font-weight: 700; color: var(--text1);
+}
+.tb-logo {
+  width: 30px; height: 30px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(201,168,76,0.3);
+}
+.tb-brand em { font-style: normal; color: var(--gold); }
+
+.tb-back {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 13px; color: var(--text2); cursor: pointer;
+  padding: 5px 10px; border-radius: 6px;
+  transition: all 0.15s ease;
+  text-decoration: none;
+}
+.tb-back:hover { background: rgba(0,0,0,0.05); color: var(--text1); }
+
+.tb-support {
+  font-size: 13px; color: var(--text2); cursor: pointer;
+  padding: 5px 10px; border-radius: 6px;
+  transition: all 0.15s ease;
+}
+.tb-support:hover { color: var(--text1); text-decoration: underline; }
+
+/* ── MAIN CARD ── */
+.page-wrap {
+  position: relative; z-index: 5;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px 260px;
+}
+
+.login-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 36px 32px 32px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05);
+  animation: cardIn 0.4s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.card-title {
+  font-family: 'Fraunces', serif;
+  font-size: 24px; font-weight: 700;
+  color: var(--text1); margin-bottom: 4px;
+  letter-spacing: -0.3px;
+}
+.card-sub {
+  font-size: 13px; color: var(--text3); margin-bottom: 22px;
+}
+
+/* ── SOCIAL BUTTONS ── */
+.social-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px; margin-bottom: 18px;
+}
+.social-btn {
+  height: 40px; border: 1px solid var(--border2); border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; transition: all 0.15s ease;
+  background: var(--surface); font-size: 16px;
+}
+.social-btn:hover { background: #f8f7f4; border-color: rgba(0,0,0,0.2); transform: translateY(-1px); }
+
+.divider {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 18px;
+}
+.divider::before, .divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+.divider span { font-size: 11px; color: var(--text3); font-weight: 500; }
+
+/* ── FORM ── */
+.fg { margin-bottom: 12px; }
+.fl {
+  display: block; font-size: 11.5px; font-weight: 600;
+  color: var(--text2); margin-bottom: 5px; letter-spacing: 0.2px;
+}
+.fi {
+  width: 100%; padding: 9px 12px;
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-sm);
+  font-size: 13.5px; font-family: inherit; color: var(--text1);
+  background: #faf9f6; outline: none;
+  transition: all 0.15s ease;
+}
+.fi:focus {
+  border-color: var(--gold-border);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.12);
+}
+.fi::placeholder { color: var(--text3); }
+
+.forgot {
+  display: block; text-align: right;
+  font-size: 11.5px; color: var(--gold);
+  margin-top: -6px; margin-bottom: 14px;
+  cursor: pointer; font-weight: 500;
+  transition: opacity 0.15s ease;
+}
+.forgot:hover { opacity: 0.75; }
+
+.submit-btn {
+  width: 100%; height: 42px;
+  background: #1a1825; color: #fff;
+  border: none; border-radius: var(--radius-sm);
+  font-size: 14px; font-weight: 600; font-family: inherit;
+  cursor: pointer; transition: all 0.18s ease;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  letter-spacing: 0.1px;
+}
+.submit-btn:hover { background: #2d2b3f; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(0,0,0,0.18); }
+.submit-btn:active { transform: translateY(0); }
+
+.submit-btn.loading { opacity: 0.7; cursor: not-allowed; }
+
+.signup-row {
+  margin-top: 16px; text-align: center;
+  font-size: 13px; color: var(--text2);
+}
+.signup-link {
+  color: var(--gold); font-weight: 600; cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+.signup-link:hover { opacity: 0.75; text-decoration: underline; }
+
+/* ── ERROR STATE ── */
+.fi.error { border-color: #dc2626; box-shadow: 0 0 0 3px rgba(220,38,38,0.1); }
+.field-error { font-size: 11px; color: #dc2626; margin-top: 3px; display: none; }
+
+/* ── BACKGROUND SVG ILLUSTRATION ── */
+.scene {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 50vh;
+  min-height: 280px;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Gradient sky */
+.sky-grad {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(to bottom, rgba(245,244,240,0) 0%, rgba(220,235,215,0.4) 50%, rgba(190,215,185,0.6) 100%);
+}
+
+/* ── MOBILE ── */
+@media (max-width: 480px) {
+  .login-card { padding: 28px 20px 24px; }
+  .card-title { font-size: 21px; }
+  .page-wrap { padding-bottom: 200px; }
+}
+
+/* Spin animation for loading */
+.spin {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── SUCCESS STATE ── */
+.success-overlay {
+  position: fixed; inset: 0; z-index: 999;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 12px;
+  animation: fadeIn 0.3s ease;
+  display: none;
+}
+.success-overlay.show { display: flex; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.success-icon {
+  width: 64px; height: 64px;
+  background: linear-gradient(135deg, var(--gold), var(--gold2));
+  border-radius: 18px; font-size: 28px;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(201,168,76,0.35);
+  animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.1s both;
+}
+@keyframes popIn { from { transform: scale(0.5); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.success-msg { font-size: 18px; font-weight: 700; color: var(--text1); }
+.success-sub { font-size: 13px; color: var(--text3); }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <a class="tb-back" href="#">
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7L9 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Back
+  </a>
+  <div class="tb-brand">
+    <div class="tb-logo">🏛️</div>
+    Grade B <em>Command</em>
+  </div>
+  <span class="tb-support">Contact support</span>
+</div>
+
+<!-- MAIN -->
+<div class="page-wrap">
+  <div class="login-card" id="loginCard">
+
+    <!-- SIGN IN VIEW -->
+    <div id="signInView">
+      <div class="card-title">Log in to Command</div>
+      <div class="card-sub">Your RBI Grade B prep starts here</div>
+
+      <div class="social-row">
+        <div class="social-btn" title="Continue with X" onclick="socialLogin('X')">𝕏</div>
+        <div class="social-btn" title="Continue with Apple" onclick="socialLogin('Apple')">
+          <svg width="16" height="18" viewBox="0 0 16 18" fill="none"><path d="M13.21 9.56c-.02-2.1 1.72-3.12 1.8-3.17-1-1.44-2.53-1.64-3.07-1.66-1.31-.13-2.57.77-3.23.77-.66 0-1.68-.75-2.77-.73-1.42.02-2.74.83-3.47 2.1-1.49 2.57-.38 6.36 1.06 8.44.7 1.02 1.54 2.16 2.64 2.12 1.06-.04 1.46-.68 2.74-.68 1.28 0 1.64.68 2.76.66 1.14-.02 1.87-1.04 2.56-2.07.81-1.18 1.14-2.33 1.16-2.39-.03-.01-2.21-.85-2.18-3.39z" fill="currentColor"/><path d="M11.12 3.16c.58-.71.97-1.69.86-2.66-.84.03-1.85.56-2.45 1.26-.54.62-1.01 1.62-.88 2.57.93.07 1.88-.47 2.47-1.17z" fill="currentColor"/></svg>
+        </div>
+        <div class="social-btn" title="Continue with Google" onclick="socialLogin('Google')">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M15.68 8.18c0-.57-.05-1.12-.14-1.64H8v3.1h4.3a3.67 3.67 0 01-1.59 2.41v2h2.57c1.5-1.38 2.4-3.42 2.4-5.87z" fill="#4285F4"/>
+            <path d="M8 16c2.16 0 3.97-.72 5.29-1.94l-2.57-2a4.8 4.8 0 01-2.72.75c-2.09 0-3.86-1.41-4.49-3.31H.86v2.06A8 8 0 008 16z" fill="#34A853"/>
+            <path d="M3.51 9.5A4.82 4.82 0 013.26 8c0-.52.09-1.02.25-1.5V4.44H.86A8 8 0 000 8c0 1.29.31 2.51.86 3.56L3.51 9.5z" fill="#FBBC05"/>
+            <path d="M8 3.19c1.18 0 2.23.41 3.07 1.2l2.3-2.3A8 8 0 008 0 8 8 0 00.86 4.44L3.51 6.5C4.14 4.6 5.91 3.19 8 3.19z" fill="#EA4335"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="divider"><span>or</span></div>
+
+      <div class="fg">
+        <label class="fl" for="emailInput">Email address</label>
+        <input class="fi" type="email" id="emailInput" placeholder="you@example.com" autocomplete="email">
+        <div class="field-error" id="emailError">Please enter a valid email</div>
+      </div>
+
+      <div class="fg">
+        <label class="fl" for="passInput">Password</label>
+        <input class="fi" type="password" id="passInput" placeholder="••••••••" autocomplete="current-password" onkeydown="if(event.key==='Enter')handleLogin()">
+        <div class="field-error" id="passError">Password is required</div>
+      </div>
+
+      <span class="forgot" onclick="showForgot()">Forgot password?</span>
+
+      <button class="submit-btn" id="submitBtn" onclick="handleLogin()">
+        Continue with Email
+      </button>
+
+      <div class="signup-row">
+        Don't have an account? <span class="signup-link" onclick="showSignup()">Sign up</span>
+      </div>
+    </div>
+
+    <!-- SIGN UP VIEW (hidden) -->
+    <div id="signUpView" style="display:none">
+      <div class="card-title">Create account</div>
+      <div class="card-sub">Start your RBI Grade B journey</div>
+
+      <div class="fg">
+        <label class="fl">Full Name</label>
+        <input class="fi" type="text" id="signupName" placeholder="Muneeb Rashid">
+      </div>
+      <div class="fg">
+        <label class="fl">Email address</label>
+        <input class="fi" type="email" id="signupEmail" placeholder="you@example.com">
+      </div>
+      <div class="fg">
+        <label class="fl">Password</label>
+        <input class="fi" type="password" id="signupPass" placeholder="Min. 8 characters" onkeydown="if(event.key==='Enter')handleSignup()">
+      </div>
+
+      <button class="submit-btn" id="signupBtn" onclick="handleSignup()" style="margin-bottom:14px">
+        Create Account
+      </button>
+
+      <div class="signup-row">
+        Already have an account? <span class="signup-link" onclick="showSignIn()">Sign in</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ILLUSTRATED BACKGROUND -->
+<div class="scene">
+  <div class="sky-grad"></div>
+  <svg viewBox="0 0 1440 320" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax slice" style="position:absolute;bottom:0;left:0;right:0;width:100%;height:100%">
+    <!-- Rolling hills -->
+    <path d="M0 180 Q180 120 360 160 Q540 200 720 140 Q900 80 1080 130 Q1260 180 1440 120 L1440 320 L0 320 Z" fill="#d4e8c8" opacity="0.7"/>
+    <path d="M0 220 Q200 170 400 200 Q600 230 800 185 Q1000 140 1200 190 Q1350 220 1440 180 L1440 320 L0 320 Z" fill="#b8d9a0" opacity="0.8"/>
+    <!-- Foreground grass -->
+    <path d="M0 270 Q360 240 720 260 Q1080 280 1440 250 L1440 320 L0 320 Z" fill="#9ecb7e" opacity="0.9"/>
+    <!-- Sand bunkers -->
+    <ellipse cx="260" cy="298" rx="70" ry="14" fill="#e8ddb5" opacity="0.8"/>
+    <ellipse cx="1180" cy="295" rx="55" ry="11" fill="#e8ddb5" opacity="0.8"/>
+    <!-- RBI building silhouette -->
+    <g opacity="0.18" fill="#2d2b3f">
+      <!-- Main dome building (center) -->
+      <rect x="640" y="120" width="160" height="100"/>
+      <ellipse cx="720" cy="120" rx="80" ry="30"/>
+      <!-- Dome top -->
+      <ellipse cx="720" cy="95" rx="40" ry="28"/>
+      <rect x="700" y="68" width="40" height="28"/>
+      <!-- Columns -->
+      <rect x="648" y="150" width="10" height="70"/>
+      <rect x="668" y="150" width="10" height="70"/>
+      <rect x="688" y="150" width="10" height="70"/>
+      <rect x="728" y="150" width="10" height="70"/>
+      <rect x="748" y="150" width="10" height="70"/>
+      <rect x="768" y="150" width="10" height="70"/>
+      <rect x="788" y="150" width="10" height="70"/>
+      <!-- Wings -->
+      <rect x="500" y="160" width="140" height="60"/>
+      <rect x="800" y="160" width="140" height="60"/>
+      <rect x="508" y="150" width="6" height="70"/>
+      <rect x="524" y="150" width="6" height="70"/>
+      <rect x="540" y="150" width="6" height="70"/>
+      <rect x="556" y="150" width="6" height="70"/>
+      <rect x="810" y="150" width="6" height="70"/>
+      <rect x="826" y="150" width="6" height="70"/>
+      <rect x="842" y="150" width="6" height="70"/>
+      <rect x="858" y="150" width="6" height="70"/>
+    </g>
+    <!-- Trees left -->
+    <g opacity="0.55">
+      <rect x="80" y="200" width="10" height="60" fill="#5a7a45"/>
+      <ellipse cx="85" cy="195" rx="32" ry="28" fill="#6b9650"/>
+      <ellipse cx="75" cy="205" rx="20" ry="18" fill="#7aaa5e"/>
+    </g>
+    <!-- Trees right -->
+    <g opacity="0.55">
+      <rect x="1340" y="210" width="10" height="55" fill="#5a7a45"/>
+      <ellipse cx="1345" cy="205" rx="28" ry="24" fill="#6b9650"/>
+    </g>
+    <!-- Small trees -->
+    <g opacity="0.4">
+      <rect x="1260" y="230" width="7" height="40" fill="#5a7a45"/>
+      <ellipse cx="1263" cy="227" rx="18" ry="16" fill="#7aaa5e"/>
+      <rect x="150" y="235" width="7" height="35" fill="#5a7a45"/>
+      <ellipse cx="153" cy="232" rx="16" ry="14" fill="#7aaa5e"/>
+    </g>
+    <!-- Flag (golf-inspired but works for RBI too) -->
+    <g opacity="0.5">
+      <rect x="720" y="245" width="2" height="30" fill="#888"/>
+      <path d="M722 246 L738 251 L722 256 Z" fill="#c9a84c"/>
+    </g>
+  </svg>
+</div>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-icon">🏛️</div>
+  <div class="success-msg">Welcome back!</div>
+  <div class="success-sub">Loading your Command Centre…</div>
+</div>
+
+<script>
+function showSignup() {
+  document.getElementById('signInView').style.display = 'none';
+  document.getElementById('signUpView').style.display = '';
+}
+function showSignIn() {
+  document.getElementById('signUpView').style.display = 'none';
+  document.getElementById('signInView').style.display = '';
+}
+function showForgot() {
+  alert('Password reset link will be sent to your email.');
+}
+
+function socialLogin(provider) {
+  const btn = event.currentTarget;
+  showLoading();
+  setTimeout(() => completeLogin('User'), 1200);
+}
+
+function showLoading() {
+  const btn = document.getElementById('submitBtn');
+  if (btn) btn.innerHTML = '<div class="spin"></div> Signing in…';
+}
+
+function handleLogin() {
+  const email = document.getElementById('emailInput').value.trim();
+  const pass = document.getElementById('passInput').value.trim();
+  let valid = true;
+
+  document.getElementById('emailInput').classList.remove('error');
+  document.getElementById('passInput').classList.remove('error');
+  document.getElementById('emailError').style.display = 'none';
+  document.getElementById('passError').style.display = 'none';
+
+  if (!email || !/\S+@\S+\.\S+/.test(email)) {
+    document.getElementById('emailInput').classList.add('error');
+    document.getElementById('emailError').style.display = 'block';
+    valid = false;
+  }
+  if (!pass) {
+    document.getElementById('passInput').classList.add('error');
+    document.getElementById('passError').style.display = 'block';
+    valid = false;
+  }
+  if (!valid) return;
+
+  const btn = document.getElementById('submitBtn');
+  btn.innerHTML = '<div class="spin"></div> Signing in…';
+  btn.classList.add('loading');
+
+  // Extract name from email for greeting
+  const name = email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g, l => l.toUpperCase());
+  setTimeout(() => completeLogin(name), 1000);
+}
+
+function handleSignup() {
+  const name = document.getElementById('signupName').value.trim();
+  const email = document.getElementById('signupEmail').value.trim();
+  const pass = document.getElementById('signupPass').value.trim();
+  if (!name || !email || pass.length < 8) { alert('Please fill all fields. Password must be 8+ characters.'); return; }
+  const btn = document.getElementById('signupBtn');
+  btn.innerHTML = '<div class="spin"></div> Creating account…';
+  btn.disabled = true;
+  setTimeout(() => completeLogin(name), 1200);
+}
+
+function completeLogin(name) {
+  localStorage.setItem('rbi_username', name);
+  localStorage.setItem('rbi_logged_in', 'true');
+  const overlay = document.getElementById('successOverlay');
+  overlay.querySelector('.success-msg').textContent = `Welcome, ${name.split(' ')[0]}!`;
+  overlay.classList.add('show');
+  setTimeout(() => {
+    window.location.href = '/';
+  }, 1600);
+}
+
+// Auto-redirect if already logged in
+if (localStorage.getItem('rbi_logged_in') === 'true') {
+  window.location.href = '/';
+}
+</script>
+</body>
+</html>
